@@ -35,12 +35,14 @@ LINKER_SCRIPT_DEP:=
 SUBDIRS :=  \
 ../App \
 ../Hal \
-../Mcal
+../Mcal \
+../Mcal/Dio
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../App/main.c
+../App/main.c \
+../Mcal/Dio/Dio.c
 
 
 PREPROCESSING_SRCS += 
@@ -50,16 +52,20 @@ ASM_SRCS +=
 
 
 OBJS +=  \
-App/main.o
+App/main.o \
+Mcal/Dio/Dio.o
 
 OBJS_AS_ARGS +=  \
-App/main.o
+App/main.o \
+Mcal/Dio/Dio.o
 
 C_DEPS +=  \
-App/main.d
+App/main.d \
+Mcal/Dio/Dio.d
 
 C_DEPS_AS_ARGS +=  \
-App/main.d
+App/main.d \
+Mcal/Dio/Dio.d
 
 OUTPUT_FILE_PATH +=Door_Lock_System.elf
 
@@ -78,7 +84,14 @@ LINKER_SCRIPT_DEP+=
 App/main.o: ../App/main.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\1.6.364\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\1.6.364\include" -I"../App" -I"../Hal" -I"../Mcal" -I"../Mcal/Dio"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Mcal/Dio/Dio.o: ../Mcal/Dio/Dio.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\1.6.364\include" -I"../App" -I"../Hal" -I"../Mcal" -I"../Mcal/Dio"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 

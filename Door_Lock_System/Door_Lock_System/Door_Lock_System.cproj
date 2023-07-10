@@ -101,6 +101,7 @@
       <Value>../App</Value>
       <Value>../Hal</Value>
       <Value>../Mcal</Value>
+      <Value>../Mcal/Dio</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -123,7 +124,22 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="App\BitMaths.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="App\main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="App\StdTypes.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\Dio\Dio.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\Dio\Dio.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\Reg.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
@@ -131,6 +147,7 @@
     <Folder Include="App" />
     <Folder Include="Hal" />
     <Folder Include="Mcal" />
+    <Folder Include="Mcal\Dio" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
