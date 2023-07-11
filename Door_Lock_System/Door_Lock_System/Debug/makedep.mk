@@ -4,5 +4,11 @@
 
 App\main.c
 
+Hal\Buzzer\Buzzer.c
+
+Hal\Leds\Leds.c
+
+Hal\PushButtons\PushButtons.c
+
 Mcal\Dio\Dio.c
 

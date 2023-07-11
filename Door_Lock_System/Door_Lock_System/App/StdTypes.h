@@ -25,5 +25,4 @@ typedef double f64;
 
 
 
-
 #endif /* STDTYPES_H_ */

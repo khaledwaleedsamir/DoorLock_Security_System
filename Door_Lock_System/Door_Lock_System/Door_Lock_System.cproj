@@ -102,6 +102,9 @@
       <Value>../Hal</Value>
       <Value>../Mcal</Value>
       <Value>../Mcal/Dio</Value>
+      <Value>../Hal/Buzzer</Value>
+      <Value>../Hal/Leds</Value>
+      <Value>../Hal/PushButtons</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -133,6 +136,33 @@
     <Compile Include="App\StdTypes.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Hal\Buzzer\Buzzer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Hal\Buzzer\Buzzer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Hal\Buzzer\BuzzerCfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Hal\Leds\Leds.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Hal\Leds\Leds.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Hal\Leds\LedsCfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Hal\PushButtons\PushButtons.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Hal\PushButtons\PushButtons.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Hal\PushButtons\PushButtonsCfg.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Mcal\Dio\Dio.c">
       <SubType>compile</SubType>
     </Compile>
@@ -146,6 +176,9 @@
   <ItemGroup>
     <Folder Include="App" />
     <Folder Include="Hal" />
+    <Folder Include="Hal\Buzzer" />
+    <Folder Include="Hal\Leds" />
+    <Folder Include="Hal\PushButtons" />
     <Folder Include="Mcal" />
     <Folder Include="Mcal\Dio" />
   </ItemGroup>

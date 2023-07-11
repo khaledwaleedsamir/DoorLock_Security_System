@@ -1,7 +1,6 @@
-App/main.d App/main.o: ../App/main.c ../Hal/Leds/Leds.h \
- ../Hal/Leds/LedsCfg.h ../App/StdTypes.h ../Mcal/Dio/Dio.h \
- ../App/BitMaths.h ../Mcal/Reg.h ../Hal/PushButtons/PushButtons.h \
- ../Hal/PushButtons/PushButtonsCfg.h \
+Hal/Buzzer/Buzzer.d Hal/Buzzer/Buzzer.o: ../Hal/Buzzer/Buzzer.c \
+ ../Hal/Buzzer/Buzzer.h ../Hal/Buzzer/BuzzerCfg.h ../Mcal/Dio/Dio.h \
+ ../App/StdTypes.h ../App/BitMaths.h ../Mcal/Reg.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
@@ -9,21 +8,17 @@ App/main.d App/main.o: ../App/main.c ../Hal/Leds/Leds.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h
 
-../Hal/Leds/Leds.h:
+../Hal/Buzzer/Buzzer.h:
 
-../Hal/Leds/LedsCfg.h:
-
-../App/StdTypes.h:
+../Hal/Buzzer/BuzzerCfg.h:
 
 ../Mcal/Dio/Dio.h:
+
+../App/StdTypes.h:
 
 ../App/BitMaths.h:
 
 ../Mcal/Reg.h:
-
-../Hal/PushButtons/PushButtons.h:
-
-../Hal/PushButtons/PushButtonsCfg.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
 
