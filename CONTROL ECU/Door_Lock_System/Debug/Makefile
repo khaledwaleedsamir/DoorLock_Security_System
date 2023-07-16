@@ -37,8 +37,6 @@ SUBDIRS :=  \
 ../Hal \
 ../Hal/Buzzer \
 ../Hal/Leds \
-../Hal/Lcd \
-../Hal/Keypad \
 ../Hal/PushButtons \
 ../Mcal \
 ../Mcal/Dio
@@ -48,8 +46,6 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../App/main.c \
 ../Hal/Buzzer/Buzzer.c \
-../Hal/Keypad/Keypad.c \
-../Hal/Lcd/Lcd.c \
 ../Hal/Leds/Leds.c \
 ../Hal/PushButtons/PushButtons.c \
 ../Mcal/Dio/Dio.c
@@ -64,8 +60,6 @@ ASM_SRCS +=
 OBJS +=  \
 App/main.o \
 Hal/Buzzer/Buzzer.o \
-Hal/Keypad/Keypad.o \
-Hal/Lcd/Lcd.o \
 Hal/Leds/Leds.o \
 Hal/PushButtons/PushButtons.o \
 Mcal/Dio/Dio.o
@@ -73,8 +67,6 @@ Mcal/Dio/Dio.o
 OBJS_AS_ARGS +=  \
 App/main.o \
 Hal/Buzzer/Buzzer.o \
-Hal/Keypad/Keypad.o \
-Hal/Lcd/Lcd.o \
 Hal/Leds/Leds.o \
 Hal/PushButtons/PushButtons.o \
 Mcal/Dio/Dio.o
@@ -82,8 +74,6 @@ Mcal/Dio/Dio.o
 C_DEPS +=  \
 App/main.d \
 Hal/Buzzer/Buzzer.d \
-Hal/Keypad/Keypad.d \
-Hal/Lcd/Lcd.d \
 Hal/Leds/Leds.d \
 Hal/PushButtons/PushButtons.d \
 Mcal/Dio/Dio.d
@@ -91,8 +81,6 @@ Mcal/Dio/Dio.d
 C_DEPS_AS_ARGS +=  \
 App/main.d \
 Hal/Buzzer/Buzzer.d \
-Hal/Keypad/Keypad.d \
-Hal/Lcd/Lcd.d \
 Hal/Leds/Leds.d \
 Hal/PushButtons/PushButtons.d \
 Mcal/Dio/Dio.d
@@ -119,20 +107,6 @@ App/main.o: ../App/main.c
 	
 
 Hal/Buzzer/Buzzer.o: ../Hal/Buzzer/Buzzer.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"../App" -I"../Hal" -I"../Mcal" -I"../Mcal/Dio" -I"../Hal/Buzzer" -I"../Hal/Leds" -I"../Hal/PushButtons" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\1.6.364\include" -I"../Hal/Lcd" -I"../Hal/Keypad"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-Hal/Keypad/Keypad.o: ../Hal/Keypad/Keypad.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"../App" -I"../Hal" -I"../Mcal" -I"../Mcal/Dio" -I"../Hal/Buzzer" -I"../Hal/Leds" -I"../Hal/PushButtons" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\1.6.364\include" -I"../Hal/Lcd" -I"../Hal/Keypad"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-Hal/Lcd/Lcd.o: ../Hal/Lcd/Lcd.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"../App" -I"../Hal" -I"../Mcal" -I"../Mcal/Dio" -I"../Hal/Buzzer" -I"../Hal/Leds" -I"../Hal/PushButtons" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\1.6.364\include" -I"../Hal/Lcd" -I"../Hal/Keypad"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
