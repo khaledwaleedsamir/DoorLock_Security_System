@@ -22,7 +22,7 @@
 #define KEYPAD_C3_PIN     PC7
 
 // Keypad De-Bouncing time selection
-#define KEYPAD_DEBOUNCING_TIME 80
+#define KEYPAD_DEBOUNCING_TIME 20
 
 
 

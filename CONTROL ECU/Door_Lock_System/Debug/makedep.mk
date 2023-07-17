@@ -12,3 +12,5 @@ Hal\PushButtons\PushButtons.c
 
 Mcal\Dio\Dio.c
 
+Mcal\Uart\Uart.c
+

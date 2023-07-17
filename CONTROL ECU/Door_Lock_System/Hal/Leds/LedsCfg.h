@@ -10,8 +10,8 @@
 #define LEDSCFG_H_
 
 // LEDs Pins Selection
-#define LED0_PIN PC2
-#define LED1_PIN PC7
-#define LED2_PIN PD3
+#define LED0_PIN PA0
+#define LED1_PIN PA1
+#define LED2_PIN PA2
 
 #endif /* LEDSCFG_H_ */

@@ -10,7 +10,7 @@
 #define PUSHBUTTONSCFG_H_
 
 // Push Buttons Pins Selection
-#define PUSH_BUTTON0_PIN PB0
+#define PUSH_BUTTON0_PIN PA4
 #define PUSH_BUTTON1_PIN PD6
 #define PUSH_BUTTON2_PIN PD2
 
