@@ -11,21 +11,21 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000478  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 000000e8  00000000  00000000  000004b4  2**0
+  4 .debug_aranges 000000f8  00000000  00000000  000004b4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000ef4  00000000  00000000  0000059c  2**0
+  5 .debug_info   00000d8d  00000000  00000000  000005ac  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00000905  00000000  00000000  00001490  2**0
+  6 .debug_abbrev 0000085b  00000000  00000000  00001339  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   0000085c  00000000  00000000  00001d95  2**0
+  7 .debug_line   0000076d  00000000  00000000  00001b94  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000154  00000000  00000000  000025f4  2**2
+  8 .debug_frame  00000174  00000000  00000000  00002304  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    0000053e  00000000  00000000  00002748  2**0
+  9 .debug_str    0000051f  00000000  00000000  00002478  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000004c1  00000000  00000000  00002c86  2**0
+ 10 .debug_loc    00000358  00000000  00000000  00002997  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 000000b0  00000000  00000000  00003147  2**0
+ 11 .debug_ranges 000000a8  00000000  00000000  00002cef  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -75,255 +75,234 @@ int main(void)
 {
   6c:	cf 93       	push	r28
   6e:	df 93       	push	r29
-  70:	00 d0       	rcall	.+0      	; 0x72 <main+0x6>
-  72:	00 d0       	rcall	.+0      	; 0x74 <main+0x8>
-  74:	cd b7       	in	r28, 0x3d	; 61
-  76:	de b7       	in	r29, 0x3e	; 62
+  70:	cd b7       	in	r28, 0x3d	; 61
+  72:	de b7       	in	r29, 0x3e	; 62
+  74:	28 97       	sbiw	r28, 0x08	; 8
+  76:	0f b6       	in	r0, 0x3f	; 63
+  78:	f8 94       	cli
+  7a:	de bf       	out	0x3e, r29	; 62
+  7c:	0f be       	out	0x3f, r0	; 63
+  7e:	cd bf       	out	0x3d, r28	; 61
 	    M_Uart_Init();
-  78:	0e 94 e5 01 	call	0x3ca	; 0x3ca <M_Uart_Init>
-		H_PushButtons_Init(PUSH_BUTTON0);
-  7c:	81 e0       	ldi	r24, 0x01	; 1
-  7e:	0e 94 be 00 	call	0x17c	; 0x17c <H_PushButtons_Init>
+  80:	0e 94 e5 01 	call	0x3ca	; 0x3ca <M_Uart_Init>
 		H_Leds_Init();
-  82:	0e 94 87 00 	call	0x10e	; 0x10e <H_Leds_Init>
-		H_Leds_On(LED0);
-  86:	81 e0       	ldi	r24, 0x01	; 1
-  88:	0e 94 94 00 	call	0x128	; 0x128 <H_Leds_On>
-	#else
-		//round up by default
-		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
-	#endif
-
-	__builtin_avr_delay_cycles(__ticks_dc);
-  8c:	2f ef       	ldi	r18, 0xFF	; 255
-  8e:	83 ed       	ldi	r24, 0xD3	; 211
-  90:	90 e3       	ldi	r25, 0x30	; 48
-  92:	21 50       	subi	r18, 0x01	; 1
-  94:	80 40       	sbci	r24, 0x00	; 0
-  96:	90 40       	sbci	r25, 0x00	; 0
-  98:	e1 f7       	brne	.-8      	; 0x92 <main+0x26>
-  9a:	00 c0       	rjmp	.+0      	; 0x9c <main+0x30>
-  9c:	00 00       	nop
-		_delay_ms(1000);
-		H_Leds_Off(LED0);
-  9e:	81 e0       	ldi	r24, 0x01	; 1
-  a0:	0e 94 a9 00 	call	0x152	; 0x152 <H_Leds_Off>
-        u8 msg = 'x';
-		u8 check;
+  84:	0e 94 b1 00 	call	0x162	; 0x162 <H_Leds_Init>
+		H_Buzzer_Init();
+  88:	0e 94 a7 00 	call	0x14e	; 0x14e <H_Buzzer_Init>
 		u8 Str [4];
+		u8 Password[4] = {'1','2','3','4'};
+  8c:	81 e3       	ldi	r24, 0x31	; 49
+  8e:	8d 83       	std	Y+5, r24	; 0x05
+  90:	82 e3       	ldi	r24, 0x32	; 50
+  92:	8e 83       	std	Y+6, r24	; 0x06
+  94:	83 e3       	ldi	r24, 0x33	; 51
+  96:	8f 83       	std	Y+7, r24	; 0x07
+  98:	84 e3       	ldi	r24, 0x34	; 52
+  9a:	88 87       	std	Y+8, r24	; 0x08
 		int counter = 0;
-		bool CorrectPass = true;
-  a4:	dd 24       	eor	r13, r13
-  a6:	d3 94       	inc	r13
-		_delay_ms(1000);
-		H_Leds_Off(LED0);
-        u8 msg = 'x';
-		u8 check;
-		u8 Str [4];
-		int counter = 0;
-  a8:	e1 2c       	mov	r14, r1
-  aa:	f1 2c       	mov	r15, r1
-		H_PushButtons_Init(PUSH_BUTTON0);
+		int check = 0;
+		int trials = 0;
+  9c:	00 e0       	ldi	r16, 0x00	; 0
+  9e:	10 e0       	ldi	r17, 0x00	; 0
 		H_Leds_Init();
-		H_Leds_On(LED0);
-		_delay_ms(1000);
-		H_Leds_Off(LED0);
-        u8 msg = 'x';
-  ac:	08 e7       	ldi	r16, 0x78	; 120
-	
-		
-		if(counter == 3){
-			for(int i = 0;i<4;i++){
-				if(Str[i] != (i+49)){
-				  CorrectPass = false;
-  ae:	c1 2c       	mov	r12, r1
-  b0:	01 c0       	rjmp	.+2      	; 0xb4 <main+0x48>
-  b2:	01 2f       	mov	r16, r17
+		H_Buzzer_Init();
 		u8 Str [4];
+		u8 Password[4] = {'1','2','3','4'};
 		int counter = 0;
-		bool CorrectPass = true;
+		int check = 0;
+  a0:	c1 2c       	mov	r12, r1
+  a2:	d1 2c       	mov	r13, r1
+	    M_Uart_Init();
+		H_Leds_Init();
+		H_Buzzer_Init();
+		u8 Str [4];
+		u8 Password[4] = {'1','2','3','4'};
+		int counter = 0;
+  a4:	e1 2c       	mov	r14, r1
+  a6:	f1 2c       	mov	r15, r1
+		int check = 0;
+		int trials = 0;
     while (1) 
-    {   check = msg;
+    {   u8 msg = 0;
 		msg = M_Uart_Receive();
-  b4:	0e 94 f3 01 	call	0x3e6	; 0x3e6 <M_Uart_Receive>
-  b8:	18 2f       	mov	r17, r24
-		if (msg != check){
-  ba:	08 17       	cp	r16, r24
-  bc:	f9 f0       	breq	.+62     	; 0xfc <main+0x90>
+  a8:	0e 94 f3 01 	call	0x3e6	; 0x3e6 <M_Uart_Receive>
+		if (msg != 0){
+  ac:	88 23       	and	r24, r24
+  ae:	09 f4       	brne	.+2      	; 0xb2 <main+0x46>
+  b0:	44 c0       	rjmp	.+136    	; 0x13a <main+0xce>
 			Str[counter]=msg;
-  be:	e1 e0       	ldi	r30, 0x01	; 1
-  c0:	f0 e0       	ldi	r31, 0x00	; 0
-  c2:	ec 0f       	add	r30, r28
-  c4:	fd 1f       	adc	r31, r29
-  c6:	ee 0d       	add	r30, r14
-  c8:	ff 1d       	adc	r31, r15
-  ca:	80 83       	st	Z, r24
+  b2:	e1 e0       	ldi	r30, 0x01	; 1
+  b4:	f0 e0       	ldi	r31, 0x00	; 0
+  b6:	ec 0f       	add	r30, r28
+  b8:	fd 1f       	adc	r31, r29
+  ba:	ee 0d       	add	r30, r14
+  bc:	ff 1d       	adc	r31, r15
+  be:	80 83       	st	Z, r24
 			counter++;
-  cc:	2f ef       	ldi	r18, 0xFF	; 255
-  ce:	e2 1a       	sub	r14, r18
-  d0:	f2 0a       	sbc	r15, r18
-  d2:	14 c0       	rjmp	.+40     	; 0xfc <main+0x90>
+  c0:	8f ef       	ldi	r24, 0xFF	; 255
+  c2:	e8 1a       	sub	r14, r24
+  c4:	f8 0a       	sbc	r15, r24
+  c6:	39 c0       	rjmp	.+114    	; 0x13a <main+0xce>
 		}
 	
-		
-		if(counter == 3){
+	       if(counter == 4){
 			for(int i = 0;i<4;i++){
-				if(Str[i] != (i+49)){
-  d4:	21 91       	ld	r18, Z+
-  d6:	30 e0       	ldi	r19, 0x00	; 0
-  d8:	28 17       	cp	r18, r24
-  da:	39 07       	cpc	r19, r25
-  dc:	09 f0       	breq	.+2      	; 0xe0 <main+0x74>
-				  CorrectPass = false;
-  de:	dc 2c       	mov	r13, r12
-  e0:	01 96       	adiw	r24, 0x01	; 1
+				if(Str[i] == Password[i]){
+  c8:	91 91       	ld	r25, Z+
+  ca:	8d 91       	ld	r24, X+
+  cc:	98 13       	cpse	r25, r24
+  ce:	03 c0       	rjmp	.+6      	; 0xd6 <main+0x6a>
+				  check++;
+  d0:	8f ef       	ldi	r24, 0xFF	; 255
+  d2:	c8 1a       	sub	r12, r24
+  d4:	d8 0a       	sbc	r13, r24
+			Str[counter]=msg;
 			counter++;
 		}
 	
-		
-		if(counter == 3){
+	       if(counter == 4){
 			for(int i = 0;i<4;i++){
-  e2:	85 33       	cpi	r24, 0x35	; 53
-  e4:	91 05       	cpc	r25, r1
-  e6:	b1 f7       	brne	.-20     	; 0xd4 <main+0x68>
-				if(Str[i] != (i+49)){
-				  CorrectPass = false;
+  d6:	2e 17       	cp	r18, r30
+  d8:	3f 07       	cpc	r19, r31
+  da:	b1 f7       	brne	.-20     	; 0xc8 <main+0x5c>
+				if(Str[i] == Password[i]){
+				  check++;
 				}
 			}
-			if(CorrectPass == true){
-  e8:	dd 20       	and	r13, r13
-  ea:	21 f0       	breq	.+8      	; 0xf4 <main+0x88>
-				M_Uart_Transmit('T');
-  ec:	84 e5       	ldi	r24, 0x54	; 84
-  ee:	0e 94 ef 01 	call	0x3de	; 0x3de <M_Uart_Transmit>
-  f2:	df cf       	rjmp	.-66     	; 0xb2 <main+0x46>
-			}
-			else M_Uart_Transmit('F');
+			if(check == 4){M_Uart_Transmit('T');}
+  dc:	84 e0       	ldi	r24, 0x04	; 4
+  de:	c8 16       	cp	r12, r24
+  e0:	d1 04       	cpc	r13, r1
+  e2:	21 f4       	brne	.+8      	; 0xec <main+0x80>
+  e4:	84 e5       	ldi	r24, 0x54	; 84
+  e6:	0e 94 ef 01 	call	0x3de	; 0x3de <M_Uart_Transmit>
+  ea:	0b c0       	rjmp	.+22     	; 0x102 <main+0x96>
+			if(check  < 4){M_Uart_Transmit('F');
+  ec:	84 e0       	ldi	r24, 0x04	; 4
+  ee:	c8 16       	cp	r12, r24
+  f0:	d1 04       	cpc	r13, r1
+  f2:	3c f4       	brge	.+14     	; 0x102 <main+0x96>
   f4:	86 e4       	ldi	r24, 0x46	; 70
   f6:	0e 94 ef 01 	call	0x3de	; 0x3de <M_Uart_Transmit>
-  fa:	db cf       	rjmp	.-74     	; 0xb2 <main+0x46>
+			trials++; counter = 0;}
+  fa:	0f 5f       	subi	r16, 0xFF	; 255
+  fc:	1f 4f       	sbci	r17, 0xFF	; 255
+  fe:	e1 2c       	mov	r14, r1
+ 100:	f1 2c       	mov	r15, r1
+		}
+		if(trials == 1){H_Leds_On(LED0);}
+ 102:	01 30       	cpi	r16, 0x01	; 1
+ 104:	11 05       	cpc	r17, r1
+ 106:	21 f4       	brne	.+8      	; 0x110 <main+0xa4>
+ 108:	81 e0       	ldi	r24, 0x01	; 1
+ 10a:	0e 94 be 00 	call	0x17c	; 0x17c <H_Leds_On>
+ 10e:	0e c0       	rjmp	.+28     	; 0x12c <main+0xc0>
+		if(trials == 2){H_Leds_On(LED1);}
+ 110:	02 30       	cpi	r16, 0x02	; 2
+ 112:	11 05       	cpc	r17, r1
+ 114:	21 f4       	brne	.+8      	; 0x11e <main+0xb2>
+ 116:	82 e0       	ldi	r24, 0x02	; 2
+ 118:	0e 94 be 00 	call	0x17c	; 0x17c <H_Leds_On>
+ 11c:	c5 cf       	rjmp	.-118    	; 0xa8 <main+0x3c>
+		if(trials == 3){H_Leds_On(LED2);}
+ 11e:	03 30       	cpi	r16, 0x03	; 3
+ 120:	11 05       	cpc	r17, r1
+ 122:	21 f4       	brne	.+8      	; 0x12c <main+0xc0>
+ 124:	83 e0       	ldi	r24, 0x03	; 3
+ 126:	0e 94 be 00 	call	0x17c	; 0x17c <H_Leds_On>
+ 12a:	be cf       	rjmp	.-132    	; 0xa8 <main+0x3c>
+		if(trials == 4){H_Buzzer_On();}
+ 12c:	04 30       	cpi	r16, 0x04	; 4
+ 12e:	11 05       	cpc	r17, r1
+ 130:	09 f0       	breq	.+2      	; 0x134 <main+0xc8>
+ 132:	ba cf       	rjmp	.-140    	; 0xa8 <main+0x3c>
+ 134:	0e 94 ac 00 	call	0x158	; 0x158 <H_Buzzer_On>
+ 138:	b7 cf       	rjmp	.-146    	; 0xa8 <main+0x3c>
+		if (msg != 0){
 			Str[counter]=msg;
 			counter++;
 		}
 	
-		
-		if(counter == 3){
-  fc:	83 e0       	ldi	r24, 0x03	; 3
-  fe:	e8 16       	cp	r14, r24
- 100:	f1 04       	cpc	r15, r1
- 102:	b9 f6       	brne	.-82     	; 0xb2 <main+0x46>
- 104:	fe 01       	movw	r30, r28
- 106:	31 96       	adiw	r30, 0x01	; 1
- 108:	81 e3       	ldi	r24, 0x31	; 49
- 10a:	90 e0       	ldi	r25, 0x00	; 0
- 10c:	e3 cf       	rjmp	.-58     	; 0xd4 <main+0x68>
+	       if(counter == 4){
+ 13a:	84 e0       	ldi	r24, 0x04	; 4
+ 13c:	e8 16       	cp	r14, r24
+ 13e:	f1 04       	cpc	r15, r1
+ 140:	01 f7       	brne	.-64     	; 0x102 <main+0x96>
+ 142:	fe 01       	movw	r30, r28
+ 144:	31 96       	adiw	r30, 0x01	; 1
+ 146:	de 01       	movw	r26, r28
+ 148:	15 96       	adiw	r26, 0x05	; 5
+ 14a:	9d 01       	movw	r18, r26
+ 14c:	bd cf       	rjmp	.-134    	; 0xc8 <main+0x5c>
 
-0000010e <H_Leds_Init>:
+0000014e <H_Buzzer_Init>:
+ */ 
+#include "Buzzer.h"
+
+void H_Buzzer_Init(void)
+{
+	M_Dio_PinMode(BUZZER_PIN,OUTPUT);
+ 14e:	61 e0       	ldi	r22, 0x01	; 1
+ 150:	8d e0       	ldi	r24, 0x0D	; 13
+ 152:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <M_Dio_PinMode>
+ 156:	08 95       	ret
+
+00000158 <H_Buzzer_On>:
+}
+void H_Buzzer_On(void)
+{
+	M_Dio_PinWrite(BUZZER_PIN,HIGH);
+ 158:	61 e0       	ldi	r22, 0x01	; 1
+ 15a:	8d e0       	ldi	r24, 0x0D	; 13
+ 15c:	0e 94 5c 01 	call	0x2b8	; 0x2b8 <M_Dio_PinWrite>
+ 160:	08 95       	ret
+
+00000162 <H_Leds_Init>:
  */ 
 #include "Leds.h"
 
 void H_Leds_Init(void)
 {
 	M_Dio_PinMode(LED0_PIN,OUTPUT);
- 10e:	61 e0       	ldi	r22, 0x01	; 1
- 110:	8a e0       	ldi	r24, 0x0A	; 10
- 112:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <M_Dio_PinMode>
+ 162:	61 e0       	ldi	r22, 0x01	; 1
+ 164:	8a e0       	ldi	r24, 0x0A	; 10
+ 166:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <M_Dio_PinMode>
 	M_Dio_PinMode(LED1_PIN,OUTPUT);
- 116:	61 e0       	ldi	r22, 0x01	; 1
- 118:	8b e0       	ldi	r24, 0x0B	; 11
- 11a:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <M_Dio_PinMode>
+ 16a:	61 e0       	ldi	r22, 0x01	; 1
+ 16c:	8b e0       	ldi	r24, 0x0B	; 11
+ 16e:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <M_Dio_PinMode>
 	M_Dio_PinMode(LED2_PIN,OUTPUT);
- 11e:	61 e0       	ldi	r22, 0x01	; 1
- 120:	8c e0       	ldi	r24, 0x0C	; 12
- 122:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <M_Dio_PinMode>
- 126:	08 95       	ret
+ 172:	61 e0       	ldi	r22, 0x01	; 1
+ 174:	8c e0       	ldi	r24, 0x0C	; 12
+ 176:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <M_Dio_PinMode>
+ 17a:	08 95       	ret
 
-00000128 <H_Leds_On>:
+0000017c <H_Leds_On>:
 }
 void H_Leds_On(u8 Local_u8_LedNum)
 {
 	switch(Local_u8_LedNum)
- 128:	82 30       	cpi	r24, 0x02	; 2
- 12a:	49 f0       	breq	.+18     	; 0x13e <H_Leds_On+0x16>
- 12c:	83 30       	cpi	r24, 0x03	; 3
- 12e:	61 f0       	breq	.+24     	; 0x148 <H_Leds_On+0x20>
- 130:	81 30       	cpi	r24, 0x01	; 1
- 132:	71 f4       	brne	.+28     	; 0x150 <H_Leds_On+0x28>
+ 17c:	82 30       	cpi	r24, 0x02	; 2
+ 17e:	49 f0       	breq	.+18     	; 0x192 <H_Leds_On+0x16>
+ 180:	83 30       	cpi	r24, 0x03	; 3
+ 182:	61 f0       	breq	.+24     	; 0x19c <H_Leds_On+0x20>
+ 184:	81 30       	cpi	r24, 0x01	; 1
+ 186:	71 f4       	brne	.+28     	; 0x1a4 <H_Leds_On+0x28>
 	{
 		case LED0: M_Dio_PinWrite(LED0_PIN,HIGH);  break;
- 134:	61 e0       	ldi	r22, 0x01	; 1
- 136:	8a e0       	ldi	r24, 0x0A	; 10
- 138:	0e 94 5c 01 	call	0x2b8	; 0x2b8 <M_Dio_PinWrite>
- 13c:	08 95       	ret
-		case LED1: M_Dio_PinWrite(LED1_PIN,HIGH);  break;
- 13e:	61 e0       	ldi	r22, 0x01	; 1
- 140:	8b e0       	ldi	r24, 0x0B	; 11
- 142:	0e 94 5c 01 	call	0x2b8	; 0x2b8 <M_Dio_PinWrite>
- 146:	08 95       	ret
-		case LED2: M_Dio_PinWrite(LED2_PIN,HIGH);  break;
- 148:	61 e0       	ldi	r22, 0x01	; 1
- 14a:	8c e0       	ldi	r24, 0x0C	; 12
- 14c:	0e 94 5c 01 	call	0x2b8	; 0x2b8 <M_Dio_PinWrite>
- 150:	08 95       	ret
-
-00000152 <H_Leds_Off>:
-		default:                                   break;
-	}
-}
-void H_Leds_Off(u8 Local_u8_LedNum)
-{
-	switch(Local_u8_LedNum)
- 152:	82 30       	cpi	r24, 0x02	; 2
- 154:	49 f0       	breq	.+18     	; 0x168 <H_Leds_Off+0x16>
- 156:	83 30       	cpi	r24, 0x03	; 3
- 158:	61 f0       	breq	.+24     	; 0x172 <H_Leds_Off+0x20>
- 15a:	81 30       	cpi	r24, 0x01	; 1
- 15c:	71 f4       	brne	.+28     	; 0x17a <H_Leds_Off+0x28>
-	{
-		case LED0: M_Dio_PinWrite(LED0_PIN,LOW);  break;
- 15e:	62 e0       	ldi	r22, 0x02	; 2
- 160:	8a e0       	ldi	r24, 0x0A	; 10
- 162:	0e 94 5c 01 	call	0x2b8	; 0x2b8 <M_Dio_PinWrite>
- 166:	08 95       	ret
-		case LED1: M_Dio_PinWrite(LED1_PIN,LOW);  break;
- 168:	62 e0       	ldi	r22, 0x02	; 2
- 16a:	8b e0       	ldi	r24, 0x0B	; 11
- 16c:	0e 94 5c 01 	call	0x2b8	; 0x2b8 <M_Dio_PinWrite>
- 170:	08 95       	ret
-		case LED2: M_Dio_PinWrite(LED2_PIN,LOW);  break;
- 172:	62 e0       	ldi	r22, 0x02	; 2
- 174:	8c e0       	ldi	r24, 0x0C	; 12
- 176:	0e 94 5c 01 	call	0x2b8	; 0x2b8 <M_Dio_PinWrite>
- 17a:	08 95       	ret
-
-0000017c <H_PushButtons_Init>:
- *  Author: Khaled_Waleed_Samir_Metwally
- */ 
-#include "PushButtons.h"
-void H_PushButtons_Init(u8 Local_u8_ButtonNum)
-{
-	switch(Local_u8_ButtonNum)
- 17c:	82 30       	cpi	r24, 0x02	; 2
- 17e:	49 f0       	breq	.+18     	; 0x192 <H_PushButtons_Init+0x16>
- 180:	83 30       	cpi	r24, 0x03	; 3
- 182:	61 f0       	breq	.+24     	; 0x19c <H_PushButtons_Init+0x20>
- 184:	81 30       	cpi	r24, 0x01	; 1
- 186:	71 f4       	brne	.+28     	; 0x1a4 <H_PushButtons_Init+0x28>
-	{
-		case PUSH_BUTTON0: M_Dio_PinMode(PUSH_BUTTON0_PIN,INPUT); break;
- 188:	62 e0       	ldi	r22, 0x02	; 2
- 18a:	8e e0       	ldi	r24, 0x0E	; 14
- 18c:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <M_Dio_PinMode>
+ 188:	61 e0       	ldi	r22, 0x01	; 1
+ 18a:	8a e0       	ldi	r24, 0x0A	; 10
+ 18c:	0e 94 5c 01 	call	0x2b8	; 0x2b8 <M_Dio_PinWrite>
  190:	08 95       	ret
-		case PUSH_BUTTON1: M_Dio_PinMode(PUSH_BUTTON1_PIN,INPUT); break;
- 192:	62 e0       	ldi	r22, 0x02	; 2
- 194:	8e e2       	ldi	r24, 0x2E	; 46
- 196:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <M_Dio_PinMode>
+		case LED1: M_Dio_PinWrite(LED1_PIN,HIGH);  break;
+ 192:	61 e0       	ldi	r22, 0x01	; 1
+ 194:	8b e0       	ldi	r24, 0x0B	; 11
+ 196:	0e 94 5c 01 	call	0x2b8	; 0x2b8 <M_Dio_PinWrite>
  19a:	08 95       	ret
-		case PUSH_BUTTON2: M_Dio_PinMode(PUSH_BUTTON2_PIN,INPUT); break;
- 19c:	62 e0       	ldi	r22, 0x02	; 2
- 19e:	8a e2       	ldi	r24, 0x2A	; 42
- 1a0:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <M_Dio_PinMode>
+		case LED2: M_Dio_PinWrite(LED2_PIN,HIGH);  break;
+ 19c:	61 e0       	ldi	r22, 0x01	; 1
+ 19e:	8c e0       	ldi	r24, 0x0C	; 12
+ 1a0:	0e 94 5c 01 	call	0x2b8	; 0x2b8 <M_Dio_PinWrite>
  1a4:	08 95       	ret
 
 000001a6 <M_Dio_PinMode>:

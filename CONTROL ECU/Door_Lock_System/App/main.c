@@ -20,36 +20,36 @@
 int main(void)
 {
 	    M_Uart_Init();
-		H_PushButtons_Init(PUSH_BUTTON0);
 		H_Leds_Init();
-		H_Leds_On(LED0);
-		_delay_ms(1000);
-		H_Leds_Off(LED0);
-        u8 msg = 'x';
-		u8 check;
+		H_Buzzer_Init();
 		u8 Str [4];
+		u8 Password[4] = {'1','2','3','4'};
 		int counter = 0;
-		bool CorrectPass = true;
+		int check = 0;
+		int trials = 0;
     while (1) 
-    {   check = msg;
+    {   u8 msg = 0;
 		msg = M_Uart_Receive();
-		if (msg != check){
+		if (msg != 0){
 			Str[counter]=msg;
 			counter++;
 		}
 	
-		
-		if(counter == 3){
+	       if(counter == 4){
 			for(int i = 0;i<4;i++){
-				if(Str[i] != (i+49)){
-				  CorrectPass = false;
+				if(Str[i] == Password[i]){
+				  check++;
 				}
 			}
-			if(CorrectPass == true){
-				M_Uart_Transmit('T');
-			}
-			else M_Uart_Transmit('F');
+			if(check == 4){M_Uart_Transmit('T');}
+			if(check  < 4){M_Uart_Transmit('F');
+			trials++; counter = 0;}
 		}
+		if(trials == 1){H_Leds_On(LED0);}
+		if(trials == 2){H_Leds_On(LED1);}
+		if(trials == 3){H_Leds_On(LED2);}
+		if(trials == 4){H_Buzzer_On();}
+		
 	
 		
     }

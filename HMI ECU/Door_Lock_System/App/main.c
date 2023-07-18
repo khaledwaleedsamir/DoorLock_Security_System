@@ -19,27 +19,47 @@ int main(void)
 {
 	H_Keypad_Init();
 	H_Lcd_Init();
-	H_Lcd_WriteString("Init Done !");
 	M_Uart_Init();
 	u8 msg;
-	u8 msgR;
+	u8 Rmsg;
+	int counter = 0;
+	int trials = 0;
+	H_Lcd_WriteString("Init Done !");
+	_delay_ms(1000);
 	H_Lcd_Clear();
-
-	
+	H_Lcd_WriteString("Enter Password!");
+	_delay_ms(2000);
+	H_Lcd_Clear();
     /* Replace with your application code */
     while (1) 
-    {    
+    {   
+		if(counter == 4){
+			Rmsg = M_Uart_Receive();
+			if(Rmsg == 'T'){
+				H_Lcd_Clear();
+				H_Lcd_WriteString("Opening !");
+			}
+			if(Rmsg == 'F'){
+				if (trials < 4){
+					H_Lcd_Clear();
+					H_Lcd_WriteString("Wrong Pass!");
+					_delay_ms(2000);
+					H_Lcd_Clear();
+					H_Lcd_WriteString("Enter Password");
+					_delay_ms(2000);
+					H_Lcd_Clear();
+					trials++;
+					counter = 0;
+				}
+				if (trials > 3){H_Lcd_WriteString("THEIF !");}
+			}
+		}
 		msg = H_Keypad_Read();
-		H_Lcd_WriteChar(msg);
-		M_Uart_Transmit(msg);
-		msgR = M_Uart_Receive();
-		if(msgR == 'T'){
-		H_Lcd_WriteString("PASS");
+		if(msg != 0){
+			H_Lcd_WriteChar(msg);
+			M_Uart_Transmit(msg);
+			counter++;
 		}
-		else if(msgR == 'F'){
-			H_Lcd_WriteString("Incorrect Pass!");
-		}
-		
-    }
+	}
 }
 
