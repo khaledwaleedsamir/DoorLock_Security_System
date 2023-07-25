@@ -40,7 +40,8 @@ int main(void)
 				H_Lcd_WriteString("Opening !");
 			}
 			if(Rmsg == 'F'){
-				if (trials < 4){
+				trials++;
+				if (trials < 3){
 					H_Lcd_Clear();
 					H_Lcd_WriteString("Wrong Pass!");
 					_delay_ms(2000);
@@ -48,10 +49,13 @@ int main(void)
 					H_Lcd_WriteString("Enter Password");
 					_delay_ms(2000);
 					H_Lcd_Clear();
-					trials++;
 					counter = 0;
 				}
-				if (trials > 3){H_Lcd_WriteString("THEIF !");}
+				if (trials == 3)
+				{
+					H_Lcd_Clear();
+					H_Lcd_WriteString("THEIF !");
+					}
 			}
 		}
 		msg = H_Keypad_Read();

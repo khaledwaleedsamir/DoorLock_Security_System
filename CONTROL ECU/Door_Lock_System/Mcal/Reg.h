@@ -33,4 +33,12 @@
 #define UBRRL    *(volatile u8*)0x29
 #define UBRRH    *(volatile u8*)0x40
 
+// Timer 1 Registers
+#define TCNT1    *(volatile u16*)0x4C
+#define TCCR1A   *(volatile u8*)0x4F
+#define TCCR1B   *(volatile u8*)0x4E
+#define OCR1A    *(volatile u16*)0x4A
+#define OCR1B    *(volatile u16*)0x48
+#define ICR1     *(volatile u16*)0x46
+
 #endif /* REG_H_ */

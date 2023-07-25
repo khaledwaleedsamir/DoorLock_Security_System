@@ -3,29 +3,29 @@ Door_Lock_System.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000003f2  00000000  00000000  00000054  2**1
+  0 .text         00000592  00000000  00000000  00000054  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  00800060  00000446  2**0
+  1 .data         00000000  00800060  00800060  000005e6  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      00000030  00000000  00000000  00000446  2**0
+  2 .comment      00000030  00000000  00000000  000005e6  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000478  2**2
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000618  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 000000f8  00000000  00000000  000004b4  2**0
+  4 .debug_aranges 00000170  00000000  00000000  00000654  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000d8d  00000000  00000000  000005ac  2**0
+  5 .debug_info   00001067  00000000  00000000  000007c4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000085b  00000000  00000000  00001339  2**0
+  6 .debug_abbrev 00000964  00000000  00000000  0000182b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   0000076d  00000000  00000000  00001b94  2**0
+  7 .debug_line   00000945  00000000  00000000  0000218f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000174  00000000  00000000  00002304  2**2
+  8 .debug_frame  0000022c  00000000  00000000  00002ad4  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    0000051f  00000000  00000000  00002478  2**0
+  9 .debug_str    00000640  00000000  00000000  00002d00  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000358  00000000  00000000  00002997  2**0
+ 10 .debug_loc    00000456  00000000  00000000  00003340  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 000000a8  00000000  00000000  00002cef  2**0
+ 11 .debug_ranges 00000100  00000000  00000000  00003796  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -61,7 +61,7 @@ Disassembly of section .text:
   5c:	de bf       	out	0x3e, r29	; 62
   5e:	cd bf       	out	0x3d, r28	; 61
   60:	0e 94 36 00 	call	0x6c	; 0x6c <main>
-  64:	0c 94 f7 01 	jmp	0x3ee	; 0x3ee <_exit>
+  64:	0c 94 c7 02 	jmp	0x58e	; 0x58e <_exit>
 
 00000068 <__bad_interrupt>:
   68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -83,616 +83,918 @@ int main(void)
   7a:	de bf       	out	0x3e, r29	; 62
   7c:	0f be       	out	0x3f, r0	; 63
   7e:	cd bf       	out	0x3d, r28	; 61
+	    H_ServoMotor_Init();
+  80:	0e 94 ed 00 	call	0x1da	; 0x1da <H_ServoMotor_Init>
 	    M_Uart_Init();
-  80:	0e 94 e5 01 	call	0x3ca	; 0x3ca <M_Uart_Init>
+  84:	0e 94 5c 02 	call	0x4b8	; 0x4b8 <M_Uart_Init>
 		H_Leds_Init();
-  84:	0e 94 b1 00 	call	0x162	; 0x162 <H_Leds_Init>
+  88:	0e 94 cb 00 	call	0x196	; 0x196 <H_Leds_Init>
 		H_Buzzer_Init();
-  88:	0e 94 a7 00 	call	0x14e	; 0x14e <H_Buzzer_Init>
+  8c:	0e 94 ae 00 	call	0x15c	; 0x15c <H_Buzzer_Init>
 		u8 Str [4];
 		u8 Password[4] = {'1','2','3','4'};
-  8c:	81 e3       	ldi	r24, 0x31	; 49
-  8e:	8d 83       	std	Y+5, r24	; 0x05
-  90:	82 e3       	ldi	r24, 0x32	; 50
-  92:	8e 83       	std	Y+6, r24	; 0x06
-  94:	83 e3       	ldi	r24, 0x33	; 51
-  96:	8f 83       	std	Y+7, r24	; 0x07
-  98:	84 e3       	ldi	r24, 0x34	; 52
-  9a:	88 87       	std	Y+8, r24	; 0x08
+  90:	81 e3       	ldi	r24, 0x31	; 49
+  92:	8d 83       	std	Y+5, r24	; 0x05
+  94:	82 e3       	ldi	r24, 0x32	; 50
+  96:	8e 83       	std	Y+6, r24	; 0x06
+  98:	83 e3       	ldi	r24, 0x33	; 51
+  9a:	8f 83       	std	Y+7, r24	; 0x07
+  9c:	84 e3       	ldi	r24, 0x34	; 52
+  9e:	88 87       	std	Y+8, r24	; 0x08
 		int counter = 0;
 		int check = 0;
 		int trials = 0;
-  9c:	00 e0       	ldi	r16, 0x00	; 0
-  9e:	10 e0       	ldi	r17, 0x00	; 0
+  a0:	00 e0       	ldi	r16, 0x00	; 0
+  a2:	10 e0       	ldi	r17, 0x00	; 0
 		H_Leds_Init();
 		H_Buzzer_Init();
 		u8 Str [4];
 		u8 Password[4] = {'1','2','3','4'};
 		int counter = 0;
 		int check = 0;
-  a0:	c1 2c       	mov	r12, r1
-  a2:	d1 2c       	mov	r13, r1
+  a4:	c1 2c       	mov	r12, r1
+  a6:	d1 2c       	mov	r13, r1
 	    M_Uart_Init();
 		H_Leds_Init();
 		H_Buzzer_Init();
 		u8 Str [4];
 		u8 Password[4] = {'1','2','3','4'};
 		int counter = 0;
-  a4:	e1 2c       	mov	r14, r1
-  a6:	f1 2c       	mov	r15, r1
+  a8:	e1 2c       	mov	r14, r1
+  aa:	f1 2c       	mov	r15, r1
 		int check = 0;
 		int trials = 0;
     while (1) 
     {   u8 msg = 0;
 		msg = M_Uart_Receive();
-  a8:	0e 94 f3 01 	call	0x3e6	; 0x3e6 <M_Uart_Receive>
+  ac:	0e 94 6a 02 	call	0x4d4	; 0x4d4 <M_Uart_Receive>
 		if (msg != 0){
-  ac:	88 23       	and	r24, r24
-  ae:	09 f4       	brne	.+2      	; 0xb2 <main+0x46>
-  b0:	44 c0       	rjmp	.+136    	; 0x13a <main+0xce>
+  b0:	88 23       	and	r24, r24
+  b2:	09 f4       	brne	.+2      	; 0xb6 <main+0x4a>
+  b4:	49 c0       	rjmp	.+146    	; 0x148 <main+0xdc>
 			Str[counter]=msg;
-  b2:	e1 e0       	ldi	r30, 0x01	; 1
-  b4:	f0 e0       	ldi	r31, 0x00	; 0
-  b6:	ec 0f       	add	r30, r28
-  b8:	fd 1f       	adc	r31, r29
-  ba:	ee 0d       	add	r30, r14
-  bc:	ff 1d       	adc	r31, r15
-  be:	80 83       	st	Z, r24
+  b6:	e1 e0       	ldi	r30, 0x01	; 1
+  b8:	f0 e0       	ldi	r31, 0x00	; 0
+  ba:	ec 0f       	add	r30, r28
+  bc:	fd 1f       	adc	r31, r29
+  be:	ee 0d       	add	r30, r14
+  c0:	ff 1d       	adc	r31, r15
+  c2:	80 83       	st	Z, r24
 			counter++;
-  c0:	8f ef       	ldi	r24, 0xFF	; 255
-  c2:	e8 1a       	sub	r14, r24
-  c4:	f8 0a       	sbc	r15, r24
-  c6:	39 c0       	rjmp	.+114    	; 0x13a <main+0xce>
+  c4:	8f ef       	ldi	r24, 0xFF	; 255
+  c6:	e8 1a       	sub	r14, r24
+  c8:	f8 0a       	sbc	r15, r24
+  ca:	3e c0       	rjmp	.+124    	; 0x148 <main+0xdc>
 		}
 	
 	       if(counter == 4){
 			for(int i = 0;i<4;i++){
 				if(Str[i] == Password[i]){
-  c8:	91 91       	ld	r25, Z+
-  ca:	8d 91       	ld	r24, X+
-  cc:	98 13       	cpse	r25, r24
-  ce:	03 c0       	rjmp	.+6      	; 0xd6 <main+0x6a>
+  cc:	91 91       	ld	r25, Z+
+  ce:	8d 91       	ld	r24, X+
+  d0:	98 13       	cpse	r25, r24
+  d2:	03 c0       	rjmp	.+6      	; 0xda <main+0x6e>
 				  check++;
-  d0:	8f ef       	ldi	r24, 0xFF	; 255
-  d2:	c8 1a       	sub	r12, r24
-  d4:	d8 0a       	sbc	r13, r24
+  d4:	8f ef       	ldi	r24, 0xFF	; 255
+  d6:	c8 1a       	sub	r12, r24
+  d8:	d8 0a       	sbc	r13, r24
 			Str[counter]=msg;
 			counter++;
 		}
 	
 	       if(counter == 4){
 			for(int i = 0;i<4;i++){
-  d6:	2e 17       	cp	r18, r30
-  d8:	3f 07       	cpc	r19, r31
-  da:	b1 f7       	brne	.-20     	; 0xc8 <main+0x5c>
+  da:	2e 17       	cp	r18, r30
+  dc:	3f 07       	cpc	r19, r31
+  de:	b1 f7       	brne	.-20     	; 0xcc <main+0x60>
 				if(Str[i] == Password[i]){
 				  check++;
 				}
 			}
-			if(check == 4){M_Uart_Transmit('T');}
-  dc:	84 e0       	ldi	r24, 0x04	; 4
-  de:	c8 16       	cp	r12, r24
-  e0:	d1 04       	cpc	r13, r1
-  e2:	21 f4       	brne	.+8      	; 0xec <main+0x80>
-  e4:	84 e5       	ldi	r24, 0x54	; 84
-  e6:	0e 94 ef 01 	call	0x3de	; 0x3de <M_Uart_Transmit>
-  ea:	0b c0       	rjmp	.+22     	; 0x102 <main+0x96>
+			if(check == 4)
+  e0:	84 e0       	ldi	r24, 0x04	; 4
+  e2:	c8 16       	cp	r12, r24
+  e4:	d1 04       	cpc	r13, r1
+  e6:	49 f4       	brne	.+18     	; 0xfa <main+0x8e>
+			{
+				M_Uart_Transmit('T');
+  e8:	84 e5       	ldi	r24, 0x54	; 84
+  ea:	0e 94 66 02 	call	0x4cc	; 0x4cc <M_Uart_Transmit>
+				H_ServoMotor_SetAngle(5);
+  ee:	85 e0       	ldi	r24, 0x05	; 5
+  f0:	0e 94 f6 00 	call	0x1ec	; 0x1ec <H_ServoMotor_SetAngle>
+				H_ServoMotor_Start();
+  f4:	0e 94 07 01 	call	0x20e	; 0x20e <H_ServoMotor_Start>
+  f8:	0b c0       	rjmp	.+22     	; 0x110 <main+0xa4>
+			}
 			if(check  < 4){M_Uart_Transmit('F');
-  ec:	84 e0       	ldi	r24, 0x04	; 4
-  ee:	c8 16       	cp	r12, r24
-  f0:	d1 04       	cpc	r13, r1
-  f2:	3c f4       	brge	.+14     	; 0x102 <main+0x96>
-  f4:	86 e4       	ldi	r24, 0x46	; 70
-  f6:	0e 94 ef 01 	call	0x3de	; 0x3de <M_Uart_Transmit>
+  fa:	84 e0       	ldi	r24, 0x04	; 4
+  fc:	c8 16       	cp	r12, r24
+  fe:	d1 04       	cpc	r13, r1
+ 100:	3c f4       	brge	.+14     	; 0x110 <main+0xa4>
+ 102:	86 e4       	ldi	r24, 0x46	; 70
+ 104:	0e 94 66 02 	call	0x4cc	; 0x4cc <M_Uart_Transmit>
 			trials++; counter = 0;}
-  fa:	0f 5f       	subi	r16, 0xFF	; 255
-  fc:	1f 4f       	sbci	r17, 0xFF	; 255
-  fe:	e1 2c       	mov	r14, r1
- 100:	f1 2c       	mov	r15, r1
+ 108:	0f 5f       	subi	r16, 0xFF	; 255
+ 10a:	1f 4f       	sbci	r17, 0xFF	; 255
+ 10c:	e1 2c       	mov	r14, r1
+ 10e:	f1 2c       	mov	r15, r1
 		}
-		if(trials == 1){H_Leds_On(LED0);}
- 102:	01 30       	cpi	r16, 0x01	; 1
- 104:	11 05       	cpc	r17, r1
- 106:	21 f4       	brne	.+8      	; 0x110 <main+0xa4>
- 108:	81 e0       	ldi	r24, 0x01	; 1
- 10a:	0e 94 be 00 	call	0x17c	; 0x17c <H_Leds_On>
- 10e:	0e c0       	rjmp	.+28     	; 0x12c <main+0xc0>
-		if(trials == 2){H_Leds_On(LED1);}
- 110:	02 30       	cpi	r16, 0x02	; 2
+		if(trials == 1){H_Leds_On(LED0); check = 0;}
+ 110:	01 30       	cpi	r16, 0x01	; 1
  112:	11 05       	cpc	r17, r1
- 114:	21 f4       	brne	.+8      	; 0x11e <main+0xb2>
- 116:	82 e0       	ldi	r24, 0x02	; 2
- 118:	0e 94 be 00 	call	0x17c	; 0x17c <H_Leds_On>
- 11c:	c5 cf       	rjmp	.-118    	; 0xa8 <main+0x3c>
-		if(trials == 3){H_Leds_On(LED2);}
- 11e:	03 30       	cpi	r16, 0x03	; 3
- 120:	11 05       	cpc	r17, r1
- 122:	21 f4       	brne	.+8      	; 0x12c <main+0xc0>
- 124:	83 e0       	ldi	r24, 0x03	; 3
- 126:	0e 94 be 00 	call	0x17c	; 0x17c <H_Leds_On>
- 12a:	be cf       	rjmp	.-132    	; 0xa8 <main+0x3c>
-		if(trials == 4){H_Buzzer_On();}
- 12c:	04 30       	cpi	r16, 0x04	; 4
- 12e:	11 05       	cpc	r17, r1
- 130:	09 f0       	breq	.+2      	; 0x134 <main+0xc8>
- 132:	ba cf       	rjmp	.-140    	; 0xa8 <main+0x3c>
- 134:	0e 94 ac 00 	call	0x158	; 0x158 <H_Buzzer_On>
- 138:	b7 cf       	rjmp	.-146    	; 0xa8 <main+0x3c>
+ 114:	31 f4       	brne	.+12     	; 0x122 <main+0xb6>
+ 116:	81 e0       	ldi	r24, 0x01	; 1
+ 118:	0e 94 d8 00 	call	0x1b0	; 0x1b0 <H_Leds_On>
+ 11c:	c1 2c       	mov	r12, r1
+ 11e:	d1 2c       	mov	r13, r1
+ 120:	c5 cf       	rjmp	.-118    	; 0xac <main+0x40>
+		if(trials == 2){H_Leds_On(LED1); check = 0;}
+ 122:	02 30       	cpi	r16, 0x02	; 2
+ 124:	11 05       	cpc	r17, r1
+ 126:	31 f4       	brne	.+12     	; 0x134 <main+0xc8>
+ 128:	82 e0       	ldi	r24, 0x02	; 2
+ 12a:	0e 94 d8 00 	call	0x1b0	; 0x1b0 <H_Leds_On>
+ 12e:	c1 2c       	mov	r12, r1
+ 130:	d1 2c       	mov	r13, r1
+ 132:	bc cf       	rjmp	.-136    	; 0xac <main+0x40>
+		if(trials == 3){H_Leds_On(LED2); H_Buzzer_Loop();}
+ 134:	03 30       	cpi	r16, 0x03	; 3
+ 136:	11 05       	cpc	r17, r1
+ 138:	09 f0       	breq	.+2      	; 0x13c <main+0xd0>
+ 13a:	b8 cf       	rjmp	.-144    	; 0xac <main+0x40>
+ 13c:	83 e0       	ldi	r24, 0x03	; 3
+ 13e:	0e 94 d8 00 	call	0x1b0	; 0x1b0 <H_Leds_On>
+ 142:	0e 94 bd 00 	call	0x17a	; 0x17a <H_Buzzer_Loop>
+ 146:	b2 cf       	rjmp	.-156    	; 0xac <main+0x40>
 		if (msg != 0){
 			Str[counter]=msg;
 			counter++;
 		}
 	
 	       if(counter == 4){
- 13a:	84 e0       	ldi	r24, 0x04	; 4
- 13c:	e8 16       	cp	r14, r24
- 13e:	f1 04       	cpc	r15, r1
- 140:	01 f7       	brne	.-64     	; 0x102 <main+0x96>
- 142:	fe 01       	movw	r30, r28
- 144:	31 96       	adiw	r30, 0x01	; 1
- 146:	de 01       	movw	r26, r28
- 148:	15 96       	adiw	r26, 0x05	; 5
- 14a:	9d 01       	movw	r18, r26
- 14c:	bd cf       	rjmp	.-134    	; 0xc8 <main+0x5c>
+ 148:	84 e0       	ldi	r24, 0x04	; 4
+ 14a:	e8 16       	cp	r14, r24
+ 14c:	f1 04       	cpc	r15, r1
+ 14e:	01 f7       	brne	.-64     	; 0x110 <main+0xa4>
+ 150:	fe 01       	movw	r30, r28
+ 152:	31 96       	adiw	r30, 0x01	; 1
+ 154:	de 01       	movw	r26, r28
+ 156:	15 96       	adiw	r26, 0x05	; 5
+ 158:	9d 01       	movw	r18, r26
+ 15a:	b8 cf       	rjmp	.-144    	; 0xcc <main+0x60>
 
-0000014e <H_Buzzer_Init>:
+0000015c <H_Buzzer_Init>:
  */ 
 #include "Buzzer.h"
 
 void H_Buzzer_Init(void)
 {
 	M_Dio_PinMode(BUZZER_PIN,OUTPUT);
- 14e:	61 e0       	ldi	r22, 0x01	; 1
- 150:	8d e0       	ldi	r24, 0x0D	; 13
- 152:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <M_Dio_PinMode>
- 156:	08 95       	ret
+ 15c:	61 e0       	ldi	r22, 0x01	; 1
+ 15e:	8d e0       	ldi	r24, 0x0D	; 13
+ 160:	0e 94 0a 01 	call	0x214	; 0x214 <M_Dio_PinMode>
+ 164:	08 95       	ret
 
-00000158 <H_Buzzer_On>:
+00000166 <H_Buzzer_On>:
 }
 void H_Buzzer_On(void)
 {
 	M_Dio_PinWrite(BUZZER_PIN,HIGH);
- 158:	61 e0       	ldi	r22, 0x01	; 1
- 15a:	8d e0       	ldi	r24, 0x0D	; 13
- 15c:	0e 94 5c 01 	call	0x2b8	; 0x2b8 <M_Dio_PinWrite>
- 160:	08 95       	ret
+ 166:	61 e0       	ldi	r22, 0x01	; 1
+ 168:	8d e0       	ldi	r24, 0x0D	; 13
+ 16a:	0e 94 93 01 	call	0x326	; 0x326 <M_Dio_PinWrite>
+ 16e:	08 95       	ret
 
-00000162 <H_Leds_Init>:
+00000170 <H_Buzzer_Off>:
+}
+void H_Buzzer_Off(void)
+{
+	M_Dio_PinWrite(BUZZER_PIN,LOW);
+ 170:	62 e0       	ldi	r22, 0x02	; 2
+ 172:	8d e0       	ldi	r24, 0x0D	; 13
+ 174:	0e 94 93 01 	call	0x326	; 0x326 <M_Dio_PinWrite>
+ 178:	08 95       	ret
+
+0000017a <H_Buzzer_Loop>:
+}
+void H_Buzzer_Loop(void)
+{
+	while(1){
+		H_Buzzer_On();
+ 17a:	0e 94 b3 00 	call	0x166	; 0x166 <H_Buzzer_On>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 17e:	2f ef       	ldi	r18, 0xFF	; 255
+ 180:	83 ed       	ldi	r24, 0xD3	; 211
+ 182:	90 e3       	ldi	r25, 0x30	; 48
+ 184:	21 50       	subi	r18, 0x01	; 1
+ 186:	80 40       	sbci	r24, 0x00	; 0
+ 188:	90 40       	sbci	r25, 0x00	; 0
+ 18a:	e1 f7       	brne	.-8      	; 0x184 <H_Buzzer_Loop+0xa>
+ 18c:	00 c0       	rjmp	.+0      	; 0x18e <H_Buzzer_Loop+0x14>
+ 18e:	00 00       	nop
+		_delay_ms(DELAY_TIME);
+		H_Buzzer_Off();
+ 190:	0e 94 b8 00 	call	0x170	; 0x170 <H_Buzzer_Off>
+ 194:	f2 cf       	rjmp	.-28     	; 0x17a <H_Buzzer_Loop>
+
+00000196 <H_Leds_Init>:
  */ 
 #include "Leds.h"
 
 void H_Leds_Init(void)
 {
 	M_Dio_PinMode(LED0_PIN,OUTPUT);
- 162:	61 e0       	ldi	r22, 0x01	; 1
- 164:	8a e0       	ldi	r24, 0x0A	; 10
- 166:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <M_Dio_PinMode>
+ 196:	61 e0       	ldi	r22, 0x01	; 1
+ 198:	8a e0       	ldi	r24, 0x0A	; 10
+ 19a:	0e 94 0a 01 	call	0x214	; 0x214 <M_Dio_PinMode>
 	M_Dio_PinMode(LED1_PIN,OUTPUT);
- 16a:	61 e0       	ldi	r22, 0x01	; 1
- 16c:	8b e0       	ldi	r24, 0x0B	; 11
- 16e:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <M_Dio_PinMode>
+ 19e:	61 e0       	ldi	r22, 0x01	; 1
+ 1a0:	8b e0       	ldi	r24, 0x0B	; 11
+ 1a2:	0e 94 0a 01 	call	0x214	; 0x214 <M_Dio_PinMode>
 	M_Dio_PinMode(LED2_PIN,OUTPUT);
- 172:	61 e0       	ldi	r22, 0x01	; 1
- 174:	8c e0       	ldi	r24, 0x0C	; 12
- 176:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <M_Dio_PinMode>
- 17a:	08 95       	ret
+ 1a6:	61 e0       	ldi	r22, 0x01	; 1
+ 1a8:	8c e0       	ldi	r24, 0x0C	; 12
+ 1aa:	0e 94 0a 01 	call	0x214	; 0x214 <M_Dio_PinMode>
+ 1ae:	08 95       	ret
 
-0000017c <H_Leds_On>:
+000001b0 <H_Leds_On>:
 }
 void H_Leds_On(u8 Local_u8_LedNum)
 {
 	switch(Local_u8_LedNum)
- 17c:	82 30       	cpi	r24, 0x02	; 2
- 17e:	49 f0       	breq	.+18     	; 0x192 <H_Leds_On+0x16>
- 180:	83 30       	cpi	r24, 0x03	; 3
- 182:	61 f0       	breq	.+24     	; 0x19c <H_Leds_On+0x20>
- 184:	81 30       	cpi	r24, 0x01	; 1
- 186:	71 f4       	brne	.+28     	; 0x1a4 <H_Leds_On+0x28>
+ 1b0:	82 30       	cpi	r24, 0x02	; 2
+ 1b2:	49 f0       	breq	.+18     	; 0x1c6 <H_Leds_On+0x16>
+ 1b4:	83 30       	cpi	r24, 0x03	; 3
+ 1b6:	61 f0       	breq	.+24     	; 0x1d0 <H_Leds_On+0x20>
+ 1b8:	81 30       	cpi	r24, 0x01	; 1
+ 1ba:	71 f4       	brne	.+28     	; 0x1d8 <H_Leds_On+0x28>
 	{
 		case LED0: M_Dio_PinWrite(LED0_PIN,HIGH);  break;
- 188:	61 e0       	ldi	r22, 0x01	; 1
- 18a:	8a e0       	ldi	r24, 0x0A	; 10
- 18c:	0e 94 5c 01 	call	0x2b8	; 0x2b8 <M_Dio_PinWrite>
- 190:	08 95       	ret
+ 1bc:	61 e0       	ldi	r22, 0x01	; 1
+ 1be:	8a e0       	ldi	r24, 0x0A	; 10
+ 1c0:	0e 94 93 01 	call	0x326	; 0x326 <M_Dio_PinWrite>
+ 1c4:	08 95       	ret
 		case LED1: M_Dio_PinWrite(LED1_PIN,HIGH);  break;
- 192:	61 e0       	ldi	r22, 0x01	; 1
- 194:	8b e0       	ldi	r24, 0x0B	; 11
- 196:	0e 94 5c 01 	call	0x2b8	; 0x2b8 <M_Dio_PinWrite>
- 19a:	08 95       	ret
+ 1c6:	61 e0       	ldi	r22, 0x01	; 1
+ 1c8:	8b e0       	ldi	r24, 0x0B	; 11
+ 1ca:	0e 94 93 01 	call	0x326	; 0x326 <M_Dio_PinWrite>
+ 1ce:	08 95       	ret
 		case LED2: M_Dio_PinWrite(LED2_PIN,HIGH);  break;
- 19c:	61 e0       	ldi	r22, 0x01	; 1
- 19e:	8c e0       	ldi	r24, 0x0C	; 12
- 1a0:	0e 94 5c 01 	call	0x2b8	; 0x2b8 <M_Dio_PinWrite>
- 1a4:	08 95       	ret
+ 1d0:	61 e0       	ldi	r22, 0x01	; 1
+ 1d2:	8c e0       	ldi	r24, 0x0C	; 12
+ 1d4:	0e 94 93 01 	call	0x326	; 0x326 <M_Dio_PinWrite>
+ 1d8:	08 95       	ret
 
-000001a6 <M_Dio_PinMode>:
+000001da <H_ServoMotor_Init>:
+ */ 
+
+#include "Servo.h"
+void H_ServoMotor_Init(void)
+{
+	M_Timer1_Pwm1Init();
+ 1da:	0e 94 1c 02 	call	0x438	; 0x438 <M_Timer1_Pwm1Init>
+	M_Timer1_Pmw1SetFrequency(50);
+ 1de:	62 e3       	ldi	r22, 0x32	; 50
+ 1e0:	70 e0       	ldi	r23, 0x00	; 0
+ 1e2:	80 e0       	ldi	r24, 0x00	; 0
+ 1e4:	90 e0       	ldi	r25, 0x00	; 0
+ 1e6:	0e 94 30 02 	call	0x460	; 0x460 <M_Timer1_Pmw1SetFrequency>
+ 1ea:	08 95       	ret
+
+000001ec <H_ServoMotor_SetAngle>:
+}
+void H_ServoMotor_SetAngle(u8 Local_u8_Angle)
+{
+	u8 Local_u8_DutyCycle = (((Local_u8_Angle*5)/180) + 5);
+	M_Timer1_Pwm1DutyCycle(Local_u8_DutyCycle);
+ 1ec:	90 e0       	ldi	r25, 0x00	; 0
+ 1ee:	9c 01       	movw	r18, r24
+ 1f0:	22 0f       	add	r18, r18
+ 1f2:	33 1f       	adc	r19, r19
+ 1f4:	22 0f       	add	r18, r18
+ 1f6:	33 1f       	adc	r19, r19
+ 1f8:	82 0f       	add	r24, r18
+ 1fa:	93 1f       	adc	r25, r19
+ 1fc:	64 eb       	ldi	r22, 0xB4	; 180
+ 1fe:	70 e0       	ldi	r23, 0x00	; 0
+ 200:	0e 94 6e 02 	call	0x4dc	; 0x4dc <__divmodhi4>
+ 204:	85 e0       	ldi	r24, 0x05	; 5
+ 206:	86 0f       	add	r24, r22
+ 208:	0e 94 3b 02 	call	0x476	; 0x476 <M_Timer1_Pwm1DutyCycle>
+ 20c:	08 95       	ret
+
+0000020e <H_ServoMotor_Start>:
+}
+void H_ServoMotor_Start(void)
+{
+	M_Timer1_Pwm1Start();
+ 20e:	0e 94 52 02 	call	0x4a4	; 0x4a4 <M_Timer1_Pwm1Start>
+ 212:	08 95       	ret
+
+00000214 <M_Dio_PinMode>:
  */ 
 
 #include "Dio.h"
 void M_Dio_PinMode(u8 Local_u8_Num, u8 Local_u8_Mode)
 {
 	u8 Local_u8_Pin  = Local_u8_Num % 10;
- 1a6:	9d ec       	ldi	r25, 0xCD	; 205
- 1a8:	89 9f       	mul	r24, r25
- 1aa:	91 2d       	mov	r25, r1
- 1ac:	11 24       	eor	r1, r1
- 1ae:	29 2f       	mov	r18, r25
- 1b0:	26 95       	lsr	r18
- 1b2:	26 95       	lsr	r18
- 1b4:	26 95       	lsr	r18
- 1b6:	22 0f       	add	r18, r18
- 1b8:	32 2f       	mov	r19, r18
- 1ba:	33 0f       	add	r19, r19
- 1bc:	33 0f       	add	r19, r19
- 1be:	23 0f       	add	r18, r19
- 1c0:	82 1b       	sub	r24, r18
- 1c2:	28 2f       	mov	r18, r24
+ 214:	9d ec       	ldi	r25, 0xCD	; 205
+ 216:	89 9f       	mul	r24, r25
+ 218:	91 2d       	mov	r25, r1
+ 21a:	11 24       	eor	r1, r1
+ 21c:	29 2f       	mov	r18, r25
+ 21e:	26 95       	lsr	r18
+ 220:	26 95       	lsr	r18
+ 222:	26 95       	lsr	r18
+ 224:	22 0f       	add	r18, r18
+ 226:	32 2f       	mov	r19, r18
+ 228:	33 0f       	add	r19, r19
+ 22a:	33 0f       	add	r19, r19
+ 22c:	23 0f       	add	r18, r19
+ 22e:	82 1b       	sub	r24, r18
+ 230:	28 2f       	mov	r18, r24
 	u8 Local_u8_Port = Local_u8_Num / 10;
- 1c4:	96 95       	lsr	r25
- 1c6:	96 95       	lsr	r25
- 1c8:	96 95       	lsr	r25
+ 232:	96 95       	lsr	r25
+ 234:	96 95       	lsr	r25
+ 236:	96 95       	lsr	r25
 	switch (Local_u8_Mode)
- 1ca:	61 30       	cpi	r22, 0x01	; 1
- 1cc:	19 f0       	breq	.+6      	; 0x1d4 <M_Dio_PinMode+0x2e>
- 1ce:	62 30       	cpi	r22, 0x02	; 2
- 1d0:	c1 f1       	breq	.+112    	; 0x242 <M_Dio_PinMode+0x9c>
- 1d2:	08 95       	ret
+ 238:	61 30       	cpi	r22, 0x01	; 1
+ 23a:	19 f0       	breq	.+6      	; 0x242 <M_Dio_PinMode+0x2e>
+ 23c:	62 30       	cpi	r22, 0x02	; 2
+ 23e:	c1 f1       	breq	.+112    	; 0x2b0 <M_Dio_PinMode+0x9c>
+ 240:	08 95       	ret
 	{
 		case OUTPUT:
 		switch(Local_u8_Port)
- 1d4:	92 30       	cpi	r25, 0x02	; 2
- 1d6:	a1 f0       	breq	.+40     	; 0x200 <M_Dio_PinMode+0x5a>
- 1d8:	18 f4       	brcc	.+6      	; 0x1e0 <M_Dio_PinMode+0x3a>
- 1da:	91 30       	cpi	r25, 0x01	; 1
- 1dc:	31 f0       	breq	.+12     	; 0x1ea <M_Dio_PinMode+0x44>
- 1de:	08 95       	ret
- 1e0:	93 30       	cpi	r25, 0x03	; 3
- 1e2:	c9 f0       	breq	.+50     	; 0x216 <M_Dio_PinMode+0x70>
- 1e4:	94 30       	cpi	r25, 0x04	; 4
- 1e6:	11 f1       	breq	.+68     	; 0x22c <M_Dio_PinMode+0x86>
- 1e8:	08 95       	ret
+ 242:	92 30       	cpi	r25, 0x02	; 2
+ 244:	a1 f0       	breq	.+40     	; 0x26e <M_Dio_PinMode+0x5a>
+ 246:	18 f4       	brcc	.+6      	; 0x24e <M_Dio_PinMode+0x3a>
+ 248:	91 30       	cpi	r25, 0x01	; 1
+ 24a:	31 f0       	breq	.+12     	; 0x258 <M_Dio_PinMode+0x44>
+ 24c:	08 95       	ret
+ 24e:	93 30       	cpi	r25, 0x03	; 3
+ 250:	c9 f0       	breq	.+50     	; 0x284 <M_Dio_PinMode+0x70>
+ 252:	94 30       	cpi	r25, 0x04	; 4
+ 254:	11 f1       	breq	.+68     	; 0x29a <M_Dio_PinMode+0x86>
+ 256:	08 95       	ret
 		{
 			case 1: SetBit(DDRA,Local_u8_Pin); break;
- 1ea:	3a b3       	in	r19, 0x1a	; 26
- 1ec:	81 e0       	ldi	r24, 0x01	; 1
- 1ee:	90 e0       	ldi	r25, 0x00	; 0
- 1f0:	02 c0       	rjmp	.+4      	; 0x1f6 <M_Dio_PinMode+0x50>
- 1f2:	88 0f       	add	r24, r24
- 1f4:	99 1f       	adc	r25, r25
- 1f6:	2a 95       	dec	r18
- 1f8:	e2 f7       	brpl	.-8      	; 0x1f2 <M_Dio_PinMode+0x4c>
- 1fa:	83 2b       	or	r24, r19
- 1fc:	8a bb       	out	0x1a, r24	; 26
- 1fe:	08 95       	ret
+ 258:	3a b3       	in	r19, 0x1a	; 26
+ 25a:	81 e0       	ldi	r24, 0x01	; 1
+ 25c:	90 e0       	ldi	r25, 0x00	; 0
+ 25e:	02 c0       	rjmp	.+4      	; 0x264 <M_Dio_PinMode+0x50>
+ 260:	88 0f       	add	r24, r24
+ 262:	99 1f       	adc	r25, r25
+ 264:	2a 95       	dec	r18
+ 266:	e2 f7       	brpl	.-8      	; 0x260 <M_Dio_PinMode+0x4c>
+ 268:	83 2b       	or	r24, r19
+ 26a:	8a bb       	out	0x1a, r24	; 26
+ 26c:	08 95       	ret
 			case 2: SetBit(DDRB,Local_u8_Pin); break;
- 200:	37 b3       	in	r19, 0x17	; 23
- 202:	81 e0       	ldi	r24, 0x01	; 1
- 204:	90 e0       	ldi	r25, 0x00	; 0
- 206:	02 c0       	rjmp	.+4      	; 0x20c <M_Dio_PinMode+0x66>
- 208:	88 0f       	add	r24, r24
- 20a:	99 1f       	adc	r25, r25
- 20c:	2a 95       	dec	r18
- 20e:	e2 f7       	brpl	.-8      	; 0x208 <M_Dio_PinMode+0x62>
- 210:	83 2b       	or	r24, r19
- 212:	87 bb       	out	0x17, r24	; 23
- 214:	08 95       	ret
+ 26e:	37 b3       	in	r19, 0x17	; 23
+ 270:	81 e0       	ldi	r24, 0x01	; 1
+ 272:	90 e0       	ldi	r25, 0x00	; 0
+ 274:	02 c0       	rjmp	.+4      	; 0x27a <M_Dio_PinMode+0x66>
+ 276:	88 0f       	add	r24, r24
+ 278:	99 1f       	adc	r25, r25
+ 27a:	2a 95       	dec	r18
+ 27c:	e2 f7       	brpl	.-8      	; 0x276 <M_Dio_PinMode+0x62>
+ 27e:	83 2b       	or	r24, r19
+ 280:	87 bb       	out	0x17, r24	; 23
+ 282:	08 95       	ret
 			case 3: SetBit(DDRC,Local_u8_Pin); break;
- 216:	34 b3       	in	r19, 0x14	; 20
- 218:	81 e0       	ldi	r24, 0x01	; 1
- 21a:	90 e0       	ldi	r25, 0x00	; 0
- 21c:	02 c0       	rjmp	.+4      	; 0x222 <M_Dio_PinMode+0x7c>
- 21e:	88 0f       	add	r24, r24
- 220:	99 1f       	adc	r25, r25
- 222:	2a 95       	dec	r18
- 224:	e2 f7       	brpl	.-8      	; 0x21e <M_Dio_PinMode+0x78>
- 226:	83 2b       	or	r24, r19
- 228:	84 bb       	out	0x14, r24	; 20
- 22a:	08 95       	ret
+ 284:	34 b3       	in	r19, 0x14	; 20
+ 286:	81 e0       	ldi	r24, 0x01	; 1
+ 288:	90 e0       	ldi	r25, 0x00	; 0
+ 28a:	02 c0       	rjmp	.+4      	; 0x290 <M_Dio_PinMode+0x7c>
+ 28c:	88 0f       	add	r24, r24
+ 28e:	99 1f       	adc	r25, r25
+ 290:	2a 95       	dec	r18
+ 292:	e2 f7       	brpl	.-8      	; 0x28c <M_Dio_PinMode+0x78>
+ 294:	83 2b       	or	r24, r19
+ 296:	84 bb       	out	0x14, r24	; 20
+ 298:	08 95       	ret
 			case 4: SetBit(DDRD,Local_u8_Pin); break;
- 22c:	31 b3       	in	r19, 0x11	; 17
- 22e:	81 e0       	ldi	r24, 0x01	; 1
- 230:	90 e0       	ldi	r25, 0x00	; 0
- 232:	02 c0       	rjmp	.+4      	; 0x238 <M_Dio_PinMode+0x92>
- 234:	88 0f       	add	r24, r24
- 236:	99 1f       	adc	r25, r25
- 238:	2a 95       	dec	r18
- 23a:	e2 f7       	brpl	.-8      	; 0x234 <M_Dio_PinMode+0x8e>
- 23c:	83 2b       	or	r24, r19
- 23e:	81 bb       	out	0x11, r24	; 17
- 240:	08 95       	ret
+ 29a:	31 b3       	in	r19, 0x11	; 17
+ 29c:	81 e0       	ldi	r24, 0x01	; 1
+ 29e:	90 e0       	ldi	r25, 0x00	; 0
+ 2a0:	02 c0       	rjmp	.+4      	; 0x2a6 <M_Dio_PinMode+0x92>
+ 2a2:	88 0f       	add	r24, r24
+ 2a4:	99 1f       	adc	r25, r25
+ 2a6:	2a 95       	dec	r18
+ 2a8:	e2 f7       	brpl	.-8      	; 0x2a2 <M_Dio_PinMode+0x8e>
+ 2aa:	83 2b       	or	r24, r19
+ 2ac:	81 bb       	out	0x11, r24	; 17
+ 2ae:	08 95       	ret
 			default:                           break;
 		}break;
 		case INPUT:
 		switch(Local_u8_Port)
- 242:	92 30       	cpi	r25, 0x02	; 2
- 244:	a9 f0       	breq	.+42     	; 0x270 <M_Dio_PinMode+0xca>
- 246:	18 f4       	brcc	.+6      	; 0x24e <M_Dio_PinMode+0xa8>
- 248:	91 30       	cpi	r25, 0x01	; 1
- 24a:	31 f0       	breq	.+12     	; 0x258 <M_Dio_PinMode+0xb2>
- 24c:	08 95       	ret
- 24e:	93 30       	cpi	r25, 0x03	; 3
- 250:	d9 f0       	breq	.+54     	; 0x288 <M_Dio_PinMode+0xe2>
- 252:	94 30       	cpi	r25, 0x04	; 4
- 254:	29 f1       	breq	.+74     	; 0x2a0 <M_Dio_PinMode+0xfa>
- 256:	08 95       	ret
+ 2b0:	92 30       	cpi	r25, 0x02	; 2
+ 2b2:	a9 f0       	breq	.+42     	; 0x2de <M_Dio_PinMode+0xca>
+ 2b4:	18 f4       	brcc	.+6      	; 0x2bc <M_Dio_PinMode+0xa8>
+ 2b6:	91 30       	cpi	r25, 0x01	; 1
+ 2b8:	31 f0       	breq	.+12     	; 0x2c6 <M_Dio_PinMode+0xb2>
+ 2ba:	08 95       	ret
+ 2bc:	93 30       	cpi	r25, 0x03	; 3
+ 2be:	d9 f0       	breq	.+54     	; 0x2f6 <M_Dio_PinMode+0xe2>
+ 2c0:	94 30       	cpi	r25, 0x04	; 4
+ 2c2:	29 f1       	breq	.+74     	; 0x30e <M_Dio_PinMode+0xfa>
+ 2c4:	08 95       	ret
 		{
 			case 1: ClrBit(DDRA,Local_u8_Pin); break;
- 258:	3a b3       	in	r19, 0x1a	; 26
- 25a:	81 e0       	ldi	r24, 0x01	; 1
- 25c:	90 e0       	ldi	r25, 0x00	; 0
- 25e:	02 c0       	rjmp	.+4      	; 0x264 <M_Dio_PinMode+0xbe>
- 260:	88 0f       	add	r24, r24
- 262:	99 1f       	adc	r25, r25
- 264:	2a 95       	dec	r18
- 266:	e2 f7       	brpl	.-8      	; 0x260 <M_Dio_PinMode+0xba>
- 268:	80 95       	com	r24
- 26a:	83 23       	and	r24, r19
- 26c:	8a bb       	out	0x1a, r24	; 26
- 26e:	08 95       	ret
+ 2c6:	3a b3       	in	r19, 0x1a	; 26
+ 2c8:	81 e0       	ldi	r24, 0x01	; 1
+ 2ca:	90 e0       	ldi	r25, 0x00	; 0
+ 2cc:	02 c0       	rjmp	.+4      	; 0x2d2 <M_Dio_PinMode+0xbe>
+ 2ce:	88 0f       	add	r24, r24
+ 2d0:	99 1f       	adc	r25, r25
+ 2d2:	2a 95       	dec	r18
+ 2d4:	e2 f7       	brpl	.-8      	; 0x2ce <M_Dio_PinMode+0xba>
+ 2d6:	80 95       	com	r24
+ 2d8:	83 23       	and	r24, r19
+ 2da:	8a bb       	out	0x1a, r24	; 26
+ 2dc:	08 95       	ret
 			case 2: ClrBit(DDRB,Local_u8_Pin); break;
- 270:	37 b3       	in	r19, 0x17	; 23
- 272:	81 e0       	ldi	r24, 0x01	; 1
- 274:	90 e0       	ldi	r25, 0x00	; 0
- 276:	02 c0       	rjmp	.+4      	; 0x27c <M_Dio_PinMode+0xd6>
- 278:	88 0f       	add	r24, r24
- 27a:	99 1f       	adc	r25, r25
- 27c:	2a 95       	dec	r18
- 27e:	e2 f7       	brpl	.-8      	; 0x278 <M_Dio_PinMode+0xd2>
- 280:	80 95       	com	r24
- 282:	83 23       	and	r24, r19
- 284:	87 bb       	out	0x17, r24	; 23
- 286:	08 95       	ret
+ 2de:	37 b3       	in	r19, 0x17	; 23
+ 2e0:	81 e0       	ldi	r24, 0x01	; 1
+ 2e2:	90 e0       	ldi	r25, 0x00	; 0
+ 2e4:	02 c0       	rjmp	.+4      	; 0x2ea <M_Dio_PinMode+0xd6>
+ 2e6:	88 0f       	add	r24, r24
+ 2e8:	99 1f       	adc	r25, r25
+ 2ea:	2a 95       	dec	r18
+ 2ec:	e2 f7       	brpl	.-8      	; 0x2e6 <M_Dio_PinMode+0xd2>
+ 2ee:	80 95       	com	r24
+ 2f0:	83 23       	and	r24, r19
+ 2f2:	87 bb       	out	0x17, r24	; 23
+ 2f4:	08 95       	ret
 			case 3: ClrBit(DDRC,Local_u8_Pin); break;
- 288:	34 b3       	in	r19, 0x14	; 20
- 28a:	81 e0       	ldi	r24, 0x01	; 1
- 28c:	90 e0       	ldi	r25, 0x00	; 0
- 28e:	02 c0       	rjmp	.+4      	; 0x294 <M_Dio_PinMode+0xee>
- 290:	88 0f       	add	r24, r24
- 292:	99 1f       	adc	r25, r25
- 294:	2a 95       	dec	r18
- 296:	e2 f7       	brpl	.-8      	; 0x290 <M_Dio_PinMode+0xea>
- 298:	80 95       	com	r24
- 29a:	83 23       	and	r24, r19
- 29c:	84 bb       	out	0x14, r24	; 20
- 29e:	08 95       	ret
+ 2f6:	34 b3       	in	r19, 0x14	; 20
+ 2f8:	81 e0       	ldi	r24, 0x01	; 1
+ 2fa:	90 e0       	ldi	r25, 0x00	; 0
+ 2fc:	02 c0       	rjmp	.+4      	; 0x302 <M_Dio_PinMode+0xee>
+ 2fe:	88 0f       	add	r24, r24
+ 300:	99 1f       	adc	r25, r25
+ 302:	2a 95       	dec	r18
+ 304:	e2 f7       	brpl	.-8      	; 0x2fe <M_Dio_PinMode+0xea>
+ 306:	80 95       	com	r24
+ 308:	83 23       	and	r24, r19
+ 30a:	84 bb       	out	0x14, r24	; 20
+ 30c:	08 95       	ret
 			case 4: ClrBit(DDRD,Local_u8_Pin); break;
- 2a0:	31 b3       	in	r19, 0x11	; 17
- 2a2:	81 e0       	ldi	r24, 0x01	; 1
- 2a4:	90 e0       	ldi	r25, 0x00	; 0
- 2a6:	02 c0       	rjmp	.+4      	; 0x2ac <M_Dio_PinMode+0x106>
- 2a8:	88 0f       	add	r24, r24
- 2aa:	99 1f       	adc	r25, r25
- 2ac:	2a 95       	dec	r18
- 2ae:	e2 f7       	brpl	.-8      	; 0x2a8 <M_Dio_PinMode+0x102>
- 2b0:	80 95       	com	r24
- 2b2:	83 23       	and	r24, r19
- 2b4:	81 bb       	out	0x11, r24	; 17
- 2b6:	08 95       	ret
+ 30e:	31 b3       	in	r19, 0x11	; 17
+ 310:	81 e0       	ldi	r24, 0x01	; 1
+ 312:	90 e0       	ldi	r25, 0x00	; 0
+ 314:	02 c0       	rjmp	.+4      	; 0x31a <M_Dio_PinMode+0x106>
+ 316:	88 0f       	add	r24, r24
+ 318:	99 1f       	adc	r25, r25
+ 31a:	2a 95       	dec	r18
+ 31c:	e2 f7       	brpl	.-8      	; 0x316 <M_Dio_PinMode+0x102>
+ 31e:	80 95       	com	r24
+ 320:	83 23       	and	r24, r19
+ 322:	81 bb       	out	0x11, r24	; 17
+ 324:	08 95       	ret
 
-000002b8 <M_Dio_PinWrite>:
+00000326 <M_Dio_PinWrite>:
 default: break;
 	}
 }
 void M_Dio_PinWrite(u8 Local_u8_Num, u8 Local_u8_Mode)
 {
 	u8 Local_u8_Pin  = Local_u8_Num % 10;
- 2b8:	9d ec       	ldi	r25, 0xCD	; 205
- 2ba:	89 9f       	mul	r24, r25
- 2bc:	91 2d       	mov	r25, r1
- 2be:	11 24       	eor	r1, r1
- 2c0:	29 2f       	mov	r18, r25
- 2c2:	26 95       	lsr	r18
- 2c4:	26 95       	lsr	r18
- 2c6:	26 95       	lsr	r18
- 2c8:	22 0f       	add	r18, r18
- 2ca:	32 2f       	mov	r19, r18
- 2cc:	33 0f       	add	r19, r19
- 2ce:	33 0f       	add	r19, r19
- 2d0:	23 0f       	add	r18, r19
- 2d2:	82 1b       	sub	r24, r18
- 2d4:	28 2f       	mov	r18, r24
+ 326:	9d ec       	ldi	r25, 0xCD	; 205
+ 328:	89 9f       	mul	r24, r25
+ 32a:	91 2d       	mov	r25, r1
+ 32c:	11 24       	eor	r1, r1
+ 32e:	29 2f       	mov	r18, r25
+ 330:	26 95       	lsr	r18
+ 332:	26 95       	lsr	r18
+ 334:	26 95       	lsr	r18
+ 336:	22 0f       	add	r18, r18
+ 338:	32 2f       	mov	r19, r18
+ 33a:	33 0f       	add	r19, r19
+ 33c:	33 0f       	add	r19, r19
+ 33e:	23 0f       	add	r18, r19
+ 340:	82 1b       	sub	r24, r18
+ 342:	28 2f       	mov	r18, r24
 	u8 Local_u8_Port = Local_u8_Num / 10;
- 2d6:	96 95       	lsr	r25
- 2d8:	96 95       	lsr	r25
- 2da:	96 95       	lsr	r25
+ 344:	96 95       	lsr	r25
+ 346:	96 95       	lsr	r25
+ 348:	96 95       	lsr	r25
 	switch (Local_u8_Mode)
- 2dc:	61 30       	cpi	r22, 0x01	; 1
- 2de:	19 f0       	breq	.+6      	; 0x2e6 <M_Dio_PinWrite+0x2e>
- 2e0:	62 30       	cpi	r22, 0x02	; 2
- 2e2:	c1 f1       	breq	.+112    	; 0x354 <M_Dio_PinWrite+0x9c>
- 2e4:	08 95       	ret
+ 34a:	61 30       	cpi	r22, 0x01	; 1
+ 34c:	19 f0       	breq	.+6      	; 0x354 <M_Dio_PinWrite+0x2e>
+ 34e:	62 30       	cpi	r22, 0x02	; 2
+ 350:	c1 f1       	breq	.+112    	; 0x3c2 <M_Dio_PinWrite+0x9c>
+ 352:	08 95       	ret
 	{
 		case HIGH:
 		switch(Local_u8_Port)
- 2e6:	92 30       	cpi	r25, 0x02	; 2
- 2e8:	a1 f0       	breq	.+40     	; 0x312 <M_Dio_PinWrite+0x5a>
- 2ea:	18 f4       	brcc	.+6      	; 0x2f2 <M_Dio_PinWrite+0x3a>
- 2ec:	91 30       	cpi	r25, 0x01	; 1
- 2ee:	31 f0       	breq	.+12     	; 0x2fc <M_Dio_PinWrite+0x44>
- 2f0:	08 95       	ret
- 2f2:	93 30       	cpi	r25, 0x03	; 3
- 2f4:	c9 f0       	breq	.+50     	; 0x328 <M_Dio_PinWrite+0x70>
- 2f6:	94 30       	cpi	r25, 0x04	; 4
- 2f8:	11 f1       	breq	.+68     	; 0x33e <M_Dio_PinWrite+0x86>
- 2fa:	08 95       	ret
+ 354:	92 30       	cpi	r25, 0x02	; 2
+ 356:	a1 f0       	breq	.+40     	; 0x380 <M_Dio_PinWrite+0x5a>
+ 358:	18 f4       	brcc	.+6      	; 0x360 <M_Dio_PinWrite+0x3a>
+ 35a:	91 30       	cpi	r25, 0x01	; 1
+ 35c:	31 f0       	breq	.+12     	; 0x36a <M_Dio_PinWrite+0x44>
+ 35e:	08 95       	ret
+ 360:	93 30       	cpi	r25, 0x03	; 3
+ 362:	c9 f0       	breq	.+50     	; 0x396 <M_Dio_PinWrite+0x70>
+ 364:	94 30       	cpi	r25, 0x04	; 4
+ 366:	11 f1       	breq	.+68     	; 0x3ac <M_Dio_PinWrite+0x86>
+ 368:	08 95       	ret
 		{
 			case 1: SetBit(PORTA,Local_u8_Pin); break;
- 2fc:	3b b3       	in	r19, 0x1b	; 27
- 2fe:	81 e0       	ldi	r24, 0x01	; 1
- 300:	90 e0       	ldi	r25, 0x00	; 0
- 302:	02 c0       	rjmp	.+4      	; 0x308 <M_Dio_PinWrite+0x50>
- 304:	88 0f       	add	r24, r24
- 306:	99 1f       	adc	r25, r25
- 308:	2a 95       	dec	r18
- 30a:	e2 f7       	brpl	.-8      	; 0x304 <M_Dio_PinWrite+0x4c>
- 30c:	83 2b       	or	r24, r19
- 30e:	8b bb       	out	0x1b, r24	; 27
- 310:	08 95       	ret
+ 36a:	3b b3       	in	r19, 0x1b	; 27
+ 36c:	81 e0       	ldi	r24, 0x01	; 1
+ 36e:	90 e0       	ldi	r25, 0x00	; 0
+ 370:	02 c0       	rjmp	.+4      	; 0x376 <M_Dio_PinWrite+0x50>
+ 372:	88 0f       	add	r24, r24
+ 374:	99 1f       	adc	r25, r25
+ 376:	2a 95       	dec	r18
+ 378:	e2 f7       	brpl	.-8      	; 0x372 <M_Dio_PinWrite+0x4c>
+ 37a:	83 2b       	or	r24, r19
+ 37c:	8b bb       	out	0x1b, r24	; 27
+ 37e:	08 95       	ret
 			case 2: SetBit(PORTB,Local_u8_Pin); break;
- 312:	38 b3       	in	r19, 0x18	; 24
- 314:	81 e0       	ldi	r24, 0x01	; 1
- 316:	90 e0       	ldi	r25, 0x00	; 0
- 318:	02 c0       	rjmp	.+4      	; 0x31e <M_Dio_PinWrite+0x66>
- 31a:	88 0f       	add	r24, r24
- 31c:	99 1f       	adc	r25, r25
- 31e:	2a 95       	dec	r18
- 320:	e2 f7       	brpl	.-8      	; 0x31a <M_Dio_PinWrite+0x62>
- 322:	83 2b       	or	r24, r19
- 324:	88 bb       	out	0x18, r24	; 24
- 326:	08 95       	ret
+ 380:	38 b3       	in	r19, 0x18	; 24
+ 382:	81 e0       	ldi	r24, 0x01	; 1
+ 384:	90 e0       	ldi	r25, 0x00	; 0
+ 386:	02 c0       	rjmp	.+4      	; 0x38c <M_Dio_PinWrite+0x66>
+ 388:	88 0f       	add	r24, r24
+ 38a:	99 1f       	adc	r25, r25
+ 38c:	2a 95       	dec	r18
+ 38e:	e2 f7       	brpl	.-8      	; 0x388 <M_Dio_PinWrite+0x62>
+ 390:	83 2b       	or	r24, r19
+ 392:	88 bb       	out	0x18, r24	; 24
+ 394:	08 95       	ret
 			case 3: SetBit(PORTC,Local_u8_Pin); break;
- 328:	35 b3       	in	r19, 0x15	; 21
- 32a:	81 e0       	ldi	r24, 0x01	; 1
- 32c:	90 e0       	ldi	r25, 0x00	; 0
- 32e:	02 c0       	rjmp	.+4      	; 0x334 <M_Dio_PinWrite+0x7c>
- 330:	88 0f       	add	r24, r24
- 332:	99 1f       	adc	r25, r25
- 334:	2a 95       	dec	r18
- 336:	e2 f7       	brpl	.-8      	; 0x330 <M_Dio_PinWrite+0x78>
- 338:	83 2b       	or	r24, r19
- 33a:	85 bb       	out	0x15, r24	; 21
- 33c:	08 95       	ret
+ 396:	35 b3       	in	r19, 0x15	; 21
+ 398:	81 e0       	ldi	r24, 0x01	; 1
+ 39a:	90 e0       	ldi	r25, 0x00	; 0
+ 39c:	02 c0       	rjmp	.+4      	; 0x3a2 <M_Dio_PinWrite+0x7c>
+ 39e:	88 0f       	add	r24, r24
+ 3a0:	99 1f       	adc	r25, r25
+ 3a2:	2a 95       	dec	r18
+ 3a4:	e2 f7       	brpl	.-8      	; 0x39e <M_Dio_PinWrite+0x78>
+ 3a6:	83 2b       	or	r24, r19
+ 3a8:	85 bb       	out	0x15, r24	; 21
+ 3aa:	08 95       	ret
 			case 4: SetBit(PORTD,Local_u8_Pin); break;
- 33e:	32 b3       	in	r19, 0x12	; 18
- 340:	81 e0       	ldi	r24, 0x01	; 1
- 342:	90 e0       	ldi	r25, 0x00	; 0
- 344:	02 c0       	rjmp	.+4      	; 0x34a <M_Dio_PinWrite+0x92>
- 346:	88 0f       	add	r24, r24
- 348:	99 1f       	adc	r25, r25
- 34a:	2a 95       	dec	r18
- 34c:	e2 f7       	brpl	.-8      	; 0x346 <M_Dio_PinWrite+0x8e>
- 34e:	83 2b       	or	r24, r19
- 350:	82 bb       	out	0x12, r24	; 18
- 352:	08 95       	ret
+ 3ac:	32 b3       	in	r19, 0x12	; 18
+ 3ae:	81 e0       	ldi	r24, 0x01	; 1
+ 3b0:	90 e0       	ldi	r25, 0x00	; 0
+ 3b2:	02 c0       	rjmp	.+4      	; 0x3b8 <M_Dio_PinWrite+0x92>
+ 3b4:	88 0f       	add	r24, r24
+ 3b6:	99 1f       	adc	r25, r25
+ 3b8:	2a 95       	dec	r18
+ 3ba:	e2 f7       	brpl	.-8      	; 0x3b4 <M_Dio_PinWrite+0x8e>
+ 3bc:	83 2b       	or	r24, r19
+ 3be:	82 bb       	out	0x12, r24	; 18
+ 3c0:	08 95       	ret
 			default:                           break;
 		}break;
 		case LOW:
 		switch(Local_u8_Port)
- 354:	92 30       	cpi	r25, 0x02	; 2
- 356:	a9 f0       	breq	.+42     	; 0x382 <M_Dio_PinWrite+0xca>
- 358:	18 f4       	brcc	.+6      	; 0x360 <M_Dio_PinWrite+0xa8>
- 35a:	91 30       	cpi	r25, 0x01	; 1
- 35c:	31 f0       	breq	.+12     	; 0x36a <M_Dio_PinWrite+0xb2>
- 35e:	08 95       	ret
- 360:	93 30       	cpi	r25, 0x03	; 3
- 362:	d9 f0       	breq	.+54     	; 0x39a <M_Dio_PinWrite+0xe2>
- 364:	94 30       	cpi	r25, 0x04	; 4
- 366:	29 f1       	breq	.+74     	; 0x3b2 <M_Dio_PinWrite+0xfa>
- 368:	08 95       	ret
+ 3c2:	92 30       	cpi	r25, 0x02	; 2
+ 3c4:	a9 f0       	breq	.+42     	; 0x3f0 <M_Dio_PinWrite+0xca>
+ 3c6:	18 f4       	brcc	.+6      	; 0x3ce <M_Dio_PinWrite+0xa8>
+ 3c8:	91 30       	cpi	r25, 0x01	; 1
+ 3ca:	31 f0       	breq	.+12     	; 0x3d8 <M_Dio_PinWrite+0xb2>
+ 3cc:	08 95       	ret
+ 3ce:	93 30       	cpi	r25, 0x03	; 3
+ 3d0:	d9 f0       	breq	.+54     	; 0x408 <__EEPROM_REGION_LENGTH__+0x8>
+ 3d2:	94 30       	cpi	r25, 0x04	; 4
+ 3d4:	29 f1       	breq	.+74     	; 0x420 <__EEPROM_REGION_LENGTH__+0x20>
+ 3d6:	08 95       	ret
 		{
 			case 1: ClrBit(PORTA,Local_u8_Pin); break;
- 36a:	3b b3       	in	r19, 0x1b	; 27
- 36c:	81 e0       	ldi	r24, 0x01	; 1
- 36e:	90 e0       	ldi	r25, 0x00	; 0
- 370:	02 c0       	rjmp	.+4      	; 0x376 <M_Dio_PinWrite+0xbe>
- 372:	88 0f       	add	r24, r24
- 374:	99 1f       	adc	r25, r25
- 376:	2a 95       	dec	r18
- 378:	e2 f7       	brpl	.-8      	; 0x372 <M_Dio_PinWrite+0xba>
- 37a:	80 95       	com	r24
- 37c:	83 23       	and	r24, r19
- 37e:	8b bb       	out	0x1b, r24	; 27
- 380:	08 95       	ret
+ 3d8:	3b b3       	in	r19, 0x1b	; 27
+ 3da:	81 e0       	ldi	r24, 0x01	; 1
+ 3dc:	90 e0       	ldi	r25, 0x00	; 0
+ 3de:	02 c0       	rjmp	.+4      	; 0x3e4 <M_Dio_PinWrite+0xbe>
+ 3e0:	88 0f       	add	r24, r24
+ 3e2:	99 1f       	adc	r25, r25
+ 3e4:	2a 95       	dec	r18
+ 3e6:	e2 f7       	brpl	.-8      	; 0x3e0 <M_Dio_PinWrite+0xba>
+ 3e8:	80 95       	com	r24
+ 3ea:	83 23       	and	r24, r19
+ 3ec:	8b bb       	out	0x1b, r24	; 27
+ 3ee:	08 95       	ret
 			case 2: ClrBit(PORTB,Local_u8_Pin); break;
- 382:	38 b3       	in	r19, 0x18	; 24
- 384:	81 e0       	ldi	r24, 0x01	; 1
- 386:	90 e0       	ldi	r25, 0x00	; 0
- 388:	02 c0       	rjmp	.+4      	; 0x38e <M_Dio_PinWrite+0xd6>
- 38a:	88 0f       	add	r24, r24
- 38c:	99 1f       	adc	r25, r25
- 38e:	2a 95       	dec	r18
- 390:	e2 f7       	brpl	.-8      	; 0x38a <M_Dio_PinWrite+0xd2>
- 392:	80 95       	com	r24
- 394:	83 23       	and	r24, r19
- 396:	88 bb       	out	0x18, r24	; 24
- 398:	08 95       	ret
+ 3f0:	38 b3       	in	r19, 0x18	; 24
+ 3f2:	81 e0       	ldi	r24, 0x01	; 1
+ 3f4:	90 e0       	ldi	r25, 0x00	; 0
+ 3f6:	02 c0       	rjmp	.+4      	; 0x3fc <M_Dio_PinWrite+0xd6>
+ 3f8:	88 0f       	add	r24, r24
+ 3fa:	99 1f       	adc	r25, r25
+ 3fc:	2a 95       	dec	r18
+ 3fe:	e2 f7       	brpl	.-8      	; 0x3f8 <M_Dio_PinWrite+0xd2>
+ 400:	80 95       	com	r24
+ 402:	83 23       	and	r24, r19
+ 404:	88 bb       	out	0x18, r24	; 24
+ 406:	08 95       	ret
 			case 3: ClrBit(PORTC,Local_u8_Pin); break;
- 39a:	35 b3       	in	r19, 0x15	; 21
- 39c:	81 e0       	ldi	r24, 0x01	; 1
- 39e:	90 e0       	ldi	r25, 0x00	; 0
- 3a0:	02 c0       	rjmp	.+4      	; 0x3a6 <M_Dio_PinWrite+0xee>
- 3a2:	88 0f       	add	r24, r24
- 3a4:	99 1f       	adc	r25, r25
- 3a6:	2a 95       	dec	r18
- 3a8:	e2 f7       	brpl	.-8      	; 0x3a2 <M_Dio_PinWrite+0xea>
- 3aa:	80 95       	com	r24
- 3ac:	83 23       	and	r24, r19
- 3ae:	85 bb       	out	0x15, r24	; 21
- 3b0:	08 95       	ret
+ 408:	35 b3       	in	r19, 0x15	; 21
+ 40a:	81 e0       	ldi	r24, 0x01	; 1
+ 40c:	90 e0       	ldi	r25, 0x00	; 0
+ 40e:	02 c0       	rjmp	.+4      	; 0x414 <__EEPROM_REGION_LENGTH__+0x14>
+ 410:	88 0f       	add	r24, r24
+ 412:	99 1f       	adc	r25, r25
+ 414:	2a 95       	dec	r18
+ 416:	e2 f7       	brpl	.-8      	; 0x410 <__EEPROM_REGION_LENGTH__+0x10>
+ 418:	80 95       	com	r24
+ 41a:	83 23       	and	r24, r19
+ 41c:	85 bb       	out	0x15, r24	; 21
+ 41e:	08 95       	ret
 			case 4: ClrBit(PORTD,Local_u8_Pin); break;
- 3b2:	32 b3       	in	r19, 0x12	; 18
- 3b4:	81 e0       	ldi	r24, 0x01	; 1
- 3b6:	90 e0       	ldi	r25, 0x00	; 0
- 3b8:	02 c0       	rjmp	.+4      	; 0x3be <M_Dio_PinWrite+0x106>
- 3ba:	88 0f       	add	r24, r24
- 3bc:	99 1f       	adc	r25, r25
- 3be:	2a 95       	dec	r18
- 3c0:	e2 f7       	brpl	.-8      	; 0x3ba <M_Dio_PinWrite+0x102>
- 3c2:	80 95       	com	r24
- 3c4:	83 23       	and	r24, r19
- 3c6:	82 bb       	out	0x12, r24	; 18
- 3c8:	08 95       	ret
+ 420:	32 b3       	in	r19, 0x12	; 18
+ 422:	81 e0       	ldi	r24, 0x01	; 1
+ 424:	90 e0       	ldi	r25, 0x00	; 0
+ 426:	02 c0       	rjmp	.+4      	; 0x42c <__EEPROM_REGION_LENGTH__+0x2c>
+ 428:	88 0f       	add	r24, r24
+ 42a:	99 1f       	adc	r25, r25
+ 42c:	2a 95       	dec	r18
+ 42e:	e2 f7       	brpl	.-8      	; 0x428 <__EEPROM_REGION_LENGTH__+0x28>
+ 430:	80 95       	com	r24
+ 432:	83 23       	and	r24, r19
+ 434:	82 bb       	out	0x12, r24	; 18
+ 436:	08 95       	ret
 
-000003ca <M_Uart_Init>:
+00000438 <M_Timer1_Pwm1Init>:
+#include "Timer1.h"
+
+void M_Timer1_Pwm1Init(void)
+{
+	//to make PD5 --> output
+	SetBit(DDRD,5);
+ 438:	8d 9a       	sbi	0x11, 5	; 17
+	//to select fast PWM mode with top ICR1 (MODE 14 in Data Sheet Table 47.)
+	ClrBit(TCCR1A,0);
+ 43a:	8f b5       	in	r24, 0x2f	; 47
+ 43c:	8e 7f       	andi	r24, 0xFE	; 254
+ 43e:	8f bd       	out	0x2f, r24	; 47
+	SetBit(TCCR1A,1);
+ 440:	8f b5       	in	r24, 0x2f	; 47
+ 442:	82 60       	ori	r24, 0x02	; 2
+ 444:	8f bd       	out	0x2f, r24	; 47
+	SetBit(TCCR1B,3);
+ 446:	8e b5       	in	r24, 0x2e	; 46
+ 448:	88 60       	ori	r24, 0x08	; 8
+ 44a:	8e bd       	out	0x2e, r24	; 46
+	SetBit(TCCR1B,4);
+ 44c:	8e b5       	in	r24, 0x2e	; 46
+ 44e:	80 61       	ori	r24, 0x10	; 16
+ 450:	8e bd       	out	0x2e, r24	; 46
+	//to select non inverted mode and generate PWM at OC1A pin
+	ClrBit(TCCR1A,6);
+ 452:	8f b5       	in	r24, 0x2f	; 47
+ 454:	8f 7b       	andi	r24, 0xBF	; 191
+ 456:	8f bd       	out	0x2f, r24	; 47
+	SetBit(TCCR1A,7);
+ 458:	8f b5       	in	r24, 0x2f	; 47
+ 45a:	80 68       	ori	r24, 0x80	; 128
+ 45c:	8f bd       	out	0x2f, r24	; 47
+ 45e:	08 95       	ret
+
+00000460 <M_Timer1_Pmw1SetFrequency>:
+}
+void M_Timer1_Pmw1SetFrequency(u32 Local_u32_Frequency)
+{
+ 460:	9b 01       	movw	r18, r22
+ 462:	ac 01       	movw	r20, r24
+	ICR1 = (((F_OSC * 1000000) / TIMER1_PRESCALER) / Local_u32_Frequency);
+ 464:	64 e2       	ldi	r22, 0x24	; 36
+ 466:	74 ef       	ldi	r23, 0xF4	; 244
+ 468:	80 e0       	ldi	r24, 0x00	; 0
+ 46a:	90 e0       	ldi	r25, 0x00	; 0
+ 46c:	0e 94 82 02 	call	0x504	; 0x504 <__udivmodsi4>
+ 470:	37 bd       	out	0x27, r19	; 39
+ 472:	26 bd       	out	0x26, r18	; 38
+ 474:	08 95       	ret
+
+00000476 <M_Timer1_Pwm1DutyCycle>:
+}
+void M_Timer1_Pwm1DutyCycle(u8 Local_u8_DutyCycle)
+{
+	//fast PWM non inverted
+	OCR1A = (((Local_u8_DutyCycle*ICR1)/100)-1);
+ 476:	46 b5       	in	r20, 0x26	; 38
+ 478:	57 b5       	in	r21, 0x27	; 39
+ 47a:	28 2f       	mov	r18, r24
+ 47c:	24 9f       	mul	r18, r20
+ 47e:	c0 01       	movw	r24, r0
+ 480:	25 9f       	mul	r18, r21
+ 482:	90 0d       	add	r25, r0
+ 484:	11 24       	eor	r1, r1
+ 486:	9c 01       	movw	r18, r24
+ 488:	36 95       	lsr	r19
+ 48a:	27 95       	ror	r18
+ 48c:	36 95       	lsr	r19
+ 48e:	27 95       	ror	r18
+ 490:	ab e7       	ldi	r26, 0x7B	; 123
+ 492:	b4 e1       	ldi	r27, 0x14	; 20
+ 494:	0e 94 a4 02 	call	0x548	; 0x548 <__umulhisi3>
+ 498:	96 95       	lsr	r25
+ 49a:	87 95       	ror	r24
+ 49c:	01 97       	sbiw	r24, 0x01	; 1
+ 49e:	9b bd       	out	0x2b, r25	; 43
+ 4a0:	8a bd       	out	0x2a, r24	; 42
+ 4a2:	08 95       	ret
+
+000004a4 <M_Timer1_Pwm1Start>:
+}
+void M_Timer1_Pwm1Start(void)
+{
+	#if   TIMER1_PRESCALER == 256
+	ClrBit(TCCR1B,0);
+ 4a4:	8e b5       	in	r24, 0x2e	; 46
+ 4a6:	8e 7f       	andi	r24, 0xFE	; 254
+ 4a8:	8e bd       	out	0x2e, r24	; 46
+	ClrBit(TCCR1B,1);
+ 4aa:	8e b5       	in	r24, 0x2e	; 46
+ 4ac:	8d 7f       	andi	r24, 0xFD	; 253
+ 4ae:	8e bd       	out	0x2e, r24	; 46
+	SetBit(TCCR1B,2);
+ 4b0:	8e b5       	in	r24, 0x2e	; 46
+ 4b2:	84 60       	ori	r24, 0x04	; 4
+ 4b4:	8e bd       	out	0x2e, r24	; 46
+ 4b6:	08 95       	ret
+
+000004b8 <M_Uart_Init>:
  */ 
 
 #include "Uart.h"
 void M_Uart_Init(void)
 {
 	ClrBit(DDRD,0); //to enable input circuit for RX pin
- 3ca:	88 98       	cbi	0x11, 0	; 17
+ 4b8:	88 98       	cbi	0x11, 0	; 17
 	SetBit(DDRD,1); //to enable output circuit for TX pin
- 3cc:	89 9a       	sbi	0x11, 1	; 17
+ 4ba:	89 9a       	sbi	0x11, 1	; 17
 	
 	u8 Local_u8_UCSRC = 0b10000000;
 	//to select char size = 8-bits
 	SetBit(Local_u8_UCSRC,2);
 	SetBit(Local_u8_UCSRC,1);
 	ClrBit(UCSRB,2);
- 3ce:	52 98       	cbi	0x0a, 2	; 10
+ 4bc:	52 98       	cbi	0x0a, 2	; 10
 	SetBit(Local_u8_UCSRC,5);
 	#endif
 	//to select stop bit -> 1 bit
 	ClrBit(Local_u8_UCSRC,3);
 	
 	UBRRL = ((u32)F_OSC * 1000000 / ((u32)16 * BAUD_RATE)) - 1;
- 3d0:	87 e6       	ldi	r24, 0x67	; 103
- 3d2:	89 b9       	out	0x09, r24	; 9
+ 4be:	87 e6       	ldi	r24, 0x67	; 103
+ 4c0:	89 b9       	out	0x09, r24	; 9
 	
 	UCSRC = Local_u8_UCSRC;
- 3d4:	86 e8       	ldi	r24, 0x86	; 134
- 3d6:	80 bd       	out	0x20, r24	; 32
+ 4c2:	86 e8       	ldi	r24, 0x86	; 134
+ 4c4:	80 bd       	out	0x20, r24	; 32
 	
 	SetBit(UCSRB,4); //to enable receive circuit  RX
- 3d8:	54 9a       	sbi	0x0a, 4	; 10
+ 4c6:	54 9a       	sbi	0x0a, 4	; 10
 	SetBit(UCSRB,3); //to enable transmit circuit TX
- 3da:	53 9a       	sbi	0x0a, 3	; 10
- 3dc:	08 95       	ret
+ 4c8:	53 9a       	sbi	0x0a, 3	; 10
+ 4ca:	08 95       	ret
 
-000003de <M_Uart_Transmit>:
+000004cc <M_Uart_Transmit>:
 }
 void M_Uart_Transmit(u8 Local_u8_Data)
 {
 	UDR = Local_u8_Data;
- 3de:	8c b9       	out	0x0c, r24	; 12
+ 4cc:	8c b9       	out	0x0c, r24	; 12
 	while((GetBit(UCSRA,6)) == 0);
- 3e0:	5e 9b       	sbis	0x0b, 6	; 11
- 3e2:	fe cf       	rjmp	.-4      	; 0x3e0 <M_Uart_Transmit+0x2>
+ 4ce:	5e 9b       	sbis	0x0b, 6	; 11
+ 4d0:	fe cf       	rjmp	.-4      	; 0x4ce <M_Uart_Transmit+0x2>
 }
- 3e4:	08 95       	ret
+ 4d2:	08 95       	ret
 
-000003e6 <M_Uart_Receive>:
+000004d4 <M_Uart_Receive>:
 u8   M_Uart_Receive(void)
 {
 	while((GetBit(UCSRA,7)) == 0);
- 3e6:	5f 9b       	sbis	0x0b, 7	; 11
- 3e8:	fe cf       	rjmp	.-4      	; 0x3e6 <M_Uart_Receive>
+ 4d4:	5f 9b       	sbis	0x0b, 7	; 11
+ 4d6:	fe cf       	rjmp	.-4      	; 0x4d4 <M_Uart_Receive>
 	return UDR;
- 3ea:	8c b1       	in	r24, 0x0c	; 12
- 3ec:	08 95       	ret
+ 4d8:	8c b1       	in	r24, 0x0c	; 12
+ 4da:	08 95       	ret
 
-000003ee <_exit>:
- 3ee:	f8 94       	cli
+000004dc <__divmodhi4>:
+ 4dc:	97 fb       	bst	r25, 7
+ 4de:	07 2e       	mov	r0, r23
+ 4e0:	16 f4       	brtc	.+4      	; 0x4e6 <__divmodhi4+0xa>
+ 4e2:	00 94       	com	r0
+ 4e4:	07 d0       	rcall	.+14     	; 0x4f4 <__divmodhi4_neg1>
+ 4e6:	77 fd       	sbrc	r23, 7
+ 4e8:	09 d0       	rcall	.+18     	; 0x4fc <__divmodhi4_neg2>
+ 4ea:	0e 94 b3 02 	call	0x566	; 0x566 <__udivmodhi4>
+ 4ee:	07 fc       	sbrc	r0, 7
+ 4f0:	05 d0       	rcall	.+10     	; 0x4fc <__divmodhi4_neg2>
+ 4f2:	3e f4       	brtc	.+14     	; 0x502 <__divmodhi4_exit>
 
-000003f0 <__stop_program>:
- 3f0:	ff cf       	rjmp	.-2      	; 0x3f0 <__stop_program>
+000004f4 <__divmodhi4_neg1>:
+ 4f4:	90 95       	com	r25
+ 4f6:	81 95       	neg	r24
+ 4f8:	9f 4f       	sbci	r25, 0xFF	; 255
+ 4fa:	08 95       	ret
+
+000004fc <__divmodhi4_neg2>:
+ 4fc:	70 95       	com	r23
+ 4fe:	61 95       	neg	r22
+ 500:	7f 4f       	sbci	r23, 0xFF	; 255
+
+00000502 <__divmodhi4_exit>:
+ 502:	08 95       	ret
+
+00000504 <__udivmodsi4>:
+ 504:	a1 e2       	ldi	r26, 0x21	; 33
+ 506:	1a 2e       	mov	r1, r26
+ 508:	aa 1b       	sub	r26, r26
+ 50a:	bb 1b       	sub	r27, r27
+ 50c:	fd 01       	movw	r30, r26
+ 50e:	0d c0       	rjmp	.+26     	; 0x52a <__udivmodsi4_ep>
+
+00000510 <__udivmodsi4_loop>:
+ 510:	aa 1f       	adc	r26, r26
+ 512:	bb 1f       	adc	r27, r27
+ 514:	ee 1f       	adc	r30, r30
+ 516:	ff 1f       	adc	r31, r31
+ 518:	a2 17       	cp	r26, r18
+ 51a:	b3 07       	cpc	r27, r19
+ 51c:	e4 07       	cpc	r30, r20
+ 51e:	f5 07       	cpc	r31, r21
+ 520:	20 f0       	brcs	.+8      	; 0x52a <__udivmodsi4_ep>
+ 522:	a2 1b       	sub	r26, r18
+ 524:	b3 0b       	sbc	r27, r19
+ 526:	e4 0b       	sbc	r30, r20
+ 528:	f5 0b       	sbc	r31, r21
+
+0000052a <__udivmodsi4_ep>:
+ 52a:	66 1f       	adc	r22, r22
+ 52c:	77 1f       	adc	r23, r23
+ 52e:	88 1f       	adc	r24, r24
+ 530:	99 1f       	adc	r25, r25
+ 532:	1a 94       	dec	r1
+ 534:	69 f7       	brne	.-38     	; 0x510 <__udivmodsi4_loop>
+ 536:	60 95       	com	r22
+ 538:	70 95       	com	r23
+ 53a:	80 95       	com	r24
+ 53c:	90 95       	com	r25
+ 53e:	9b 01       	movw	r18, r22
+ 540:	ac 01       	movw	r20, r24
+ 542:	bd 01       	movw	r22, r26
+ 544:	cf 01       	movw	r24, r30
+ 546:	08 95       	ret
+
+00000548 <__umulhisi3>:
+ 548:	a2 9f       	mul	r26, r18
+ 54a:	b0 01       	movw	r22, r0
+ 54c:	b3 9f       	mul	r27, r19
+ 54e:	c0 01       	movw	r24, r0
+ 550:	a3 9f       	mul	r26, r19
+ 552:	70 0d       	add	r23, r0
+ 554:	81 1d       	adc	r24, r1
+ 556:	11 24       	eor	r1, r1
+ 558:	91 1d       	adc	r25, r1
+ 55a:	b2 9f       	mul	r27, r18
+ 55c:	70 0d       	add	r23, r0
+ 55e:	81 1d       	adc	r24, r1
+ 560:	11 24       	eor	r1, r1
+ 562:	91 1d       	adc	r25, r1
+ 564:	08 95       	ret
+
+00000566 <__udivmodhi4>:
+ 566:	aa 1b       	sub	r26, r26
+ 568:	bb 1b       	sub	r27, r27
+ 56a:	51 e1       	ldi	r21, 0x11	; 17
+ 56c:	07 c0       	rjmp	.+14     	; 0x57c <__udivmodhi4_ep>
+
+0000056e <__udivmodhi4_loop>:
+ 56e:	aa 1f       	adc	r26, r26
+ 570:	bb 1f       	adc	r27, r27
+ 572:	a6 17       	cp	r26, r22
+ 574:	b7 07       	cpc	r27, r23
+ 576:	10 f0       	brcs	.+4      	; 0x57c <__udivmodhi4_ep>
+ 578:	a6 1b       	sub	r26, r22
+ 57a:	b7 0b       	sbc	r27, r23
+
+0000057c <__udivmodhi4_ep>:
+ 57c:	88 1f       	adc	r24, r24
+ 57e:	99 1f       	adc	r25, r25
+ 580:	5a 95       	dec	r21
+ 582:	a9 f7       	brne	.-22     	; 0x56e <__udivmodhi4_loop>
+ 584:	80 95       	com	r24
+ 586:	90 95       	com	r25
+ 588:	bc 01       	movw	r22, r24
+ 58a:	cd 01       	movw	r24, r26
+ 58c:	08 95       	ret
+
+0000058e <_exit>:
+ 58e:	f8 94       	cli
+
+00000590 <__stop_program>:
+ 590:	ff cf       	rjmp	.-2      	; 0x590 <__stop_program>

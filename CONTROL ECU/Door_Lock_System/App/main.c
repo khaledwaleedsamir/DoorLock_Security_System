@@ -12,6 +12,8 @@
 #include "PushButtons.h"
 #include "Buzzer.h"
 #include "Uart.h"
+#include "Servo.h"
+#include "Timer1.h"
 #include <stdbool.h>
 #define F_CPU 16000000UL
 #include <util/delay.h>
@@ -19,6 +21,7 @@
 
 int main(void)
 {
+	    H_ServoMotor_Init();
 	    M_Uart_Init();
 		H_Leds_Init();
 		H_Buzzer_Init();
@@ -41,14 +44,19 @@ int main(void)
 				  check++;
 				}
 			}
-			if(check == 4){M_Uart_Transmit('T');}
+			if(check == 4)
+			{
+				M_Uart_Transmit('T');
+				H_ServoMotor_SetAngle(5);
+				H_ServoMotor_Start();
+			}
 			if(check  < 4){M_Uart_Transmit('F');
 			trials++; counter = 0;}
 		}
-		if(trials == 1){H_Leds_On(LED0);}
-		if(trials == 2){H_Leds_On(LED1);}
-		if(trials == 3){H_Leds_On(LED2);}
-		if(trials == 4){H_Buzzer_On();}
+		if(trials == 1){H_Leds_On(LED0); check = 0;}
+		if(trials == 2){H_Leds_On(LED1); check = 0;}
+		if(trials == 3){H_Leds_On(LED2); H_Buzzer_On();}
+
 		
 	
 		

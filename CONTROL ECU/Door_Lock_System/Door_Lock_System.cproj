@@ -109,6 +109,8 @@
       <Value>../Hal/Lcd</Value>
       <Value>../Hal/Keypad</Value>
       <Value>../Mcal/Uart</Value>
+      <Value>../Hal/ServoMotorSG90</Value>
+      <Value>../Mcal/Timer1</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -167,6 +169,12 @@
     <Compile Include="Hal\PushButtons\PushButtonsCfg.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Hal\ServoMotorSG90\Servo.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Hal\ServoMotorSG90\Servo.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Mcal\Dio\Dio.c">
       <SubType>compile</SubType>
     </Compile>
@@ -174,6 +182,15 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Mcal\Reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\Timer1\Timer1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\Timer1\Timer1.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\Timer1\Timer1Cfg.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Mcal\Uart\Uart.c">
@@ -191,9 +208,11 @@
     <Folder Include="Hal" />
     <Folder Include="Hal\Buzzer" />
     <Folder Include="Hal\Leds" />
+    <Folder Include="Hal\ServoMotorSG90" />
     <Folder Include="Hal\PushButtons" />
     <Folder Include="Mcal" />
     <Folder Include="Mcal\Dio" />
+    <Folder Include="Mcal\Timer1" />
     <Folder Include="Mcal\Uart" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
