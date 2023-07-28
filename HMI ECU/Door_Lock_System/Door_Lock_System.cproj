@@ -109,6 +109,7 @@
       <Value>../Hal/Lcd</Value>
       <Value>../Hal/Keypad</Value>
       <Value>../Mcal/Uart</Value>
+      <Value>../App/System</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -138,6 +139,15 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="App\StdTypes.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="App\System\System.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="App\System\System.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="App\System\SystemCfg.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Hal\Keypad\Keypad.c">
@@ -179,6 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App" />
+    <Folder Include="App\System" />
     <Folder Include="Hal" />
     <Folder Include="Hal\Lcd" />
     <Folder Include="Hal\Keypad" />

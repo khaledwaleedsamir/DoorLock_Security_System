@@ -7,59 +7,16 @@
 
 /* This is the main file for the control ECU */
 
-//#include <avr/io.h>
-#include "Leds.h"
-#include "PushButtons.h"
-#include "Buzzer.h"
-#include "Uart.h"
-#include "Servo.h"
-#include "Timer1.h"
-#include <stdbool.h>
-#define F_CPU 16000000UL
-#include <util/delay.h>
+#include "System.h"
 
 
 int main(void)
 {
-	    H_ServoMotor_Init();
-	    M_Uart_Init();
-		H_Leds_Init();
-		H_Buzzer_Init();
-		u8 Str [4];
-		u8 Password[4] = {'1','2','3','4'};
-		int counter = 0;
-		int check = 0;
-		int trials = 0;
+	A_System_Init();
     while (1) 
-    {   u8 msg = 0;
-		msg = M_Uart_Receive();
-		if (msg != 0){
-			Str[counter]=msg;
-			counter++;
-		}
-	
-	       if(counter == 4){
-			for(int i = 0;i<4;i++){
-				if(Str[i] == Password[i]){
-				  check++;
-				}
-			}
-			if(check == 4)
-			{
-				M_Uart_Transmit('T');
-				H_ServoMotor_SetAngle(5);
-				H_ServoMotor_Start();
-			}
-			if(check  < 4){M_Uart_Transmit('F');
-			trials++; counter = 0;}
-		}
-		if(trials == 1){H_Leds_On(LED0); check = 0;}
-		if(trials == 2){H_Leds_On(LED1); check = 0;}
-		if(trials == 3){H_Leds_On(LED2); H_Buzzer_On();}
-
-		
-	
-		
+    {  
+		A_System_GetPassword();
+		A_System_CheckPassword();
     }
 }
 
