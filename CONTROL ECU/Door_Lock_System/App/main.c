@@ -16,6 +16,8 @@
 #include "Timer0.h"
 #include "Uart.h"
 #include "StdTypes.h"
+#define F_CPU 16000000UL
+#include <util/delay.h>
 
 // System Macros
 #define PASSWORD_SIZE 5
@@ -95,6 +97,7 @@ int main(void)
 	H_Buzzer_Init();
 	H_Leds_Init();
 	H_Motor_Init();
+	H_Eeprom_Init();
 	
 	// Main Variables
 	u8 Local_u8_StrPassword[PASSWORD_SIZE];
@@ -172,7 +175,7 @@ int main(void)
 			}
 			break;
 			
-			/* This case is the case of =entering password to open the door. */
+			/* This case is the case of entering password to open the door. */
 			case 3:
 			for (int i = 0; i<PASSWORD_SIZE; i++)
 			{
@@ -195,6 +198,7 @@ int main(void)
 					Global_u8_SystemState = 5;
 				}
 			}
+			_delay_ms(1);
 			M_Uart_SendByte(Global_u8_SystemState);
 			
 			if(Local_u8_Result == SUCCESS)

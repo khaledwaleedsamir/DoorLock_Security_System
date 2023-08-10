@@ -7,10 +7,11 @@
 
 #include "ExternalEeprom.h"
 
+
 void H_Eeprom_Init(void)
 {
 	M_Twi_Init();
-	_delay_ms(1000);
+	_delay_ms(2000);
 }
 void H_Eeprom_Write(u8 Local_u8_Data ,u8 Local_u8_PageAddress ,u8 Local_u8_ByteAddress)
 {

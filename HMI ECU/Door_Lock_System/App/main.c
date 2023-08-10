@@ -13,6 +13,8 @@
 #include "Keypad.h"
 #include "Uart.h"
 #include "Timer0.h"
+#define F_CPU 16000000UL
+#include <util/delay.h>
 
 
 // System Macros
@@ -67,7 +69,8 @@ int main(void)
 			/* This case is the case of running the program for the first time with no password set before in the EEPROM */
 			case 0:
 			H_Lcd_WriteString("Create Password");
-			_delay_ms(500);
+			_delay_ms(1000);
+			H_Lcd_Clear();
 			H_Lcd_WriteString("Enter Password");
 			H_Lcd_NextLine();
 			for (int i = 0; i<PASSWORD_SIZE; i++)
@@ -98,6 +101,7 @@ int main(void)
 			/*Sending the password after the user presses '=' key.*/
 			for (int i = 0; i<PASSWORD_SIZE; i++)
 			{
+				_delay_ms(1);
 				M_Uart_Transmit(Local_u8_Password[i]);
 			}
 			H_Lcd_Clear();
@@ -141,6 +145,7 @@ int main(void)
 			/*Sending the password after the user presses '=' key.*/
 			for (int i = 0; i<PASSWORD_SIZE; i++)
 			{
+				_delay_ms(1);
 				M_Uart_Transmit(Local_u8_Password[i]);
 			}
 			H_Lcd_Clear();
@@ -230,6 +235,7 @@ int main(void)
 			/*Sending the entered password to the control ECU to check if it is correct. */
 			for(int i = 0; i<PASSWORD_SIZE; i++)
 			{
+				_delay_ms(1);
 				M_Uart_Transmit(Local_u8_Password[i]);
 			}
 			H_Lcd_Clear();
@@ -287,6 +293,7 @@ int main(void)
 			/*Sending the entered password to the control ECU to check if it is correct. */
 			for(int i = 0; i<PASSWORD_SIZE; i++)
 			{
+				_delay_ms(1);
 				M_Uart_Transmit(Local_u8_Password[i]);
 			}
 			H_Lcd_Clear();
