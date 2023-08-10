@@ -112,6 +112,12 @@
       <Value>../Hal/ServoMotorSG90</Value>
       <Value>../Mcal/Timer1</Value>
       <Value>../App/System</Value>
+      <Value>../Mcal/InternalEeprom</Value>
+      <Value>../Mcal/ExtInt0</Value>
+      <Value>../Mcal/Twi</Value>
+      <Value>../Hal/ExternalEeprom</Value>
+      <Value>../Mcal/Timer0</Value>
+      <Value>../Hal/Motor</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -143,15 +149,6 @@
     <Compile Include="App\StdTypes.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="App\System\System.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="App\System\System.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="App\System\SystemCfg.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Hal\Buzzer\Buzzer.c">
       <SubType>compile</SubType>
     </Compile>
@@ -159,6 +156,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Hal\Buzzer\BuzzerCfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Hal\ExternalEeprom\ExternalEeprom.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Hal\ExternalEeprom\ExternalEeprom.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Hal\Leds\Leds.c">
@@ -170,10 +173,13 @@
     <Compile Include="Hal\Leds\LedsCfg.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Hal\ServoMotorSG90\Servo.c">
+    <Compile Include="Hal\Motor\Motor.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Hal\ServoMotorSG90\Servo.h">
+    <Compile Include="Hal\Motor\Motor.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Hal\Motor\MotorCfg.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Mcal\Dio\Dio.c">
@@ -185,13 +191,22 @@
     <Compile Include="Mcal\Reg.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Mcal\Timer1\Timer1.c">
+    <Compile Include="Mcal\Timer0\Timer0.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Mcal\Timer1\Timer1.h">
+    <Compile Include="Mcal\Timer0\Timer0.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Mcal\Timer1\Timer1Cfg.h">
+    <Compile Include="Mcal\Timer0\Timer0Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\Twi\Twi.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\Twi\Twi.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\Twi\TwiCfg.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Mcal\Uart\Uart.c">
@@ -206,14 +221,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App" />
-    <Folder Include="App\System" />
     <Folder Include="Hal" />
     <Folder Include="Hal\Buzzer" />
     <Folder Include="Hal\Leds" />
-    <Folder Include="Hal\ServoMotorSG90" />
+    <Folder Include="Hal\ExternalEeprom" />
+    <Folder Include="Hal\Motor" />
     <Folder Include="Mcal" />
     <Folder Include="Mcal\Dio" />
-    <Folder Include="Mcal\Timer1" />
+    <Folder Include="Mcal\Timer0" />
+    <Folder Include="Mcal\Twi" />
     <Folder Include="Mcal\Uart" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />

@@ -6,6 +6,7 @@
  */ 
 
 #include "Uart.h"
+
 void M_Uart_Init(void)
 {
 	ClrBit(DDRD,0); //to enable input circuit for RX pin
@@ -38,13 +39,37 @@ void M_Uart_Init(void)
 	SetBit(UCSRB,4); //to enable receive circuit  RX
 	SetBit(UCSRB,3); //to enable transmit circuit TX
 }
-void M_Uart_Transmit(u8 Local_u8_Data)
+
+void M_Uart_SendByte(u8 Local_u8_Data)
 {
 	UDR = Local_u8_Data;
 	while((GetBit(UCSRA,6)) == 0);
 }
-u8   M_Uart_Receive(void)
+
+u8   M_Uart_ReceiveByte(void)
 {
 	while((GetBit(UCSRA,7)) == 0);
 	return UDR;
+}
+
+void M_Uart_SendString(const u8* Local_u8_String)
+{
+	u8 Local_u8_Counter = 0;
+	while(Local_u8_String[Local_u8_Counter] != '\0')
+	{
+		M_Uart_SendByte(Local_u8_String[Local_u8_Counter]);
+		Local_u8_Counter++;
+	}
+}
+	
+void M_Uart_ReceiveString(u8* Local_u8_String)
+{
+	u8 Local_u8_Counter = 0;
+	Local_u8_String[Local_u8_Counter] = M_Uart_ReceiveByte();
+	while(Local_u8_String[Local_u8_Counter] != '#')
+	{
+		Local_u8_Counter++;
+		Local_u8_String[Local_u8_Counter] = M_Uart_ReceiveByte();
+	}
+	Local_u8_String[Local_u8_Counter] = '\0';
 }

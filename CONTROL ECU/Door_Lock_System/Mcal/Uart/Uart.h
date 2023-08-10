@@ -22,8 +22,10 @@
 
 // Functions Prototypes 
 void M_Uart_Init(void);
-void M_Uart_Transmit(u8);
-u8   M_Uart_Receive(void);
+void M_Uart_SendByte(u8);
+u8   M_Uart_ReceiveByte(void);
+void M_Uart_SendString(const u8*);
+void M_Uart_ReceiveString(u8*);  // Receive Until #
 
 
 #endif /* UART_H_ */

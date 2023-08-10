@@ -4,17 +4,19 @@
 
 App\main.c
 
-App\System\System.c
-
 Hal\Buzzer\Buzzer.c
+
+Hal\ExternalEeprom\ExternalEeprom.c
 
 Hal\Leds\Leds.c
 
-Hal\ServoMotorSG90\Servo.c
+Hal\Motor\Motor.c
 
 Mcal\Dio\Dio.c
 
-Mcal\Timer1\Timer1.c
+Mcal\Timer0\Timer0.c
+
+Mcal\Twi\Twi.c
 
 Mcal\Uart\Uart.c
 

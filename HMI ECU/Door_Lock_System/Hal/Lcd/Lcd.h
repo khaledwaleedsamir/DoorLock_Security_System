@@ -21,6 +21,7 @@
 #define _4_BIT_MODE                 2
 #define LCD_DISPLAY_ON_CURSOR_OFF 0x0C
 #define LCD_CLEAR                 0x01
+#define LCD_NEXT_LINE             0xC0
 #define LCD_RETURN_HOME           0x02
 #define LCD_8BIT_MODE             0x38
 #define LCD_4BIT_MODE_1           0x33
@@ -35,6 +36,7 @@ void H_Lcd_WriteCommand(u8);
 void H_Lcd_WriteString(u8*);
 void H_Lcd_WriteNumber(s32);
 void H_Lcd_Clear(void);
+void H_Lcd_NextLine(void);
 
 
 

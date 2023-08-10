@@ -141,3 +141,7 @@ void H_Lcd_Clear(void)
 {
 	H_Lcd_WriteCommand(LCD_CLEAR);
 }
+void H_Lcd_NextLine(void)
+{
+	H_Lcd_WriteCommand(LCD_NEXT_LINE); 
+}
