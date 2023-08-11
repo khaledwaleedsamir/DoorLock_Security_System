@@ -169,10 +169,6 @@ int main(void)
 			{
 				Global_u8_SystemState = 4;
 			}
-			else if(Local_u8_Symbol == '-')
-			{
-				Global_u8_SystemState = 6;
-			}
 			break;
 			
 			/* This case is the case of entering password to open the door. */
