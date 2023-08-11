@@ -6,23 +6,29 @@
  */ 
 
 #include "Twi.h"
+#include <avr/io.h>
 
 void M_Twi_Init(void)
 {
-	#if   TWI_MODE == TWI_MASTER
-	TWBR = 12;         //to select FSCL = 400KHz
-	#elif TWI_MODE == TWI_SLAVE
-	TWAR = 0b00000010; //to select slave address 1, and disable general call recognition
+	#if   TWI_MODE   ==   TWI_MASTER
+	TWBR = 12;                      // to select fscl = 400 khz
+	#elif TWI_MODE   ==   TWI_SLAVE
+	TWAR = 0b00000010;             // to select the slave add. = 1 , and disable general call rec.
 	#endif
-	
-	SetBit(TWCR,2);    //to enable TWI circuit
+	SetBit(TWCR,2);                // to enable TWI circuit
 }
 void M_Twi_StartCondition(void)
 {
-	SetBit(TWCR,5);
-	SetBit(TWCR,7);                //to clear the flag
-	while ((GetBit(TWCR,7)) == 0);
-	while ((TWSR & 0xF8) != START_ACK);   //F8 is 11111000 to make sure that the last 3 bits are 0
+	/*
+	 * Clear the TWINT flag before sending the start bit TWINT=1
+	 * send the start bit by TWSTA=1
+	 * Enable TWI Module TWEN=1
+	 */
+	TWCR = (1 << TWINT) | (1 << TWSTA) | (1 << TWEN);
+
+	/* Wait for TWINT flag set in TWCR Register (start bit is send successfully) */
+	while(GetBit(TWCR,TWINT) == 0);
+
 }
 void M_Twi_SendSlaveAddressWrite(u8 Local_u8_Address)
 {
@@ -43,20 +49,27 @@ void M_Twi_SendSlaveAddressRead(u8 Local_u8_Address)
 }
 void M_Twi_SendByte(u8 Local_u8_Data)
 {
+	/* Put data On TWI data Register */
 	TWDR = Local_u8_Data;
-	ClrBit(TWCR,5);              //as per data sheet this bit must be set to 0 via software
-	SetBit(TWCR,7);                //to clear the flag
-	while ((GetBit(TWCR,7)) == 0);
-	while ((TWSR & 0xF8) != WR_BYTE_ACK);
+	/*
+	 * Clear the TWINT flag before sending the data TWINT=1
+	 * Enable TWI Module TWEN=1
+	 */
+	TWCR = (1 << TWINT) | (1 << TWEN);
+	/* Wait for TWINT flag set in TWCR Register(data is send successfully) */
+	while(GetBit(TWCR,TWINT) == 0);
+	
 }
 u8   M_Twi_ReadByte(void)
 {
-	ClrBit(TWCR,5);
-	ClrBit(TWCR,4);
-	SetBit(TWCR,6);  
-	SetBit(TWCR,7);       //to clear the flag
-	while ((GetBit(TWCR,7)) == 0);
-	while ((TWSR & 0xF8) != RD_BYTE_WITH_ACK);
+	/*
+	 * Clear the TWINT flag before reading the data TWINT=1
+	 * Enable TWI Module TWEN=1
+	 */
+	TWCR = (1 << TWINT) | (1 << TWEN);
+	/* Wait for TWINT flag set in TWCR Register (data received successfully) */
+	while(GetBit(TWCR,TWINT) == 0);
+	/* Read Data */
 	return TWDR;
 }
 void M_Twi_RepeatedStart(void)
@@ -68,9 +81,12 @@ void M_Twi_RepeatedStart(void)
 }
 void M_Twi_StopCondition(void)
 {
-	SetBit(TWCR,4);
-	SetBit(TWCR,7);                //to clear the flag
-	//while ((GetBit(TWCR,7))== 0);
+	/*
+	 * Clear the TWINT flag before sending the stop bit TWINT=1
+	 * send the stop bit by TWSTO=1
+	 * Enable TWI Module TWEN=1
+	 */
+	TWCR = (1 << TWINT) | (1 << TWSTO) | (1 << TWEN);
 }
 void M_Twi_Ack(void)
 {

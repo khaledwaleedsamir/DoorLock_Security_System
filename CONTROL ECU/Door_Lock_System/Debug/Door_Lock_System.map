@@ -70,6 +70,12 @@ Discarded input sections
  .text          0x00000000        0x0 Mcal/Twi/Twi.o
  .data          0x00000000        0x0 Mcal/Twi/Twi.o
  .bss           0x00000000        0x0 Mcal/Twi/Twi.o
+ .text.M_Twi_SendSlaveAddressWrite
+                0x00000000       0x20 Mcal/Twi/Twi.o
+ .text.M_Twi_SendSlaveAddressRead
+                0x00000000       0x22 Mcal/Twi/Twi.o
+ .text.M_Twi_RepeatedStart
+                0x00000000       0x1c Mcal/Twi/Twi.o
  .text.M_Twi_Ack
                 0x00000000       0x14 Mcal/Twi/Twi.o
  .text          0x00000000        0x0 Mcal/Uart/Uart.o
@@ -317,7 +323,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xa9a
+.text           0x00000000      0xa2a
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -403,117 +409,108 @@ END GROUP
                 0x00000090       0x2e App/main.o
                 0x00000090                A_Main_ConfirmPassword
  .text.A_Main_CheckPasswordEeprom
-                0x000000be       0x42 App/main.o
+                0x000000be       0x4a App/main.o
                 0x000000be                A_Main_CheckPasswordEeprom
- .text.main     0x00000100      0x316 App/main.o
-                0x00000100                main
+ .text.main     0x00000108      0x32e App/main.o
+                0x00000108                main
  .text.H_Buzzer_Init
-                0x00000416        0xa Hal/Buzzer/Buzzer.o
-                0x00000416                H_Buzzer_Init
+                0x00000436        0xa Hal/Buzzer/Buzzer.o
+                0x00000436                H_Buzzer_Init
  .text.H_Buzzer_On
-                0x00000420        0xa Hal/Buzzer/Buzzer.o
-                0x00000420                H_Buzzer_On
+                0x00000440        0xa Hal/Buzzer/Buzzer.o
+                0x00000440                H_Buzzer_On
  .text.H_Buzzer_Off
-                0x0000042a        0xa Hal/Buzzer/Buzzer.o
-                0x0000042a                H_Buzzer_Off
+                0x0000044a        0xa Hal/Buzzer/Buzzer.o
+                0x0000044a                H_Buzzer_Off
  .text.H_Eeprom_Init
-                0x00000434       0x18 Hal/ExternalEeprom/ExternalEeprom.o
-                0x00000434                H_Eeprom_Init
+                0x00000454        0x6 Hal/ExternalEeprom/ExternalEeprom.o
+                0x00000454                H_Eeprom_Init
  .text.H_Eeprom_Write
-                0x0000044c       0x30 Hal/ExternalEeprom/ExternalEeprom.o
-                0x0000044c                H_Eeprom_Write
+                0x0000045a       0x3c Hal/ExternalEeprom/ExternalEeprom.o
+                0x0000045a                H_Eeprom_Write
  .text.H_Eeprom_Read
-                0x0000047c       0x36 Hal/ExternalEeprom/ExternalEeprom.o
-                0x0000047c                H_Eeprom_Read
+                0x00000496       0x4e Hal/ExternalEeprom/ExternalEeprom.o
+                0x00000496                H_Eeprom_Read
  .text.H_Leds_Init
-                0x000004b2       0x1a Hal/Leds/Leds.o
-                0x000004b2                H_Leds_Init
+                0x000004e4       0x1a Hal/Leds/Leds.o
+                0x000004e4                H_Leds_Init
  .text.H_Leds_On
-                0x000004cc       0x2a Hal/Leds/Leds.o
-                0x000004cc                H_Leds_On
+                0x000004fe       0x2a Hal/Leds/Leds.o
+                0x000004fe                H_Leds_On
  .text.H_Leds_Off
-                0x000004f6       0x2a Hal/Leds/Leds.o
-                0x000004f6                H_Leds_Off
+                0x00000528       0x2a Hal/Leds/Leds.o
+                0x00000528                H_Leds_Off
  .text.H_Motor_Init
-                0x00000520       0x22 Hal/Motor/Motor.o
-                0x00000520                H_Motor_Init
+                0x00000552       0x22 Hal/Motor/Motor.o
+                0x00000552                H_Motor_Init
  .text.H_Motor_CW
-                0x00000542       0x12 Hal/Motor/Motor.o
-                0x00000542                H_Motor_CW
+                0x00000574       0x12 Hal/Motor/Motor.o
+                0x00000574                H_Motor_CW
  .text.H_Motor_Stop
-                0x00000554       0x12 Hal/Motor/Motor.o
-                0x00000554                H_Motor_Stop
+                0x00000586       0x12 Hal/Motor/Motor.o
+                0x00000586                H_Motor_Stop
  .text.M_Dio_PinMode
-                0x00000566      0x112 Mcal/Dio/Dio.o
-                0x00000566                M_Dio_PinMode
+                0x00000598      0x112 Mcal/Dio/Dio.o
+                0x00000598                M_Dio_PinMode
  .text.M_Dio_PinWrite
-                0x00000678      0x112 Mcal/Dio/Dio.o
-                0x00000678                M_Dio_PinWrite
+                0x000006aa      0x112 Mcal/Dio/Dio.o
+                0x000006aa                M_Dio_PinWrite
  .text.M_Timer0_Init
-                0x0000078a       0x1a Mcal/Timer0/Timer0.o
-                0x0000078a                M_Timer0_Init
+                0x000007bc       0x1a Mcal/Timer0/Timer0.o
+                0x000007bc                M_Timer0_Init
  .text.M_Timer0_SetTime
-                0x000007a4       0xaa Mcal/Timer0/Timer0.o
-                0x000007a4                M_Timer0_SetTime
+                0x000007d6       0xaa Mcal/Timer0/Timer0.o
+                0x000007d6                M_Timer0_SetTime
  .text.M_Timer0_Start
-                0x0000084e       0x14 Mcal/Timer0/Timer0.o
-                0x0000084e                M_Timer0_Start
+                0x00000880       0x14 Mcal/Timer0/Timer0.o
+                0x00000880                M_Timer0_Start
  .text.M_Timer0_Stop
-                0x00000862       0x14 Mcal/Timer0/Timer0.o
-                0x00000862                M_Timer0_Stop
+                0x00000894       0x14 Mcal/Timer0/Timer0.o
+                0x00000894                M_Timer0_Stop
  .text.M_Timer0_SetCallBack
-                0x00000876        0xa Mcal/Timer0/Timer0.o
-                0x00000876                M_Timer0_SetCallBack
+                0x000008a8        0xa Mcal/Timer0/Timer0.o
+                0x000008a8                M_Timer0_SetCallBack
  .text.__vector_10
-                0x00000880       0x9e Mcal/Timer0/Timer0.o
-                0x00000880                __vector_10
+                0x000008b2       0x9e Mcal/Timer0/Timer0.o
+                0x000008b2                __vector_10
  .text.M_Twi_Init
-                0x0000091e        0xc Mcal/Twi/Twi.o
-                0x0000091e                M_Twi_Init
+                0x00000950        0xc Mcal/Twi/Twi.o
+                0x00000950                M_Twi_Init
  .text.M_Twi_StartCondition
-                0x0000092a       0x1c Mcal/Twi/Twi.o
-                0x0000092a                M_Twi_StartCondition
- .text.M_Twi_SendSlaveAddressWrite
-                0x00000946       0x20 Mcal/Twi/Twi.o
-                0x00000946                M_Twi_SendSlaveAddressWrite
- .text.M_Twi_SendSlaveAddressRead
-                0x00000966       0x22 Mcal/Twi/Twi.o
-                0x00000966                M_Twi_SendSlaveAddressRead
+                0x0000095c        0xc Mcal/Twi/Twi.o
+                0x0000095c                M_Twi_StartCondition
  .text.M_Twi_SendByte
-                0x00000988       0x1e Mcal/Twi/Twi.o
-                0x00000988                M_Twi_SendByte
+                0x00000968        0xe Mcal/Twi/Twi.o
+                0x00000968                M_Twi_SendByte
  .text.M_Twi_ReadByte
-                0x000009a6       0x2a Mcal/Twi/Twi.o
-                0x000009a6                M_Twi_ReadByte
- .text.M_Twi_RepeatedStart
-                0x000009d0       0x1c Mcal/Twi/Twi.o
-                0x000009d0                M_Twi_RepeatedStart
+                0x00000976        0xe Mcal/Twi/Twi.o
+                0x00000976                M_Twi_ReadByte
  .text.M_Twi_StopCondition
-                0x000009ec        0xe Mcal/Twi/Twi.o
-                0x000009ec                M_Twi_StopCondition
+                0x00000984        0x6 Mcal/Twi/Twi.o
+                0x00000984                M_Twi_StopCondition
  .text.M_Uart_Init
-                0x000009fa       0x14 Mcal/Uart/Uart.o
-                0x000009fa                M_Uart_Init
+                0x0000098a       0x14 Mcal/Uart/Uart.o
+                0x0000098a                M_Uart_Init
  .text.M_Uart_SendByte
-                0x00000a0e        0x8 Mcal/Uart/Uart.o
-                0x00000a0e                M_Uart_SendByte
+                0x0000099e        0x8 Mcal/Uart/Uart.o
+                0x0000099e                M_Uart_SendByte
  .text.M_Uart_ReceiveByte
-                0x00000a16        0x8 Mcal/Uart/Uart.o
-                0x00000a16                M_Uart_ReceiveByte
+                0x000009a6        0x8 Mcal/Uart/Uart.o
+                0x000009a6                M_Uart_ReceiveByte
  .text.libgcc.div
-                0x00000a1e       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x00000a1e                __udivmodsi4
+                0x000009ae       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x000009ae                __udivmodsi4
  .text.libgcc.mul
-                0x00000a62       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
-                0x00000a62                __muluhisi3
+                0x000009f2       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
+                0x000009f2                __muluhisi3
  .text.libgcc.mul
-                0x00000a78       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
-                0x00000a78                __umulhisi3
-                0x00000a96                . = ALIGN (0x2)
+                0x00000a08       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                0x00000a08                __umulhisi3
+                0x00000a26                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000a96        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000a96                _exit
-                0x00000a96                exit
+ .fini9         0x00000a26        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000a26                _exit
+                0x00000a26                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -532,11 +529,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000a96        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000a26        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000a9a                _etext = .
+                0x00000a2a                _etext = .
 
-.data           0x00800060        0x0 load address 0x00000a9a
+.data           0x00800060        0x0 load address 0x00000a2a
                 [!provide]                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -567,8 +564,8 @@ END GROUP
  COMMON         0x0080006d        0x2 Mcal/Timer0/Timer0.o
                 0x0080006d                CallBack
                 0x0080006f                PROVIDE (__bss_end, .)
-                0x00000a9a                __data_load_start = LOADADDR (.data)
-                0x00000a9a                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000a2a                __data_load_start = LOADADDR (.data)
+                0x00000a2a                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0080006f        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -671,89 +668,89 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1c9e
+.debug_info     0x00000000     0x1c7a
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_info    0x000004e6      0x81d App/main.o
- .debug_info    0x00000d03      0x1d0 Hal/Buzzer/Buzzer.o
- .debug_info    0x00000ed3      0x2d6 Hal/ExternalEeprom/ExternalEeprom.o
- .debug_info    0x000011a9      0x1c1 Hal/Leds/Leds.o
- .debug_info    0x0000136a      0x1d2 Hal/Motor/Motor.o
- .debug_info    0x0000153c      0x20c Mcal/Dio/Dio.o
- .debug_info    0x00001748      0x265 Mcal/Timer0/Timer0.o
- .debug_info    0x000019ad      0x172 Mcal/Twi/Twi.o
- .debug_info    0x00001b1f      0x17f Mcal/Uart/Uart.o
+ .debug_info    0x000004e6      0x891 App/main.o
+ .debug_info    0x00000d77      0x1d0 Hal/Buzzer/Buzzer.o
+ .debug_info    0x00000f47      0x217 Hal/ExternalEeprom/ExternalEeprom.o
+ .debug_info    0x0000115e      0x1c1 Hal/Leds/Leds.o
+ .debug_info    0x0000131f      0x1d2 Hal/Motor/Motor.o
+ .debug_info    0x000014f1      0x20c Mcal/Dio/Dio.o
+ .debug_info    0x000016fd      0x265 Mcal/Timer0/Timer0.o
+ .debug_info    0x00001962      0x199 Mcal/Twi/Twi.o
+ .debug_info    0x00001afb      0x17f Mcal/Uart/Uart.o
 
-.debug_abbrev   0x00000000      0xd40
+.debug_abbrev   0x00000000      0xce3
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_abbrev  0x000004a3      0x20a App/main.o
  .debug_abbrev  0x000006ad      0x10c Hal/Buzzer/Buzzer.o
- .debug_abbrev  0x000007b9      0x152 Hal/ExternalEeprom/ExternalEeprom.o
- .debug_abbrev  0x0000090b       0x8d Hal/Leds/Leds.o
- .debug_abbrev  0x00000998       0x71 Hal/Motor/Motor.o
- .debug_abbrev  0x00000a09       0xb8 Mcal/Dio/Dio.o
- .debug_abbrev  0x00000ac1      0x123 Mcal/Timer0/Timer0.o
- .debug_abbrev  0x00000be4       0x89 Mcal/Twi/Twi.o
- .debug_abbrev  0x00000c6d       0xd3 Mcal/Uart/Uart.o
+ .debug_abbrev  0x000007b9       0xdd Hal/ExternalEeprom/ExternalEeprom.o
+ .debug_abbrev  0x00000896       0x8d Hal/Leds/Leds.o
+ .debug_abbrev  0x00000923       0x71 Hal/Motor/Motor.o
+ .debug_abbrev  0x00000994       0xb8 Mcal/Dio/Dio.o
+ .debug_abbrev  0x00000a4c      0x123 Mcal/Timer0/Timer0.o
+ .debug_abbrev  0x00000b6f       0xa1 Mcal/Twi/Twi.o
+ .debug_abbrev  0x00000c10       0xd3 Mcal/Uart/Uart.o
 
-.debug_line     0x00000000     0x11f0
+.debug_line     0x00000000     0x1168
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_line    0x00000116      0x4cc App/main.o
- .debug_line    0x000005e2      0x187 Hal/Buzzer/Buzzer.o
- .debug_line    0x00000769      0x1c9 Hal/ExternalEeprom/ExternalEeprom.o
- .debug_line    0x00000932       0xcc Hal/Leds/Leds.o
- .debug_line    0x000009fe       0xc3 Hal/Motor/Motor.o
- .debug_line    0x00000ac1      0x1d4 Mcal/Dio/Dio.o
- .debug_line    0x00000c95      0x214 Mcal/Timer0/Timer0.o
- .debug_line    0x00000ea9      0x212 Mcal/Twi/Twi.o
- .debug_line    0x000010bb      0x135 Mcal/Uart/Uart.o
+ .debug_line    0x00000116      0x4f4 App/main.o
+ .debug_line    0x0000060a      0x187 Hal/Buzzer/Buzzer.o
+ .debug_line    0x00000791       0xf8 Hal/ExternalEeprom/ExternalEeprom.o
+ .debug_line    0x00000889       0xcc Hal/Leds/Leds.o
+ .debug_line    0x00000955       0xc3 Hal/Motor/Motor.o
+ .debug_line    0x00000a18      0x1d4 Mcal/Dio/Dio.o
+ .debug_line    0x00000bec      0x214 Mcal/Timer0/Timer0.o
+ .debug_line    0x00000e00      0x233 Mcal/Twi/Twi.o
+ .debug_line    0x00001033      0x135 Mcal/Uart/Uart.o
 
-.debug_frame    0x00000000      0x490
+.debug_frame    0x00000000      0x49c
  *(.debug_frame)
- .debug_frame   0x00000000       0x80 App/main.o
- .debug_frame   0x00000080       0x54 Hal/Buzzer/Buzzer.o
- .debug_frame   0x000000d4       0x60 Hal/ExternalEeprom/ExternalEeprom.o
- .debug_frame   0x00000134       0x44 Hal/Leds/Leds.o
- .debug_frame   0x00000178       0x54 Hal/Motor/Motor.o
- .debug_frame   0x000001cc       0x64 Mcal/Dio/Dio.o
- .debug_frame   0x00000230      0x12c Mcal/Timer0/Timer0.o
- .debug_frame   0x0000035c       0xa4 Mcal/Twi/Twi.o
- .debug_frame   0x00000400       0x90 Mcal/Uart/Uart.o
+ .debug_frame   0x00000000       0x84 App/main.o
+ .debug_frame   0x00000084       0x54 Hal/Buzzer/Buzzer.o
+ .debug_frame   0x000000d8       0x68 Hal/ExternalEeprom/ExternalEeprom.o
+ .debug_frame   0x00000140       0x44 Hal/Leds/Leds.o
+ .debug_frame   0x00000184       0x54 Hal/Motor/Motor.o
+ .debug_frame   0x000001d8       0x64 Mcal/Dio/Dio.o
+ .debug_frame   0x0000023c      0x12c Mcal/Timer0/Timer0.o
+ .debug_frame   0x00000368       0xa4 Mcal/Twi/Twi.o
+ .debug_frame   0x0000040c       0x90 Mcal/Uart/Uart.o
 
-.debug_str      0x00000000      0x972
+.debug_str      0x00000000      0x95e
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_str     0x00000196      0x3ee App/main.o
                                 0x422 (size before relaxing)
  .debug_str     0x00000584       0x42 Hal/Buzzer/Buzzer.o
                                 0x256 (size before relaxing)
- .debug_str     0x000005c6       0xfc Hal/ExternalEeprom/ExternalEeprom.o
-                                0x314 (size before relaxing)
- .debug_str     0x000006c2       0x23 Hal/Leds/Leds.o
+ .debug_str     0x000005c6       0x9d Hal/ExternalEeprom/ExternalEeprom.o
+                                0x271 (size before relaxing)
+ .debug_str     0x00000663       0x23 Hal/Leds/Leds.o
                                 0x1d8 (size before relaxing)
- .debug_str     0x000006e5       0x21 Hal/Motor/Motor.o
+ .debug_str     0x00000686       0x21 Hal/Motor/Motor.o
                                 0x1da (size before relaxing)
- .debug_str     0x00000706       0x8d Mcal/Dio/Dio.o
+ .debug_str     0x000006a7       0x8d Mcal/Dio/Dio.o
                                 0x221 (size before relaxing)
- .debug_str     0x00000793      0x147 Mcal/Timer0/Timer0.o
+ .debug_str     0x00000734      0x147 Mcal/Timer0/Timer0.o
                                 0x34a (size before relaxing)
- .debug_str     0x000008da       0x2d Mcal/Twi/Twi.o
-                                0x24f (size before relaxing)
- .debug_str     0x00000907       0x6b Mcal/Uart/Uart.o
+ .debug_str     0x0000087b       0x78 Mcal/Twi/Twi.o
+                                0x289 (size before relaxing)
+ .debug_str     0x000008f3       0x6b Mcal/Uart/Uart.o
                                 0x21f (size before relaxing)
 
-.debug_loc      0x00000000      0xdd6
+.debug_loc      0x00000000      0xdd5
  *(.debug_loc)
- .debug_loc     0x00000000      0x626 App/main.o
- .debug_loc     0x00000626       0x48 Hal/Buzzer/Buzzer.o
- .debug_loc     0x0000066e      0x1c4 Hal/ExternalEeprom/ExternalEeprom.o
- .debug_loc     0x00000832       0xa6 Hal/Leds/Leds.o
- .debug_loc     0x000008d8      0x120 Mcal/Dio/Dio.o
- .debug_loc     0x000009f8      0x217 Mcal/Timer0/Timer0.o
- .debug_loc     0x00000c0f       0x6f Mcal/Twi/Twi.o
- .debug_loc     0x00000c7e      0x158 Mcal/Uart/Uart.o
+ .debug_loc     0x00000000      0x697 App/main.o
+ .debug_loc     0x00000697       0x48 Hal/Buzzer/Buzzer.o
+ .debug_loc     0x000006df      0x152 Hal/ExternalEeprom/ExternalEeprom.o
+ .debug_loc     0x00000831       0xa6 Hal/Leds/Leds.o
+ .debug_loc     0x000008d7      0x120 Mcal/Dio/Dio.o
+ .debug_loc     0x000009f7      0x217 Mcal/Timer0/Timer0.o
+ .debug_loc     0x00000c0e       0x6f Mcal/Twi/Twi.o
+ .debug_loc     0x00000c7d      0x158 Mcal/Uart/Uart.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -773,17 +770,17 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x220
+.debug_ranges   0x00000000      0x228
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x88 App/main.o
- .debug_ranges  0x00000088       0x28 Hal/Buzzer/Buzzer.o
- .debug_ranges  0x000000b0       0x20 Hal/ExternalEeprom/ExternalEeprom.o
- .debug_ranges  0x000000d0       0x20 Hal/Leds/Leds.o
- .debug_ranges  0x000000f0       0x28 Hal/Motor/Motor.o
- .debug_ranges  0x00000118       0x30 Mcal/Dio/Dio.o
- .debug_ranges  0x00000148       0x58 Mcal/Timer0/Timer0.o
- .debug_ranges  0x000001a0       0x50 Mcal/Twi/Twi.o
- .debug_ranges  0x000001f0       0x30 Mcal/Uart/Uart.o
+ .debug_ranges  0x00000000       0x90 App/main.o
+ .debug_ranges  0x00000090       0x28 Hal/Buzzer/Buzzer.o
+ .debug_ranges  0x000000b8       0x20 Hal/ExternalEeprom/ExternalEeprom.o
+ .debug_ranges  0x000000d8       0x20 Hal/Leds/Leds.o
+ .debug_ranges  0x000000f8       0x28 Hal/Motor/Motor.o
+ .debug_ranges  0x00000120       0x30 Mcal/Dio/Dio.o
+ .debug_ranges  0x00000150       0x58 Mcal/Timer0/Timer0.o
+ .debug_ranges  0x000001a8       0x50 Mcal/Twi/Twi.o
+ .debug_ranges  0x000001f8       0x30 Mcal/Uart/Uart.o
 
 .debug_macro
  *(.debug_macro)

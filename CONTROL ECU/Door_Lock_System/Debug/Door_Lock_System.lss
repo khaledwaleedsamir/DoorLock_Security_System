@@ -3,31 +3,31 @@ Door_Lock_System.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000a9a  00000000  00000000  00000074  2**1
+  0 .text         00000a2a  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  00800060  00000b0e  2**0
+  1 .data         00000000  00800060  00800060  00000a9e  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          0000000f  00800060  00800060  00000b0e  2**0
+  2 .bss          0000000f  00800060  00800060  00000a9e  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000b0e  2**0
+  3 .comment      00000030  00000000  00000000  00000a9e  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000b40  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000ad0  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000250  00000000  00000000  00000b7c  2**0
+  5 .debug_aranges 00000250  00000000  00000000  00000b0c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00001c9e  00000000  00000000  00000dcc  2**0
+  6 .debug_info   00001c7a  00000000  00000000  00000d5c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000d40  00000000  00000000  00002a6a  2**0
+  7 .debug_abbrev 00000ce3  00000000  00000000  000029d6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000011f0  00000000  00000000  000037aa  2**0
+  8 .debug_line   00001168  00000000  00000000  000036b9  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000490  00000000  00000000  0000499c  2**2
+  9 .debug_frame  0000049c  00000000  00000000  00004824  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000972  00000000  00000000  00004e2c  2**0
+ 10 .debug_str    0000095e  00000000  00000000  00004cc0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000dd6  00000000  00000000  0000579e  2**0
+ 11 .debug_loc    00000dd5  00000000  00000000  0000561e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000220  00000000  00000000  00006574  2**0
+ 12 .debug_ranges 00000228  00000000  00000000  000063f3  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -43,7 +43,7 @@ Disassembly of section .text:
   1c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
   20:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
   24:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
-  28:	0c 94 40 04 	jmp	0x880	; 0x880 <__vector_10>
+  28:	0c 94 59 04 	jmp	0x8b2	; 0x8b2 <__vector_10>
   2c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
   30:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
   34:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
@@ -76,8 +76,8 @@ Disassembly of section .text:
   6a:	af 36       	cpi	r26, 0x6F	; 111
   6c:	b2 07       	cpc	r27, r18
   6e:	e1 f7       	brne	.-8      	; 0x68 <.do_clear_bss_loop>
-  70:	0e 94 80 00 	call	0x100	; 0x100 <main>
-  74:	0c 94 4b 05 	jmp	0xa96	; 0xa96 <_exit>
+  70:	0e 94 84 00 	call	0x108	; 0x108 <main>
+  74:	0c 94 13 05 	jmp	0xa26	; 0xa26 <_exit>
 
 00000078 <__bad_interrupt>:
   78:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -89,11 +89,11 @@ Disassembly of section .text:
 void A_Timer0_Execution(void)
 {
 	H_Motor_Stop();
-  7c:	0e 94 aa 02 	call	0x554	; 0x554 <H_Motor_Stop>
+  7c:	0e 94 c3 02 	call	0x586	; 0x586 <H_Motor_Stop>
 	H_Buzzer_Off();
-  80:	0e 94 15 02 	call	0x42a	; 0x42a <H_Buzzer_Off>
+  80:	0e 94 25 02 	call	0x44a	; 0x44a <H_Buzzer_Off>
 	M_Timer0_Stop();
-  84:	0e 94 31 04 	call	0x862	; 0x862 <M_Timer0_Stop>
+  84:	0e 94 4a 04 	call	0x894	; 0x894 <M_Timer0_Stop>
 	Global_u8_SystemState = 2;
   88:	82 e0       	ldi	r24, 0x02	; 2
   8a:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
@@ -164,1741 +164,1645 @@ u8 A_Main_CheckPasswordEeprom(u8 * Local_u8_Str1, u8* Local_u8_Str2)
   c2:	0f 93       	push	r16
   c4:	1f 93       	push	r17
   c6:	cf 93       	push	r28
-  c8:	7c 01       	movw	r14, r24
-  ca:	06 2f       	mov	r16, r22
-  cc:	17 2f       	mov	r17, r23
-  ce:	c1 e0       	ldi	r28, 0x01	; 1
+  c8:	df 93       	push	r29
+  ca:	7c 01       	movw	r14, r24
+  cc:	06 2f       	mov	r16, r22
+  ce:	17 2f       	mov	r17, r23
+  d0:	c1 e1       	ldi	r28, 0x11	; 17
+  d2:	d3 e0       	ldi	r29, 0x03	; 3
 	for (int i = 0; i<PASSWORD_SIZE; i++)
 	{
-		Local_u8_Str1 [i]= H_Eeprom_Read(1,1+i); // reads the saved password in the EEPROM page 1 byte 1
-  d0:	6c 2f       	mov	r22, r28
-  d2:	81 e0       	ldi	r24, 0x01	; 1
-  d4:	0e 94 3e 02 	call	0x47c	; 0x47c <H_Eeprom_Read>
-  d8:	f7 01       	movw	r30, r14
-  da:	81 93       	st	Z+, r24
-  dc:	7f 01       	movw	r14, r30
+		Local_u8_Str1[i]= H_Eeprom_Read(0x0311+i); // reads the saved password in the EEPROM 
+  d4:	ce 01       	movw	r24, r28
+  d6:	0e 94 4b 02 	call	0x496	; 0x496 <H_Eeprom_Read>
+  da:	f7 01       	movw	r30, r14
+  dc:	81 93       	st	Z+, r24
+  de:	7f 01       	movw	r14, r30
 		if(Local_u8_Str1[i] != Local_u8_Str2[i])
-  de:	f8 01       	movw	r30, r16
-  e0:	91 91       	ld	r25, Z+
-  e2:	8f 01       	movw	r16, r30
-  e4:	89 13       	cpse	r24, r25
-  e6:	05 c0       	rjmp	.+10     	; 0xf2 <A_Main_CheckPasswordEeprom+0x34>
-  e8:	cf 5f       	subi	r28, 0xFF	; 255
+  e0:	f8 01       	movw	r30, r16
+  e2:	91 91       	ld	r25, Z+
+  e4:	8f 01       	movw	r16, r30
+  e6:	89 13       	cpse	r24, r25
+  e8:	07 c0       	rjmp	.+14     	; 0xf8 <A_Main_CheckPasswordEeprom+0x3a>
+  ea:	21 96       	adiw	r28, 0x01	; 1
  * Parameters    : 2 pointer to characters (2 strings to compare).
  * Return        : u8 value
  */
 u8 A_Main_CheckPasswordEeprom(u8 * Local_u8_Str1, u8* Local_u8_Str2)
 {
 	for (int i = 0; i<PASSWORD_SIZE; i++)
-  ea:	c6 30       	cpi	r28, 0x06	; 6
-  ec:	89 f7       	brne	.-30     	; 0xd0 <A_Main_CheckPasswordEeprom+0x12>
+  ec:	c6 31       	cpi	r28, 0x16	; 22
+  ee:	f3 e0       	ldi	r31, 0x03	; 3
+  f0:	df 07       	cpc	r29, r31
+  f2:	81 f7       	brne	.-32     	; 0xd4 <A_Main_CheckPasswordEeprom+0x16>
 		if(Local_u8_Str1[i] != Local_u8_Str2[i])
 		{
 			return ERROR;
 		}
 	}
 	return SUCCESS;
-  ee:	81 e0       	ldi	r24, 0x01	; 1
-  f0:	01 c0       	rjmp	.+2      	; 0xf4 <A_Main_CheckPasswordEeprom+0x36>
+  f4:	81 e0       	ldi	r24, 0x01	; 1
+  f6:	01 c0       	rjmp	.+2      	; 0xfa <A_Main_CheckPasswordEeprom+0x3c>
 	for (int i = 0; i<PASSWORD_SIZE; i++)
 	{
-		Local_u8_Str1 [i]= H_Eeprom_Read(1,1+i); // reads the saved password in the EEPROM page 1 byte 1
+		Local_u8_Str1[i]= H_Eeprom_Read(0x0311+i); // reads the saved password in the EEPROM 
 		if(Local_u8_Str1[i] != Local_u8_Str2[i])
 		{
 			return ERROR;
-  f2:	80 e0       	ldi	r24, 0x00	; 0
+  f8:	80 e0       	ldi	r24, 0x00	; 0
 		}
 	}
 	return SUCCESS;
 }
-  f4:	cf 91       	pop	r28
-  f6:	1f 91       	pop	r17
-  f8:	0f 91       	pop	r16
-  fa:	ff 90       	pop	r15
-  fc:	ef 90       	pop	r14
-  fe:	08 95       	ret
+  fa:	df 91       	pop	r29
+  fc:	cf 91       	pop	r28
+  fe:	1f 91       	pop	r17
+ 100:	0f 91       	pop	r16
+ 102:	ff 90       	pop	r15
+ 104:	ef 90       	pop	r14
+ 106:	08 95       	ret
 
-00000100 <main>:
+00000108 <main>:
 
 
 int main(void)
 {
- 100:	cf 93       	push	r28
- 102:	df 93       	push	r29
- 104:	cd b7       	in	r28, 0x3d	; 61
- 106:	de b7       	in	r29, 0x3e	; 62
- 108:	2a 97       	sbiw	r28, 0x0a	; 10
- 10a:	0f b6       	in	r0, 0x3f	; 63
- 10c:	f8 94       	cli
- 10e:	de bf       	out	0x3e, r29	; 62
- 110:	0f be       	out	0x3f, r0	; 63
- 112:	cd bf       	out	0x3d, r28	; 61
+ 108:	cf 93       	push	r28
+ 10a:	df 93       	push	r29
+ 10c:	cd b7       	in	r28, 0x3d	; 61
+ 10e:	de b7       	in	r29, 0x3e	; 62
+ 110:	2a 97       	sbiw	r28, 0x0a	; 10
+ 112:	0f b6       	in	r0, 0x3f	; 63
+ 114:	f8 94       	cli
+ 116:	de bf       	out	0x3e, r29	; 62
+ 118:	0f be       	out	0x3f, r0	; 63
+ 11a:	cd bf       	out	0x3d, r28	; 61
 	// Initializing UART, LEDs, Buzzer, and Motor.
 	M_Uart_Init();
- 114:	0e 94 fd 04 	call	0x9fa	; 0x9fa <M_Uart_Init>
+ 11c:	0e 94 c5 04 	call	0x98a	; 0x98a <M_Uart_Init>
 	H_Buzzer_Init();
- 118:	0e 94 0b 02 	call	0x416	; 0x416 <H_Buzzer_Init>
+ 120:	0e 94 1b 02 	call	0x436	; 0x436 <H_Buzzer_Init>
 	H_Leds_Init();
- 11c:	0e 94 59 02 	call	0x4b2	; 0x4b2 <H_Leds_Init>
+ 124:	0e 94 72 02 	call	0x4e4	; 0x4e4 <H_Leds_Init>
 	H_Motor_Init();
- 120:	0e 94 90 02 	call	0x520	; 0x520 <H_Motor_Init>
+ 128:	0e 94 a9 02 	call	0x552	; 0x552 <H_Motor_Init>
 	H_Eeprom_Init();
- 124:	0e 94 1a 02 	call	0x434	; 0x434 <H_Eeprom_Init>
+ 12c:	0e 94 2a 02 	call	0x454	; 0x454 <H_Eeprom_Init>
 	u8 Local_u8_StrPasswordCheck[PASSWORD_SIZE];
 	u8 Local_u8_CheckPassword;
 	u8 Local_u8_TrialCounter = 0;
 	u8 Local_u8_Result;
 	
 	while(M_Uart_ReceiveByte() != HMI_READY );   // this waits until the HMI MC is ready
- 128:	0e 94 0b 05 	call	0xa16	; 0xa16 <M_Uart_ReceiveByte>
- 12c:	80 32       	cpi	r24, 0x20	; 32
- 12e:	e1 f7       	brne	.-8      	; 0x128 <main+0x28>
-	Local_u8_CheckPassword = H_Eeprom_Read(1,1); // check if there is a password already in the EEPROM.
- 130:	61 e0       	ldi	r22, 0x01	; 1
- 132:	81 e0       	ldi	r24, 0x01	; 1
- 134:	0e 94 3e 02 	call	0x47c	; 0x47c <H_Eeprom_Read>
+ 130:	0e 94 d3 04 	call	0x9a6	; 0x9a6 <M_Uart_ReceiveByte>
+ 134:	80 32       	cpi	r24, 0x20	; 32
+ 136:	e1 f7       	brne	.-8      	; 0x130 <main+0x28>
+	Local_u8_CheckPassword = H_Eeprom_Read(0x0311); // check if there is a password already in the EEPROM.
+ 138:	81 e1       	ldi	r24, 0x11	; 17
+ 13a:	93 e0       	ldi	r25, 0x03	; 3
+ 13c:	0e 94 4b 02 	call	0x496	; 0x496 <H_Eeprom_Read>
 	if (Local_u8_CheckPassword != 0xFF)          // Determine the system current state based on EEPROM.
- 138:	8f 3f       	cpi	r24, 0xFF	; 255
- 13a:	41 f0       	breq	.+16     	; 0x14c <main+0x4c>
+ 140:	8f 3f       	cpi	r24, 0xFF	; 255
+ 142:	41 f0       	breq	.+16     	; 0x154 <main+0x4c>
 	{
 		Global_u8_SystemState = 2;
- 13c:	82 e0       	ldi	r24, 0x02	; 2
- 13e:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 144:	82 e0       	ldi	r24, 0x02	; 2
+ 146:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
 		M_Uart_SendByte(Global_u8_SystemState);
- 142:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 146:	0e 94 07 05 	call	0xa0e	; 0xa0e <M_Uart_SendByte>
- 14a:	06 c0       	rjmp	.+12     	; 0x158 <main+0x58>
+ 14a:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 14e:	0e 94 cf 04 	call	0x99e	; 0x99e <M_Uart_SendByte>
+ 152:	06 c0       	rjmp	.+12     	; 0x160 <main+0x58>
 	}
 	else
 	{
 		Global_u8_SystemState = 0;
- 14c:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 154:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
 		M_Uart_SendByte(Global_u8_SystemState);
- 150:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 154:	0e 94 07 05 	call	0xa0e	; 0xa0e <M_Uart_SendByte>
+ 158:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 15c:	0e 94 cf 04 	call	0x99e	; 0x99e <M_Uart_SendByte>
 				M_Uart_SendByte(Global_u8_SystemState);
 			}
 			
 			else if(Local_u8_Result == SUCCESS)
 			{
 				Local_u8_TrialCounter = 0;
- 158:	71 2c       	mov	r7, r1
- 15a:	8e 01       	movw	r16, r28
- 15c:	0a 5f       	subi	r16, 0xFA	; 250
- 15e:	1f 4f       	sbci	r17, 0xFF	; 255
-			if(Local_u8_Result == SUCCESS)
-			{
-				Local_u8_TrialCounter = 0;
-				H_Leds_Off(LED0); H_Leds_Off(LED1); H_Leds_Off(LED2); // turning off all LEDs. 
-				M_Uart_SendByte(C_READY);
-				Global_u32_MS = 15000; // seconds needed for timer 0 in ms.
- 160:	0f 2e       	mov	r0, r31
- 162:	f8 e9       	ldi	r31, 0x98	; 152
- 164:	2f 2e       	mov	r2, r31
- 166:	fa e3       	ldi	r31, 0x3A	; 58
- 168:	3f 2e       	mov	r3, r31
- 16a:	41 2c       	mov	r4, r1
- 16c:	51 2c       	mov	r5, r1
- 16e:	f0 2d       	mov	r31, r0
+ 160:	91 2c       	mov	r9, r1
+ 162:	7e 01       	movw	r14, r28
+ 164:	86 e0       	ldi	r24, 0x06	; 6
+ 166:	e8 0e       	add	r14, r24
+ 168:	f1 1c       	adc	r15, r1
+				H_Leds_On(Local_u8_TrialCounter);
+				
+				if(Local_u8_TrialCounter == MAX_TRIALS)
+				{
+					Local_u8_TrialCounter = 0;
+					Global_u8_SystemState = 5;
+ 16a:	0f 2e       	mov	r0, r31
+ 16c:	f5 e0       	ldi	r31, 0x05	; 5
+ 16e:	3f 2e       	mov	r3, r31
+ 170:	f0 2d       	mov	r31, r0
 			break;
 			
 			
 			/* This case is for when the user used the maximum amount of trials. */
 			case 5:
 			Global_u32_MS = 60000; // time for timer0 in ms.
- 170:	0f 2e       	mov	r0, r31
- 172:	f0 e6       	ldi	r31, 0x60	; 96
- 174:	8f 2e       	mov	r8, r31
- 176:	fa ee       	ldi	r31, 0xEA	; 234
- 178:	9f 2e       	mov	r9, r31
- 17a:	a1 2c       	mov	r10, r1
- 17c:	b1 2c       	mov	r11, r1
- 17e:	f0 2d       	mov	r31, r0
- 180:	6e 01       	movw	r12, r28
- 182:	8b e0       	ldi	r24, 0x0B	; 11
- 184:	c8 0e       	add	r12, r24
- 186:	d1 1c       	adc	r13, r1
+ 172:	0f 2e       	mov	r0, r31
+ 174:	f0 e6       	ldi	r31, 0x60	; 96
+ 176:	4f 2e       	mov	r4, r31
+ 178:	fa ee       	ldi	r31, 0xEA	; 234
+ 17a:	5f 2e       	mov	r5, r31
+ 17c:	61 2c       	mov	r6, r1
+ 17e:	71 2c       	mov	r7, r1
+ 180:	f0 2d       	mov	r31, r0
+ 182:	6e 01       	movw	r12, r28
+ 184:	9b e0       	ldi	r25, 0x0B	; 11
+ 186:	c9 0e       	add	r12, r25
+ 188:	d1 1c       	adc	r13, r1
+			{
+				Global_u8_SystemState = 4;
+			}
+			else if(Local_u8_Symbol == '-')
+			{
+				Global_u8_SystemState = 6;
+ 18a:	0f 2e       	mov	r0, r31
+ 18c:	f6 e0       	ldi	r31, 0x06	; 6
+ 18e:	2f 2e       	mov	r2, r31
+ 190:	f0 2d       	mov	r31, r0
+			{
+				Global_u8_SystemState = 3;
+			}
+			else if(Local_u8_Symbol == '+')
+			{
+				Global_u8_SystemState = 4;
+ 192:	68 94       	set
+ 194:	88 24       	eor	r8, r8
+ 196:	82 f8       	bld	r8, 2
 	
 	
 	
     while (1) 
     {  
 		switch (Global_u8_SystemState)
- 188:	60 90 60 00 	lds	r6, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 18c:	92 e0       	ldi	r25, 0x02	; 2
- 18e:	69 16       	cp	r6, r25
- 190:	09 f4       	brne	.+2      	; 0x194 <main+0x94>
- 192:	5a c0       	rjmp	.+180    	; 0x248 <main+0x148>
- 194:	96 15       	cp	r25, r6
- 196:	30 f0       	brcs	.+12     	; 0x1a4 <main+0xa4>
- 198:	66 20       	and	r6, r6
- 19a:	81 f0       	breq	.+32     	; 0x1bc <main+0xbc>
- 19c:	e1 e0       	ldi	r30, 0x01	; 1
- 19e:	6e 16       	cp	r6, r30
- 1a0:	d9 f1       	breq	.+118    	; 0x218 <main+0x118>
- 1a2:	f2 cf       	rjmp	.-28     	; 0x188 <main+0x88>
- 1a4:	f4 e0       	ldi	r31, 0x04	; 4
- 1a6:	6f 16       	cp	r6, r31
- 1a8:	09 f4       	brne	.+2      	; 0x1ac <main+0xac>
- 1aa:	c9 c0       	rjmp	.+402    	; 0x33e <main+0x23e>
- 1ac:	6f 16       	cp	r6, r31
- 1ae:	08 f4       	brcc	.+2      	; 0x1b2 <main+0xb2>
- 1b0:	63 c0       	rjmp	.+198    	; 0x278 <main+0x178>
- 1b2:	85 e0       	ldi	r24, 0x05	; 5
- 1b4:	68 16       	cp	r6, r24
- 1b6:	09 f4       	brne	.+2      	; 0x1ba <main+0xba>
- 1b8:	02 c1       	rjmp	.+516    	; 0x3be <main+0x2be>
- 1ba:	e6 cf       	rjmp	.-52     	; 0x188 <main+0x88>
- 1bc:	fe 01       	movw	r30, r28
- 1be:	31 96       	adiw	r30, 0x01	; 1
- 1c0:	7f 01       	movw	r14, r30
+ 198:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 19c:	82 30       	cpi	r24, 0x02	; 2
+ 19e:	09 f4       	brne	.+2      	; 0x1a2 <main+0x9a>
+ 1a0:	57 c0       	rjmp	.+174    	; 0x250 <main+0x148>
+ 1a2:	28 f4       	brcc	.+10     	; 0x1ae <main+0xa6>
+ 1a4:	88 23       	and	r24, r24
+ 1a6:	61 f0       	breq	.+24     	; 0x1c0 <main+0xb8>
+ 1a8:	81 30       	cpi	r24, 0x01	; 1
+ 1aa:	b9 f1       	breq	.+110    	; 0x21a <main+0x112>
+ 1ac:	f5 cf       	rjmp	.-22     	; 0x198 <main+0x90>
+ 1ae:	84 30       	cpi	r24, 0x04	; 4
+ 1b0:	09 f4       	brne	.+2      	; 0x1b4 <main+0xac>
+ 1b2:	ca c0       	rjmp	.+404    	; 0x348 <main+0x240>
+ 1b4:	08 f4       	brcc	.+2      	; 0x1b8 <main+0xb0>
+ 1b6:	62 c0       	rjmp	.+196    	; 0x27c <main+0x174>
+ 1b8:	85 30       	cpi	r24, 0x05	; 5
+ 1ba:	09 f4       	brne	.+2      	; 0x1be <main+0xb6>
+ 1bc:	10 c1       	rjmp	.+544    	; 0x3de <main+0x2d6>
+ 1be:	ec cf       	rjmp	.-40     	; 0x198 <main+0x90>
+ 1c0:	8e 01       	movw	r16, r28
+ 1c2:	0f 5f       	subi	r16, 0xFF	; 255
+ 1c4:	1f 4f       	sbci	r17, 0xFF	; 255
 		{
 			/* This case is the case of running the program for the first time with no password set before in the EEPROM */
 			case 0:
 			for (int i = 0; i<PASSWORD_SIZE; i++)
 			{
 				Local_u8_StrPassword[i] = M_Uart_ReceiveByte(); // Receiving the password from the HMI ECU.
- 1c2:	0e 94 0b 05 	call	0xa16	; 0xa16 <M_Uart_ReceiveByte>
- 1c6:	f7 01       	movw	r30, r14
- 1c8:	81 93       	st	Z+, r24
- 1ca:	7f 01       	movw	r14, r30
+ 1c6:	0e 94 d3 04 	call	0x9a6	; 0x9a6 <M_Uart_ReceiveByte>
+ 1ca:	d8 01       	movw	r26, r16
+ 1cc:	8d 93       	st	X+, r24
+ 1ce:	8d 01       	movw	r16, r26
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 1cc:	8f e9       	ldi	r24, 0x9F	; 159
- 1ce:	9f e0       	ldi	r25, 0x0F	; 15
- 1d0:	01 97       	sbiw	r24, 0x01	; 1
- 1d2:	f1 f7       	brne	.-4      	; 0x1d0 <main+0xd0>
- 1d4:	00 c0       	rjmp	.+0      	; 0x1d6 <main+0xd6>
- 1d6:	00 00       	nop
+ 1d0:	ef e9       	ldi	r30, 0x9F	; 159
+ 1d2:	ff e0       	ldi	r31, 0x0F	; 15
+ 1d4:	31 97       	sbiw	r30, 0x01	; 1
+ 1d6:	f1 f7       	brne	.-4      	; 0x1d4 <main+0xcc>
+ 1d8:	00 c0       	rjmp	.+0      	; 0x1da <main+0xd2>
+ 1da:	00 00       	nop
     {  
 		switch (Global_u8_SystemState)
 		{
 			/* This case is the case of running the program for the first time with no password set before in the EEPROM */
 			case 0:
 			for (int i = 0; i<PASSWORD_SIZE; i++)
- 1d8:	0e 17       	cp	r16, r30
- 1da:	1f 07       	cpc	r17, r31
- 1dc:	91 f7       	brne	.-28     	; 0x1c2 <main+0xc2>
- 1de:	7e 01       	movw	r14, r28
- 1e0:	96 e0       	ldi	r25, 0x06	; 6
- 1e2:	e9 0e       	add	r14, r25
- 1e4:	f1 1c       	adc	r15, r1
+ 1dc:	ea 16       	cp	r14, r26
+ 1de:	fb 06       	cpc	r15, r27
+ 1e0:	91 f7       	brne	.-28     	; 0x1c6 <main+0xbe>
+ 1e2:	8e 01       	movw	r16, r28
+ 1e4:	0a 5f       	subi	r16, 0xFA	; 250
+ 1e6:	1f 4f       	sbci	r17, 0xFF	; 255
 				Local_u8_StrPassword[i] = M_Uart_ReceiveByte(); // Receiving the password from the HMI ECU.
 				_delay_ms(1);
 			}
 			for (int i = 0; i<PASSWORD_SIZE; i++)
 			{
 				Local_u8_StrPasswordCheck[i] = M_Uart_ReceiveByte(); // Receiving the password confirmation from the HMI ECU.
- 1e6:	0e 94 0b 05 	call	0xa16	; 0xa16 <M_Uart_ReceiveByte>
- 1ea:	f7 01       	movw	r30, r14
- 1ec:	81 93       	st	Z+, r24
- 1ee:	7f 01       	movw	r14, r30
- 1f0:	8f e9       	ldi	r24, 0x9F	; 159
- 1f2:	9f e0       	ldi	r25, 0x0F	; 15
- 1f4:	01 97       	sbiw	r24, 0x01	; 1
- 1f6:	f1 f7       	brne	.-4      	; 0x1f4 <main+0xf4>
- 1f8:	00 c0       	rjmp	.+0      	; 0x1fa <main+0xfa>
- 1fa:	00 00       	nop
+ 1e8:	0e 94 d3 04 	call	0x9a6	; 0x9a6 <M_Uart_ReceiveByte>
+ 1ec:	d8 01       	movw	r26, r16
+ 1ee:	8d 93       	st	X+, r24
+ 1f0:	8d 01       	movw	r16, r26
+ 1f2:	ef e9       	ldi	r30, 0x9F	; 159
+ 1f4:	ff e0       	ldi	r31, 0x0F	; 15
+ 1f6:	31 97       	sbiw	r30, 0x01	; 1
+ 1f8:	f1 f7       	brne	.-4      	; 0x1f6 <main+0xee>
+ 1fa:	00 c0       	rjmp	.+0      	; 0x1fc <main+0xf4>
+ 1fc:	00 00       	nop
 			for (int i = 0; i<PASSWORD_SIZE; i++)
 			{
 				Local_u8_StrPassword[i] = M_Uart_ReceiveByte(); // Receiving the password from the HMI ECU.
 				_delay_ms(1);
 			}
 			for (int i = 0; i<PASSWORD_SIZE; i++)
- 1fc:	ce 16       	cp	r12, r30
- 1fe:	df 06       	cpc	r13, r31
- 200:	91 f7       	brne	.-28     	; 0x1e6 <main+0xe6>
+ 1fe:	ca 16       	cp	r12, r26
+ 200:	db 06       	cpc	r13, r27
+ 202:	91 f7       	brne	.-28     	; 0x1e8 <main+0xe0>
 				Local_u8_StrPasswordCheck[i] = M_Uart_ReceiveByte(); // Receiving the password confirmation from the HMI ECU.
 				_delay_ms(1);
 			}
 			/* SUCCESS = 1 and ERROR = 0 , System state will be determined based on whether the entered passwords match or not. */
 			
 			Local_u8_CheckPassword = A_Main_ConfirmPassword(Local_u8_StrPassword, Local_u8_StrPasswordCheck);
- 202:	b8 01       	movw	r22, r16
- 204:	ce 01       	movw	r24, r28
- 206:	01 96       	adiw	r24, 0x01	; 1
- 208:	0e 94 48 00 	call	0x90	; 0x90 <A_Main_ConfirmPassword>
- 20c:	f8 2e       	mov	r15, r24
+ 204:	b7 01       	movw	r22, r14
+ 206:	ce 01       	movw	r24, r28
+ 208:	01 96       	adiw	r24, 0x01	; 1
+ 20a:	0e 94 48 00 	call	0x90	; 0x90 <A_Main_ConfirmPassword>
+ 20e:	18 2f       	mov	r17, r24
 			M_Uart_SendByte(Local_u8_CheckPassword);
- 20e:	0e 94 07 05 	call	0xa0e	; 0xa0e <M_Uart_SendByte>
+ 210:	0e 94 cf 04 	call	0x99e	; 0x99e <M_Uart_SendByte>
 			Global_u8_SystemState = Local_u8_CheckPassword;
- 212:	f0 92 60 00 	sts	0x0060, r15	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 214:	10 93 60 00 	sts	0x0060, r17	; 0x800060 <__DATA_REGION_ORIGIN__>
 			break;
- 216:	b8 cf       	rjmp	.-144    	; 0x188 <main+0x88>
- 218:	fe 01       	movw	r30, r28
- 21a:	31 96       	adiw	r30, 0x01	; 1
- 21c:	7f 01       	movw	r14, r30
+ 218:	bf cf       	rjmp	.-130    	; 0x198 <main+0x90>
+ 21a:	ce 01       	movw	r24, r28
+ 21c:	01 96       	adiw	r24, 0x01	; 1
+ 21e:	5c 01       	movw	r10, r24
+	
+	
+	
+    while (1) 
+    {  
+		switch (Global_u8_SystemState)
+ 220:	01 e1       	ldi	r16, 0x11	; 17
+ 222:	13 e0       	ldi	r17, 0x03	; 3
 			
 			/* This case is follows the first case to save the password to the EEPROM if password entered and confirmed successfully. */
 			case 1:
 			for (int i = 0; i<PASSWORD_SIZE; i++)
 			{
-				H_Eeprom_Write(Local_u8_StrPassword[i],1,1+i);
- 21e:	46 2d       	mov	r20, r6
- 220:	61 e0       	ldi	r22, 0x01	; 1
- 222:	f7 01       	movw	r30, r14
- 224:	81 91       	ld	r24, Z+
- 226:	7f 01       	movw	r14, r30
- 228:	0e 94 26 02 	call	0x44c	; 0x44c <H_Eeprom_Write>
- 22c:	8f e3       	ldi	r24, 0x3F	; 63
- 22e:	9c e9       	ldi	r25, 0x9C	; 156
- 230:	01 97       	sbiw	r24, 0x01	; 1
- 232:	f1 f7       	brne	.-4      	; 0x230 <main+0x130>
- 234:	00 c0       	rjmp	.+0      	; 0x236 <main+0x136>
- 236:	00 00       	nop
- 238:	63 94       	inc	r6
+				H_Eeprom_Write(Local_u8_StrPassword[i],0x0311+i);
+ 224:	b8 01       	movw	r22, r16
+ 226:	d5 01       	movw	r26, r10
+ 228:	8d 91       	ld	r24, X+
+ 22a:	5d 01       	movw	r10, r26
+ 22c:	0e 94 2d 02 	call	0x45a	; 0x45a <H_Eeprom_Write>
+ 230:	ef e3       	ldi	r30, 0x3F	; 63
+ 232:	fc e9       	ldi	r31, 0x9C	; 156
+ 234:	31 97       	sbiw	r30, 0x01	; 1
+ 236:	f1 f7       	brne	.-4      	; 0x234 <main+0x12c>
+ 238:	00 c0       	rjmp	.+0      	; 0x23a <main+0x132>
+ 23a:	00 00       	nop
+ 23c:	0f 5f       	subi	r16, 0xFF	; 255
+ 23e:	1f 4f       	sbci	r17, 0xFF	; 255
 			Global_u8_SystemState = Local_u8_CheckPassword;
 			break;
 			
 			/* This case is follows the first case to save the password to the EEPROM if password entered and confirmed successfully. */
 			case 1:
 			for (int i = 0; i<PASSWORD_SIZE; i++)
- 23a:	96 e0       	ldi	r25, 0x06	; 6
- 23c:	69 12       	cpse	r6, r25
- 23e:	ef cf       	rjmp	.-34     	; 0x21e <main+0x11e>
+ 240:	06 31       	cpi	r16, 0x16	; 22
+ 242:	f3 e0       	ldi	r31, 0x03	; 3
+ 244:	1f 07       	cpc	r17, r31
+ 246:	71 f7       	brne	.-36     	; 0x224 <main+0x11c>
 			{
-				H_Eeprom_Write(Local_u8_StrPassword[i],1,1+i);
+				H_Eeprom_Write(Local_u8_StrPassword[i],0x0311+i);
 				_delay_ms(10);
 			}
 			Global_u8_SystemState = 2;
- 240:	82 e0       	ldi	r24, 0x02	; 2
- 242:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 248:	82 e0       	ldi	r24, 0x02	; 2
+ 24a:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
 			break;
- 246:	a0 cf       	rjmp	.-192    	; 0x188 <main+0x88>
+ 24e:	a4 cf       	rjmp	.-184    	; 0x198 <main+0x90>
 			
 			
 			/* This case is the normal case of running the system with a password saved */
 			case 2:
 			M_Uart_SendByte(C_READY); // sending to the HMI ECU that the control ECU is ready.
- 248:	80 e1       	ldi	r24, 0x10	; 16
- 24a:	0e 94 07 05 	call	0xa0e	; 0xa0e <M_Uart_SendByte>
+ 250:	80 e1       	ldi	r24, 0x10	; 16
+ 252:	0e 94 cf 04 	call	0x99e	; 0x99e <M_Uart_SendByte>
 			
 			u8 Local_u8_Symbol = M_Uart_ReceiveByte(); // determining system state based on received symbol.
- 24e:	0e 94 0b 05 	call	0xa16	; 0xa16 <M_Uart_ReceiveByte>
+ 256:	0e 94 d3 04 	call	0x9a6	; 0x9a6 <M_Uart_ReceiveByte>
 			
 			if(Local_u8_Symbol == '*')
- 252:	8a 32       	cpi	r24, 0x2A	; 42
- 254:	21 f4       	brne	.+8      	; 0x25e <main+0x15e>
+ 25a:	8a 32       	cpi	r24, 0x2A	; 42
+ 25c:	21 f4       	brne	.+8      	; 0x266 <main+0x15e>
 			{
 				Global_u8_SystemState = 3;
- 256:	83 e0       	ldi	r24, 0x03	; 3
- 258:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
- 25c:	95 cf       	rjmp	.-214    	; 0x188 <main+0x88>
+ 25e:	83 e0       	ldi	r24, 0x03	; 3
+ 260:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 264:	99 cf       	rjmp	.-206    	; 0x198 <main+0x90>
 			}
 			else if(Local_u8_Symbol == '+')
- 25e:	8b 32       	cpi	r24, 0x2B	; 43
- 260:	21 f4       	brne	.+8      	; 0x26a <main+0x16a>
+ 266:	8b 32       	cpi	r24, 0x2B	; 43
+ 268:	19 f4       	brne	.+6      	; 0x270 <main+0x168>
 			{
 				Global_u8_SystemState = 4;
- 262:	e4 e0       	ldi	r30, 0x04	; 4
- 264:	e0 93 60 00 	sts	0x0060, r30	; 0x800060 <__DATA_REGION_ORIGIN__>
- 268:	8f cf       	rjmp	.-226    	; 0x188 <main+0x88>
+ 26a:	80 92 60 00 	sts	0x0060, r8	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 26e:	94 cf       	rjmp	.-216    	; 0x198 <main+0x90>
 			}
 			else if(Local_u8_Symbol == '-')
- 26a:	8d 32       	cpi	r24, 0x2D	; 45
- 26c:	09 f0       	breq	.+2      	; 0x270 <main+0x170>
- 26e:	8c cf       	rjmp	.-232    	; 0x188 <main+0x88>
+ 270:	8d 32       	cpi	r24, 0x2D	; 45
+ 272:	09 f0       	breq	.+2      	; 0x276 <main+0x16e>
+ 274:	91 cf       	rjmp	.-222    	; 0x198 <main+0x90>
 			{
 				Global_u8_SystemState = 6;
- 270:	f6 e0       	ldi	r31, 0x06	; 6
- 272:	f0 93 60 00 	sts	0x0060, r31	; 0x800060 <__DATA_REGION_ORIGIN__>
- 276:	88 cf       	rjmp	.-240    	; 0x188 <main+0x88>
- 278:	ce 01       	movw	r24, r28
- 27a:	01 96       	adiw	r24, 0x01	; 1
- 27c:	7c 01       	movw	r14, r24
+ 276:	20 92 60 00 	sts	0x0060, r2	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 27a:	8e cf       	rjmp	.-228    	; 0x198 <main+0x90>
+ 27c:	8e 01       	movw	r16, r28
+ 27e:	0f 5f       	subi	r16, 0xFF	; 255
+ 280:	1f 4f       	sbci	r17, 0xFF	; 255
 			
 			/* This case is the case of entering password to open the door. */
 			case 3:
 			for (int i = 0; i<PASSWORD_SIZE; i++)
 			{
 				Local_u8_StrPassword[i] = M_Uart_ReceiveByte();
- 27e:	0e 94 0b 05 	call	0xa16	; 0xa16 <M_Uart_ReceiveByte>
- 282:	f7 01       	movw	r30, r14
- 284:	81 93       	st	Z+, r24
- 286:	7f 01       	movw	r14, r30
- 288:	8f e9       	ldi	r24, 0x9F	; 159
- 28a:	9f e0       	ldi	r25, 0x0F	; 15
- 28c:	01 97       	sbiw	r24, 0x01	; 1
- 28e:	f1 f7       	brne	.-4      	; 0x28c <main+0x18c>
- 290:	00 c0       	rjmp	.+0      	; 0x292 <main+0x192>
- 292:	00 00       	nop
+ 282:	0e 94 d3 04 	call	0x9a6	; 0x9a6 <M_Uart_ReceiveByte>
+ 286:	d8 01       	movw	r26, r16
+ 288:	8d 93       	st	X+, r24
+ 28a:	8d 01       	movw	r16, r26
+ 28c:	ef e9       	ldi	r30, 0x9F	; 159
+ 28e:	ff e0       	ldi	r31, 0x0F	; 15
+ 290:	31 97       	sbiw	r30, 0x01	; 1
+ 292:	f1 f7       	brne	.-4      	; 0x290 <main+0x188>
+ 294:	00 c0       	rjmp	.+0      	; 0x296 <main+0x18e>
+ 296:	00 00       	nop
 			}
 			break;
 			
 			/* This case is the case of entering password to open the door. */
 			case 3:
 			for (int i = 0; i<PASSWORD_SIZE; i++)
- 294:	0e 17       	cp	r16, r30
- 296:	1f 07       	cpc	r17, r31
- 298:	91 f7       	brne	.-28     	; 0x27e <main+0x17e>
+ 298:	ea 16       	cp	r14, r26
+ 29a:	fb 06       	cpc	r15, r27
+ 29c:	91 f7       	brne	.-28     	; 0x282 <main+0x17a>
 			{
 				Local_u8_StrPassword[i] = M_Uart_ReceiveByte();
 				_delay_ms(1);
 			}
 			Local_u8_Result = A_Main_CheckPasswordEeprom(Local_u8_StrPasswordCheck, Local_u8_StrPassword); // comparing entered password to the saved password.
- 29a:	be 01       	movw	r22, r28
- 29c:	6f 5f       	subi	r22, 0xFF	; 255
- 29e:	7f 4f       	sbci	r23, 0xFF	; 255
- 2a0:	c8 01       	movw	r24, r16
- 2a2:	0e 94 5f 00 	call	0xbe	; 0xbe <A_Main_CheckPasswordEeprom>
- 2a6:	f8 2e       	mov	r15, r24
+ 29e:	be 01       	movw	r22, r28
+ 2a0:	6f 5f       	subi	r22, 0xFF	; 255
+ 2a2:	7f 4f       	sbci	r23, 0xFF	; 255
+ 2a4:	c7 01       	movw	r24, r14
+ 2a6:	0e 94 5f 00 	call	0xbe	; 0xbe <A_Main_CheckPasswordEeprom>
+ 2aa:	18 2f       	mov	r17, r24
 			M_Uart_SendByte(Local_u8_Result);
- 2a8:	0e 94 07 05 	call	0xa0e	; 0xa0e <M_Uart_SendByte>
-			
+ 2ac:	0e 94 cf 04 	call	0x99e	; 0x99e <M_Uart_SendByte>
 			/* Action will be taken based on the Result variable */
 			
 			if(Local_u8_Result == ERROR)
- 2ac:	f1 10       	cpse	r15, r1
- 2ae:	0c c0       	rjmp	.+24     	; 0x2c8 <main+0x1c8>
+ 2b0:	11 11       	cpse	r17, r1
+ 2b2:	0b c0       	rjmp	.+22     	; 0x2ca <main+0x1c2>
 			{
 				Local_u8_TrialCounter++;
- 2b0:	73 94       	inc	r7
+ 2b4:	93 94       	inc	r9
 				H_Leds_On(Local_u8_TrialCounter); // lights a red led on each wrong trial.
- 2b2:	87 2d       	mov	r24, r7
- 2b4:	0e 94 66 02 	call	0x4cc	; 0x4cc <H_Leds_On>
+ 2b6:	89 2d       	mov	r24, r9
+ 2b8:	0e 94 7f 02 	call	0x4fe	; 0x4fe <H_Leds_On>
 				
 				if(Local_u8_TrialCounter == MAX_TRIALS)
- 2b8:	93 e0       	ldi	r25, 0x03	; 3
- 2ba:	79 12       	cpse	r7, r25
- 2bc:	a1 c0       	rjmp	.+322    	; 0x400 <__EEPROM_REGION_LENGTH__>
+ 2bc:	f3 e0       	ldi	r31, 0x03	; 3
+ 2be:	9f 12       	cpse	r9, r31
+ 2c0:	af c0       	rjmp	.+350    	; 0x420 <__EEPROM_REGION_LENGTH__+0x20>
 				{
 					Local_u8_TrialCounter = 0;
 					Global_u8_SystemState = 5;
- 2be:	e5 e0       	ldi	r30, 0x05	; 5
- 2c0:	e0 93 60 00 	sts	0x0060, r30	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 2c2:	30 92 60 00 	sts	0x0060, r3	; 0x800060 <__DATA_REGION_ORIGIN__>
 				Local_u8_TrialCounter++;
 				H_Leds_On(Local_u8_TrialCounter); // lights a red led on each wrong trial.
 				
 				if(Local_u8_TrialCounter == MAX_TRIALS)
 				{
 					Local_u8_TrialCounter = 0;
- 2c4:	71 2c       	mov	r7, r1
- 2c6:	9c c0       	rjmp	.+312    	; 0x400 <__EEPROM_REGION_LENGTH__>
- 2c8:	8f e9       	ldi	r24, 0x9F	; 159
- 2ca:	9f e0       	ldi	r25, 0x0F	; 15
- 2cc:	01 97       	sbiw	r24, 0x01	; 1
- 2ce:	f1 f7       	brne	.-4      	; 0x2cc <main+0x1cc>
- 2d0:	00 c0       	rjmp	.+0      	; 0x2d2 <main+0x1d2>
- 2d2:	00 00       	nop
+ 2c6:	91 2c       	mov	r9, r1
+ 2c8:	ab c0       	rjmp	.+342    	; 0x420 <__EEPROM_REGION_LENGTH__+0x20>
+ 2ca:	8f e9       	ldi	r24, 0x9F	; 159
+ 2cc:	9f e0       	ldi	r25, 0x0F	; 15
+ 2ce:	01 97       	sbiw	r24, 0x01	; 1
+ 2d0:	f1 f7       	brne	.-4      	; 0x2ce <main+0x1c6>
+ 2d2:	00 c0       	rjmp	.+0      	; 0x2d4 <main+0x1cc>
+ 2d4:	00 00       	nop
 					Global_u8_SystemState = 5;
 				}
 			}
 			_delay_ms(1);
 			M_Uart_SendByte(Global_u8_SystemState);
- 2d4:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 2d8:	0e 94 07 05 	call	0xa0e	; 0xa0e <M_Uart_SendByte>
+ 2d6:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 2da:	0e 94 cf 04 	call	0x99e	; 0x99e <M_Uart_SendByte>
 			
 			if(Local_u8_Result == SUCCESS)
- 2dc:	91 e0       	ldi	r25, 0x01	; 1
- 2de:	f9 12       	cpse	r15, r25
- 2e0:	53 cf       	rjmp	.-346    	; 0x188 <main+0x88>
+ 2de:	11 30       	cpi	r17, 0x01	; 1
+ 2e0:	09 f0       	breq	.+2      	; 0x2e4 <main+0x1dc>
+ 2e2:	5a cf       	rjmp	.-332    	; 0x198 <main+0x90>
 			{
 				Local_u8_TrialCounter = 0;
 				H_Leds_Off(LED0); H_Leds_Off(LED1); H_Leds_Off(LED2); // turning off all LEDs. 
- 2e2:	81 e0       	ldi	r24, 0x01	; 1
- 2e4:	0e 94 7b 02 	call	0x4f6	; 0x4f6 <H_Leds_Off>
- 2e8:	82 e0       	ldi	r24, 0x02	; 2
- 2ea:	0e 94 7b 02 	call	0x4f6	; 0x4f6 <H_Leds_Off>
- 2ee:	83 e0       	ldi	r24, 0x03	; 3
- 2f0:	0e 94 7b 02 	call	0x4f6	; 0x4f6 <H_Leds_Off>
+ 2e4:	81 e0       	ldi	r24, 0x01	; 1
+ 2e6:	0e 94 94 02 	call	0x528	; 0x528 <H_Leds_Off>
+ 2ea:	82 e0       	ldi	r24, 0x02	; 2
+ 2ec:	0e 94 94 02 	call	0x528	; 0x528 <H_Leds_Off>
+ 2f0:	83 e0       	ldi	r24, 0x03	; 3
+ 2f2:	0e 94 94 02 	call	0x528	; 0x528 <H_Leds_Off>
 				M_Uart_SendByte(C_READY);
- 2f4:	80 e1       	ldi	r24, 0x10	; 16
- 2f6:	0e 94 07 05 	call	0xa0e	; 0xa0e <M_Uart_SendByte>
+ 2f6:	80 e1       	ldi	r24, 0x10	; 16
+ 2f8:	0e 94 cf 04 	call	0x99e	; 0x99e <M_Uart_SendByte>
 				Global_u32_MS = 15000; // seconds needed for timer 0 in ms.
- 2fa:	20 92 61 00 	sts	0x0061, r2	; 0x800061 <Global_u32_MS>
- 2fe:	30 92 62 00 	sts	0x0062, r3	; 0x800062 <Global_u32_MS+0x1>
- 302:	40 92 63 00 	sts	0x0063, r4	; 0x800063 <Global_u32_MS+0x2>
- 306:	50 92 64 00 	sts	0x0064, r5	; 0x800064 <Global_u32_MS+0x3>
+ 2fc:	88 e9       	ldi	r24, 0x98	; 152
+ 2fe:	9a e3       	ldi	r25, 0x3A	; 58
+ 300:	a0 e0       	ldi	r26, 0x00	; 0
+ 302:	b0 e0       	ldi	r27, 0x00	; 0
+ 304:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <Global_u32_MS>
+ 308:	90 93 62 00 	sts	0x0062, r25	; 0x800062 <Global_u32_MS+0x1>
+ 30c:	a0 93 63 00 	sts	0x0063, r26	; 0x800063 <Global_u32_MS+0x2>
+ 310:	b0 93 64 00 	sts	0x0064, r27	; 0x800064 <Global_u32_MS+0x3>
 				
 				/* Timer0 initialization and setting the required time for motor to open the door */
 				
 				M_Timer0_Init();
- 30a:	0e 94 c5 03 	call	0x78a	; 0x78a <M_Timer0_Init>
+ 314:	0e 94 de 03 	call	0x7bc	; 0x7bc <M_Timer0_Init>
 				M_Timer0_SetCallBack(A_Timer0_Execution);
- 30e:	8e e3       	ldi	r24, 0x3E	; 62
- 310:	90 e0       	ldi	r25, 0x00	; 0
- 312:	0e 94 3b 04 	call	0x876	; 0x876 <M_Timer0_SetCallBack>
+ 318:	8e e3       	ldi	r24, 0x3E	; 62
+ 31a:	90 e0       	ldi	r25, 0x00	; 0
+ 31c:	0e 94 54 04 	call	0x8a8	; 0x8a8 <M_Timer0_SetCallBack>
 				M_Timer0_SetTime(Global_u32_MS);
- 316:	60 91 61 00 	lds	r22, 0x0061	; 0x800061 <Global_u32_MS>
- 31a:	70 91 62 00 	lds	r23, 0x0062	; 0x800062 <Global_u32_MS+0x1>
- 31e:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <Global_u32_MS+0x2>
- 322:	90 91 64 00 	lds	r25, 0x0064	; 0x800064 <Global_u32_MS+0x3>
- 326:	0e 94 d2 03 	call	0x7a4	; 0x7a4 <M_Timer0_SetTime>
+ 320:	60 91 61 00 	lds	r22, 0x0061	; 0x800061 <Global_u32_MS>
+ 324:	70 91 62 00 	lds	r23, 0x0062	; 0x800062 <Global_u32_MS+0x1>
+ 328:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <Global_u32_MS+0x2>
+ 32c:	90 91 64 00 	lds	r25, 0x0064	; 0x800064 <Global_u32_MS+0x3>
+ 330:	0e 94 eb 03 	call	0x7d6	; 0x7d6 <M_Timer0_SetTime>
 				M_Timer0_Start();
- 32a:	0e 94 27 04 	call	0x84e	; 0x84e <M_Timer0_Start>
+ 334:	0e 94 40 04 	call	0x880	; 0x880 <M_Timer0_Start>
 				H_Motor_CW();
- 32e:	0e 94 a1 02 	call	0x542	; 0x542 <H_Motor_CW>
+ 338:	0e 94 ba 02 	call	0x574	; 0x574 <H_Motor_CW>
 				
 				/* next while loop is to wait until the door has opened and timer0 callback function is executed. */
 				while(Global_u8_SystemState != 2);
- 332:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 336:	82 30       	cpi	r24, 0x02	; 2
- 338:	e1 f7       	brne	.-8      	; 0x332 <main+0x232>
+ 33c:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 340:	82 30       	cpi	r24, 0x02	; 2
+ 342:	e1 f7       	brne	.-8      	; 0x33c <main+0x234>
 			_delay_ms(1);
 			M_Uart_SendByte(Global_u8_SystemState);
 			
 			if(Local_u8_Result == SUCCESS)
 			{
 				Local_u8_TrialCounter = 0;
- 33a:	71 2c       	mov	r7, r1
- 33c:	25 cf       	rjmp	.-438    	; 0x188 <main+0x88>
- 33e:	fe 01       	movw	r30, r28
- 340:	31 96       	adiw	r30, 0x01	; 1
- 342:	7f 01       	movw	r14, r30
+ 344:	91 2c       	mov	r9, r1
+ 346:	28 cf       	rjmp	.-432    	; 0x198 <main+0x90>
+ 348:	8e 01       	movw	r16, r28
+ 34a:	0f 5f       	subi	r16, 0xFF	; 255
+ 34c:	1f 4f       	sbci	r17, 0xFF	; 255
 			
 			/* This case is for doing the password reset */
 			case 4:
 			for(int i = 0; i<PASSWORD_SIZE; i++)
 			{
 				Local_u8_StrPassword[i] = M_Uart_ReceiveByte();
- 344:	0e 94 0b 05 	call	0xa16	; 0xa16 <M_Uart_ReceiveByte>
- 348:	f7 01       	movw	r30, r14
- 34a:	81 93       	st	Z+, r24
- 34c:	7f 01       	movw	r14, r30
- 34e:	8f e9       	ldi	r24, 0x9F	; 159
- 350:	9f e0       	ldi	r25, 0x0F	; 15
- 352:	01 97       	sbiw	r24, 0x01	; 1
- 354:	f1 f7       	brne	.-4      	; 0x352 <main+0x252>
- 356:	00 c0       	rjmp	.+0      	; 0x358 <main+0x258>
- 358:	00 00       	nop
+ 34e:	0e 94 d3 04 	call	0x9a6	; 0x9a6 <M_Uart_ReceiveByte>
+ 352:	d8 01       	movw	r26, r16
+ 354:	8d 93       	st	X+, r24
+ 356:	8d 01       	movw	r16, r26
+ 358:	ef e9       	ldi	r30, 0x9F	; 159
+ 35a:	ff e0       	ldi	r31, 0x0F	; 15
+ 35c:	31 97       	sbiw	r30, 0x01	; 1
+ 35e:	f1 f7       	brne	.-4      	; 0x35c <main+0x254>
+ 360:	00 c0       	rjmp	.+0      	; 0x362 <main+0x25a>
+ 362:	00 00       	nop
 			break;
 			
 			
 			/* This case is for doing the password reset */
 			case 4:
 			for(int i = 0; i<PASSWORD_SIZE; i++)
- 35a:	e0 17       	cp	r30, r16
- 35c:	f1 07       	cpc	r31, r17
- 35e:	91 f7       	brne	.-28     	; 0x344 <main+0x244>
+ 364:	ae 15       	cp	r26, r14
+ 366:	bf 05       	cpc	r27, r15
+ 368:	91 f7       	brne	.-28     	; 0x34e <main+0x246>
 			{
 				Local_u8_StrPassword[i] = M_Uart_ReceiveByte();
 				_delay_ms(1);
 			}
 			Local_u8_Result = A_Main_CheckPasswordEeprom(Local_u8_StrPasswordCheck, Local_u8_StrPassword);
- 360:	be 01       	movw	r22, r28
- 362:	6f 5f       	subi	r22, 0xFF	; 255
- 364:	7f 4f       	sbci	r23, 0xFF	; 255
- 366:	c8 01       	movw	r24, r16
- 368:	0e 94 5f 00 	call	0xbe	; 0xbe <A_Main_CheckPasswordEeprom>
- 36c:	f8 2e       	mov	r15, r24
+ 36a:	be 01       	movw	r22, r28
+ 36c:	6f 5f       	subi	r22, 0xFF	; 255
+ 36e:	7f 4f       	sbci	r23, 0xFF	; 255
+ 370:	c7 01       	movw	r24, r14
+ 372:	0e 94 5f 00 	call	0xbe	; 0xbe <A_Main_CheckPasswordEeprom>
+ 376:	18 2f       	mov	r17, r24
 			M_Uart_SendByte(Local_u8_Result);
- 36e:	0e 94 07 05 	call	0xa0e	; 0xa0e <M_Uart_SendByte>
+ 378:	0e 94 cf 04 	call	0x99e	; 0x99e <M_Uart_SendByte>
 			
 			/* Action will be taken based on the Result variable */
 			if(Local_u8_Result == ERROR)
- 372:	f1 10       	cpse	r15, r1
- 374:	10 c0       	rjmp	.+32     	; 0x396 <main+0x296>
+ 37c:	11 11       	cpse	r17, r1
+ 37e:	15 c0       	rjmp	.+42     	; 0x3aa <main+0x2a2>
 			{
 				Local_u8_TrialCounter++;
- 376:	73 94       	inc	r7
+ 380:	93 94       	inc	r9
 				H_Leds_On(Local_u8_TrialCounter);
- 378:	87 2d       	mov	r24, r7
- 37a:	0e 94 66 02 	call	0x4cc	; 0x4cc <H_Leds_On>
+ 382:	89 2d       	mov	r24, r9
+ 384:	0e 94 7f 02 	call	0x4fe	; 0x4fe <H_Leds_On>
 				
 				if(Local_u8_TrialCounter == MAX_TRIALS)
- 37e:	93 e0       	ldi	r25, 0x03	; 3
- 380:	79 12       	cpse	r7, r25
- 382:	04 c0       	rjmp	.+8      	; 0x38c <main+0x28c>
+ 388:	f3 e0       	ldi	r31, 0x03	; 3
+ 38a:	9f 12       	cpse	r9, r31
+ 38c:	03 c0       	rjmp	.+6      	; 0x394 <main+0x28c>
 				{
 					Local_u8_TrialCounter = 0;
 					Global_u8_SystemState = 5;
- 384:	e5 e0       	ldi	r30, 0x05	; 5
- 386:	e0 93 60 00 	sts	0x0060, r30	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 38e:	30 92 60 00 	sts	0x0060, r3	; 0x800060 <__DATA_REGION_ORIGIN__>
 				Local_u8_TrialCounter++;
 				H_Leds_On(Local_u8_TrialCounter);
 				
 				if(Local_u8_TrialCounter == MAX_TRIALS)
 				{
 					Local_u8_TrialCounter = 0;
- 38a:	71 2c       	mov	r7, r1
+ 392:	91 2c       	mov	r9, r1
+ 394:	8f e9       	ldi	r24, 0x9F	; 159
+ 396:	9f e0       	ldi	r25, 0x0F	; 15
+ 398:	01 97       	sbiw	r24, 0x01	; 1
+ 39a:	f1 f7       	brne	.-4      	; 0x398 <main+0x290>
+ 39c:	00 c0       	rjmp	.+0      	; 0x39e <main+0x296>
+ 39e:	00 00       	nop
 					Global_u8_SystemState = 5;
 				}
+				_delay_ms(1);
 				M_Uart_SendByte(Global_u8_SystemState);
- 38c:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 390:	0e 94 07 05 	call	0xa0e	; 0xa0e <M_Uart_SendByte>
- 394:	f9 ce       	rjmp	.-526    	; 0x188 <main+0x88>
+ 3a0:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 3a4:	0e 94 cf 04 	call	0x99e	; 0x99e <M_Uart_SendByte>
+ 3a8:	f7 ce       	rjmp	.-530    	; 0x198 <main+0x90>
 			}
 			
 			else if(Local_u8_Result == SUCCESS)
- 396:	f1 e0       	ldi	r31, 0x01	; 1
- 398:	ff 12       	cpse	r15, r31
- 39a:	f6 ce       	rjmp	.-532    	; 0x188 <main+0x88>
+ 3aa:	11 30       	cpi	r17, 0x01	; 1
+ 3ac:	09 f0       	breq	.+2      	; 0x3b0 <main+0x2a8>
+ 3ae:	f4 ce       	rjmp	.-536    	; 0x198 <main+0x90>
 			{
 				Local_u8_TrialCounter = 0;
 				H_Leds_Off(LED0); H_Leds_Off(LED1); H_Leds_Off(LED2);
- 39c:	81 e0       	ldi	r24, 0x01	; 1
- 39e:	0e 94 7b 02 	call	0x4f6	; 0x4f6 <H_Leds_Off>
- 3a2:	82 e0       	ldi	r24, 0x02	; 2
- 3a4:	0e 94 7b 02 	call	0x4f6	; 0x4f6 <H_Leds_Off>
- 3a8:	83 e0       	ldi	r24, 0x03	; 3
- 3aa:	0e 94 7b 02 	call	0x4f6	; 0x4f6 <H_Leds_Off>
+ 3b0:	81 e0       	ldi	r24, 0x01	; 1
+ 3b2:	0e 94 94 02 	call	0x528	; 0x528 <H_Leds_Off>
+ 3b6:	82 e0       	ldi	r24, 0x02	; 2
+ 3b8:	0e 94 94 02 	call	0x528	; 0x528 <H_Leds_Off>
+ 3bc:	83 e0       	ldi	r24, 0x03	; 3
+ 3be:	0e 94 94 02 	call	0x528	; 0x528 <H_Leds_Off>
 				Global_u8_SystemState = 0;
- 3ae:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 3c2:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 3c6:	af e9       	ldi	r26, 0x9F	; 159
+ 3c8:	bf e0       	ldi	r27, 0x0F	; 15
+ 3ca:	11 97       	sbiw	r26, 0x01	; 1
+ 3cc:	f1 f7       	brne	.-4      	; 0x3ca <main+0x2c2>
+ 3ce:	00 c0       	rjmp	.+0      	; 0x3d0 <main+0x2c8>
+ 3d0:	00 00       	nop
+				_delay_ms(1);
 				M_Uart_SendByte(Global_u8_SystemState);
- 3b2:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 3b6:	0e 94 07 05 	call	0xa0e	; 0xa0e <M_Uart_SendByte>
+ 3d2:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 3d6:	0e 94 cf 04 	call	0x99e	; 0x99e <M_Uart_SendByte>
 				M_Uart_SendByte(Global_u8_SystemState);
 			}
 			
 			else if(Local_u8_Result == SUCCESS)
 			{
 				Local_u8_TrialCounter = 0;
- 3ba:	71 2c       	mov	r7, r1
- 3bc:	e5 ce       	rjmp	.-566    	; 0x188 <main+0x88>
+ 3da:	91 2c       	mov	r9, r1
+ 3dc:	dd ce       	rjmp	.-582    	; 0x198 <main+0x90>
 			break;
 			
 			
 			/* This case is for when the user used the maximum amount of trials. */
 			case 5:
 			Global_u32_MS = 60000; // time for timer0 in ms.
- 3be:	80 92 61 00 	sts	0x0061, r8	; 0x800061 <Global_u32_MS>
- 3c2:	90 92 62 00 	sts	0x0062, r9	; 0x800062 <Global_u32_MS+0x1>
- 3c6:	a0 92 63 00 	sts	0x0063, r10	; 0x800063 <Global_u32_MS+0x2>
- 3ca:	b0 92 64 00 	sts	0x0064, r11	; 0x800064 <Global_u32_MS+0x3>
+ 3de:	40 92 61 00 	sts	0x0061, r4	; 0x800061 <Global_u32_MS>
+ 3e2:	50 92 62 00 	sts	0x0062, r5	; 0x800062 <Global_u32_MS+0x1>
+ 3e6:	60 92 63 00 	sts	0x0063, r6	; 0x800063 <Global_u32_MS+0x2>
+ 3ea:	70 92 64 00 	sts	0x0064, r7	; 0x800064 <Global_u32_MS+0x3>
 			M_Timer0_Init();
- 3ce:	0e 94 c5 03 	call	0x78a	; 0x78a <M_Timer0_Init>
+ 3ee:	0e 94 de 03 	call	0x7bc	; 0x7bc <M_Timer0_Init>
 			M_Timer0_SetCallBack(A_Timer0_Execution);
- 3d2:	8e e3       	ldi	r24, 0x3E	; 62
- 3d4:	90 e0       	ldi	r25, 0x00	; 0
- 3d6:	0e 94 3b 04 	call	0x876	; 0x876 <M_Timer0_SetCallBack>
+ 3f2:	8e e3       	ldi	r24, 0x3E	; 62
+ 3f4:	90 e0       	ldi	r25, 0x00	; 0
+ 3f6:	0e 94 54 04 	call	0x8a8	; 0x8a8 <M_Timer0_SetCallBack>
 			M_Timer0_SetTime(Global_u32_MS);
- 3da:	60 91 61 00 	lds	r22, 0x0061	; 0x800061 <Global_u32_MS>
- 3de:	70 91 62 00 	lds	r23, 0x0062	; 0x800062 <Global_u32_MS+0x1>
- 3e2:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <Global_u32_MS+0x2>
- 3e6:	90 91 64 00 	lds	r25, 0x0064	; 0x800064 <Global_u32_MS+0x3>
- 3ea:	0e 94 d2 03 	call	0x7a4	; 0x7a4 <M_Timer0_SetTime>
+ 3fa:	60 91 61 00 	lds	r22, 0x0061	; 0x800061 <Global_u32_MS>
+ 3fe:	70 91 62 00 	lds	r23, 0x0062	; 0x800062 <Global_u32_MS+0x1>
+ 402:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <Global_u32_MS+0x2>
+ 406:	90 91 64 00 	lds	r25, 0x0064	; 0x800064 <Global_u32_MS+0x3>
+ 40a:	0e 94 eb 03 	call	0x7d6	; 0x7d6 <M_Timer0_SetTime>
 			H_Buzzer_On();
- 3ee:	0e 94 10 02 	call	0x420	; 0x420 <H_Buzzer_On>
+ 40e:	0e 94 20 02 	call	0x440	; 0x440 <H_Buzzer_On>
 			M_Timer0_Start();
- 3f2:	0e 94 27 04 	call	0x84e	; 0x84e <M_Timer0_Start>
+ 412:	0e 94 40 04 	call	0x880	; 0x880 <M_Timer0_Start>
 			
 			while(Global_u8_SystemState != 2); //to block waiting for timer0 ISR.
- 3f6:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 3fa:	82 30       	cpi	r24, 0x02	; 2
- 3fc:	e1 f7       	brne	.-8      	; 0x3f6 <main+0x2f6>
- 3fe:	c4 ce       	rjmp	.-632    	; 0x188 <main+0x88>
- 400:	8f e9       	ldi	r24, 0x9F	; 159
- 402:	9f e0       	ldi	r25, 0x0F	; 15
- 404:	01 97       	sbiw	r24, 0x01	; 1
- 406:	f1 f7       	brne	.-4      	; 0x404 <__EEPROM_REGION_LENGTH__+0x4>
- 408:	00 c0       	rjmp	.+0      	; 0x40a <__EEPROM_REGION_LENGTH__+0xa>
- 40a:	00 00       	nop
+ 416:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 41a:	82 30       	cpi	r24, 0x02	; 2
+ 41c:	e1 f7       	brne	.-8      	; 0x416 <__EEPROM_REGION_LENGTH__+0x16>
+ 41e:	bc ce       	rjmp	.-648    	; 0x198 <main+0x90>
+ 420:	ef e9       	ldi	r30, 0x9F	; 159
+ 422:	ff e0       	ldi	r31, 0x0F	; 15
+ 424:	31 97       	sbiw	r30, 0x01	; 1
+ 426:	f1 f7       	brne	.-4      	; 0x424 <__EEPROM_REGION_LENGTH__+0x24>
+ 428:	00 c0       	rjmp	.+0      	; 0x42a <__EEPROM_REGION_LENGTH__+0x2a>
+ 42a:	00 00       	nop
 					Local_u8_TrialCounter = 0;
 					Global_u8_SystemState = 5;
 				}
 			}
 			_delay_ms(1);
 			M_Uart_SendByte(Global_u8_SystemState);
- 40c:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 410:	0e 94 07 05 	call	0xa0e	; 0xa0e <M_Uart_SendByte>
- 414:	b9 ce       	rjmp	.-654    	; 0x188 <main+0x88>
+ 42c:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 430:	0e 94 cf 04 	call	0x99e	; 0x99e <M_Uart_SendByte>
+ 434:	b1 ce       	rjmp	.-670    	; 0x198 <main+0x90>
 
-00000416 <H_Buzzer_Init>:
+00000436 <H_Buzzer_Init>:
  */ 
 #include "Buzzer.h"
 
 void H_Buzzer_Init(void)
 {
 	M_Dio_PinMode(BUZZER_PIN,OUTPUT);
- 416:	61 e0       	ldi	r22, 0x01	; 1
- 418:	8d e0       	ldi	r24, 0x0D	; 13
- 41a:	0e 94 b3 02 	call	0x566	; 0x566 <M_Dio_PinMode>
- 41e:	08 95       	ret
+ 436:	61 e0       	ldi	r22, 0x01	; 1
+ 438:	8d e0       	ldi	r24, 0x0D	; 13
+ 43a:	0e 94 cc 02 	call	0x598	; 0x598 <M_Dio_PinMode>
+ 43e:	08 95       	ret
 
-00000420 <H_Buzzer_On>:
+00000440 <H_Buzzer_On>:
 }
 void H_Buzzer_On(void)
 {
 	M_Dio_PinWrite(BUZZER_PIN,HIGH);
- 420:	61 e0       	ldi	r22, 0x01	; 1
- 422:	8d e0       	ldi	r24, 0x0D	; 13
- 424:	0e 94 3c 03 	call	0x678	; 0x678 <M_Dio_PinWrite>
- 428:	08 95       	ret
+ 440:	61 e0       	ldi	r22, 0x01	; 1
+ 442:	8d e0       	ldi	r24, 0x0D	; 13
+ 444:	0e 94 55 03 	call	0x6aa	; 0x6aa <M_Dio_PinWrite>
+ 448:	08 95       	ret
 
-0000042a <H_Buzzer_Off>:
+0000044a <H_Buzzer_Off>:
 }
 void H_Buzzer_Off(void)
 {
 	M_Dio_PinWrite(BUZZER_PIN,LOW);
- 42a:	62 e0       	ldi	r22, 0x02	; 2
- 42c:	8d e0       	ldi	r24, 0x0D	; 13
- 42e:	0e 94 3c 03 	call	0x678	; 0x678 <M_Dio_PinWrite>
- 432:	08 95       	ret
+ 44a:	62 e0       	ldi	r22, 0x02	; 2
+ 44c:	8d e0       	ldi	r24, 0x0D	; 13
+ 44e:	0e 94 55 03 	call	0x6aa	; 0x6aa <M_Dio_PinWrite>
+ 452:	08 95       	ret
 
-00000434 <H_Eeprom_Init>:
+00000454 <H_Eeprom_Init>:
 #include "ExternalEeprom.h"
-
+#include "Leds.h"
 
 void H_Eeprom_Init(void)
 {
 	M_Twi_Init();
- 434:	0e 94 8f 04 	call	0x91e	; 0x91e <M_Twi_Init>
- 438:	2f ef       	ldi	r18, 0xFF	; 255
- 43a:	87 ea       	ldi	r24, 0xA7	; 167
- 43c:	91 e6       	ldi	r25, 0x61	; 97
- 43e:	21 50       	subi	r18, 0x01	; 1
- 440:	80 40       	sbci	r24, 0x00	; 0
- 442:	90 40       	sbci	r25, 0x00	; 0
- 444:	e1 f7       	brne	.-8      	; 0x43e <H_Eeprom_Init+0xa>
- 446:	00 c0       	rjmp	.+0      	; 0x448 <H_Eeprom_Init+0x14>
- 448:	00 00       	nop
- 44a:	08 95       	ret
+ 454:	0e 94 a8 04 	call	0x950	; 0x950 <M_Twi_Init>
+ 458:	08 95       	ret
 
-0000044c <H_Eeprom_Write>:
-	_delay_ms(2000);
+0000045a <H_Eeprom_Write>:
+	//_delay_ms(1000);
 }
-void H_Eeprom_Write(u8 Local_u8_Data ,u8 Local_u8_PageAddress ,u8 Local_u8_ByteAddress)
+void H_Eeprom_Write(u8 Local_u8_Data, u16 Local_u16_ByteAddress)
 {
- 44c:	1f 93       	push	r17
- 44e:	cf 93       	push	r28
- 450:	df 93       	push	r29
- 452:	c8 2f       	mov	r28, r24
- 454:	16 2f       	mov	r17, r22
- 456:	d4 2f       	mov	r29, r20
+ 45a:	1f 93       	push	r17
+ 45c:	cf 93       	push	r28
+ 45e:	df 93       	push	r29
+ 460:	18 2f       	mov	r17, r24
+ 462:	eb 01       	movw	r28, r22
 	M_Twi_StartCondition();
- 458:	0e 94 95 04 	call	0x92a	; 0x92a <M_Twi_StartCondition>
-	M_Twi_SendSlaveAddressWrite(0x50 | Local_u8_PageAddress);
- 45c:	81 2f       	mov	r24, r17
- 45e:	80 65       	ori	r24, 0x50	; 80
- 460:	0e 94 a3 04 	call	0x946	; 0x946 <M_Twi_SendSlaveAddressWrite>
-	M_Twi_SendByte(Local_u8_ByteAddress);
- 464:	8d 2f       	mov	r24, r29
- 466:	0e 94 c4 04 	call	0x988	; 0x988 <M_Twi_SendByte>
+ 464:	0e 94 ae 04 	call	0x95c	; 0x95c <M_Twi_StartCondition>
+	M_Twi_SendByte((u8)(0xA0 | ((Local_u16_ByteAddress & 0x0700)>>7)));
+ 468:	ce 01       	movw	r24, r28
+ 46a:	88 27       	eor	r24, r24
+ 46c:	97 70       	andi	r25, 0x07	; 7
+ 46e:	88 0f       	add	r24, r24
+ 470:	89 2f       	mov	r24, r25
+ 472:	88 1f       	adc	r24, r24
+ 474:	99 0b       	sbc	r25, r25
+ 476:	91 95       	neg	r25
+ 478:	80 6a       	ori	r24, 0xA0	; 160
+ 47a:	0e 94 b4 04 	call	0x968	; 0x968 <M_Twi_SendByte>
+	M_Twi_SendByte((u8)Local_u16_ByteAddress);
+ 47e:	8c 2f       	mov	r24, r28
+ 480:	0e 94 b4 04 	call	0x968	; 0x968 <M_Twi_SendByte>
 	M_Twi_SendByte(Local_u8_Data);
- 46a:	8c 2f       	mov	r24, r28
- 46c:	0e 94 c4 04 	call	0x988	; 0x988 <M_Twi_SendByte>
+ 484:	81 2f       	mov	r24, r17
+ 486:	0e 94 b4 04 	call	0x968	; 0x968 <M_Twi_SendByte>
 	M_Twi_StopCondition();
- 470:	0e 94 f6 04 	call	0x9ec	; 0x9ec <M_Twi_StopCondition>
+ 48a:	0e 94 c2 04 	call	0x984	; 0x984 <M_Twi_StopCondition>
 }
- 474:	df 91       	pop	r29
- 476:	cf 91       	pop	r28
- 478:	1f 91       	pop	r17
- 47a:	08 95       	ret
+ 48e:	df 91       	pop	r29
+ 490:	cf 91       	pop	r28
+ 492:	1f 91       	pop	r17
+ 494:	08 95       	ret
 
-0000047c <H_Eeprom_Read>:
-u8   H_Eeprom_Read(u8 Local_u8_PageAddress ,u8 Local_u8_ByteAddress)
+00000496 <H_Eeprom_Read>:
+u8   H_Eeprom_Read(u16 Local_u16_ByteAddress)
 {
- 47c:	cf 93       	push	r28
- 47e:	df 93       	push	r29
- 480:	c8 2f       	mov	r28, r24
- 482:	d6 2f       	mov	r29, r22
+ 496:	0f 93       	push	r16
+ 498:	1f 93       	push	r17
+ 49a:	cf 93       	push	r28
+ 49c:	df 93       	push	r29
+ 49e:	8c 01       	movw	r16, r24
 	u8 Local_u8_Data = 0;
 	M_Twi_StartCondition();
- 484:	0e 94 95 04 	call	0x92a	; 0x92a <M_Twi_StartCondition>
-	M_Twi_SendSlaveAddressWrite(0x50 | Local_u8_PageAddress);
- 488:	c0 65       	ori	r28, 0x50	; 80
- 48a:	8c 2f       	mov	r24, r28
- 48c:	0e 94 a3 04 	call	0x946	; 0x946 <M_Twi_SendSlaveAddressWrite>
-	M_Twi_SendByte(Local_u8_ByteAddress);
- 490:	8d 2f       	mov	r24, r29
- 492:	0e 94 c4 04 	call	0x988	; 0x988 <M_Twi_SendByte>
-	M_Twi_RepeatedStart();
- 496:	0e 94 e8 04 	call	0x9d0	; 0x9d0 <M_Twi_RepeatedStart>
-	M_Twi_SendSlaveAddressRead(0x50 | Local_u8_PageAddress);
- 49a:	8c 2f       	mov	r24, r28
- 49c:	0e 94 b3 04 	call	0x966	; 0x966 <M_Twi_SendSlaveAddressRead>
+ 4a0:	0e 94 ae 04 	call	0x95c	; 0x95c <M_Twi_StartCondition>
+	M_Twi_SendByte((u8)((0xA0) | ((Local_u16_ByteAddress & 0x0700)>>7)));
+ 4a4:	e8 01       	movw	r28, r16
+ 4a6:	cc 27       	eor	r28, r28
+ 4a8:	d7 70       	andi	r29, 0x07	; 7
+ 4aa:	cc 0f       	add	r28, r28
+ 4ac:	cd 2f       	mov	r28, r29
+ 4ae:	cc 1f       	adc	r28, r28
+ 4b0:	dd 0b       	sbc	r29, r29
+ 4b2:	d1 95       	neg	r29
+ 4b4:	8c 2f       	mov	r24, r28
+ 4b6:	80 6a       	ori	r24, 0xA0	; 160
+ 4b8:	0e 94 b4 04 	call	0x968	; 0x968 <M_Twi_SendByte>
+	M_Twi_SendByte((u8)Local_u16_ByteAddress);
+ 4bc:	80 2f       	mov	r24, r16
+ 4be:	0e 94 b4 04 	call	0x968	; 0x968 <M_Twi_SendByte>
+	M_Twi_StartCondition();
+ 4c2:	0e 94 ae 04 	call	0x95c	; 0x95c <M_Twi_StartCondition>
+	M_Twi_SendByte((u8)((0xA0) | ((Local_u16_ByteAddress & 0x0700)>>7) | 1));
+ 4c6:	8c 2f       	mov	r24, r28
+ 4c8:	81 6a       	ori	r24, 0xA1	; 161
+ 4ca:	0e 94 b4 04 	call	0x968	; 0x968 <M_Twi_SendByte>
 	Local_u8_Data = M_Twi_ReadByte();
- 4a0:	0e 94 d3 04 	call	0x9a6	; 0x9a6 <M_Twi_ReadByte>
- 4a4:	c8 2f       	mov	r28, r24
+ 4ce:	0e 94 bb 04 	call	0x976	; 0x976 <M_Twi_ReadByte>
+ 4d2:	c8 2f       	mov	r28, r24
 	M_Twi_StopCondition();
- 4a6:	0e 94 f6 04 	call	0x9ec	; 0x9ec <M_Twi_StopCondition>
+ 4d4:	0e 94 c2 04 	call	0x984	; 0x984 <M_Twi_StopCondition>
 	return Local_u8_Data;
- 4aa:	8c 2f       	mov	r24, r28
- 4ac:	df 91       	pop	r29
- 4ae:	cf 91       	pop	r28
- 4b0:	08 95       	ret
+ 4d8:	8c 2f       	mov	r24, r28
+ 4da:	df 91       	pop	r29
+ 4dc:	cf 91       	pop	r28
+ 4de:	1f 91       	pop	r17
+ 4e0:	0f 91       	pop	r16
+ 4e2:	08 95       	ret
 
-000004b2 <H_Leds_Init>:
+000004e4 <H_Leds_Init>:
  */ 
 #include "Leds.h"
 
 void H_Leds_Init(void)
 {
 	M_Dio_PinMode(LED0_PIN,OUTPUT);
- 4b2:	61 e0       	ldi	r22, 0x01	; 1
- 4b4:	8a e0       	ldi	r24, 0x0A	; 10
- 4b6:	0e 94 b3 02 	call	0x566	; 0x566 <M_Dio_PinMode>
+ 4e4:	61 e0       	ldi	r22, 0x01	; 1
+ 4e6:	8a e0       	ldi	r24, 0x0A	; 10
+ 4e8:	0e 94 cc 02 	call	0x598	; 0x598 <M_Dio_PinMode>
 	M_Dio_PinMode(LED1_PIN,OUTPUT);
- 4ba:	61 e0       	ldi	r22, 0x01	; 1
- 4bc:	8b e0       	ldi	r24, 0x0B	; 11
- 4be:	0e 94 b3 02 	call	0x566	; 0x566 <M_Dio_PinMode>
+ 4ec:	61 e0       	ldi	r22, 0x01	; 1
+ 4ee:	8b e0       	ldi	r24, 0x0B	; 11
+ 4f0:	0e 94 cc 02 	call	0x598	; 0x598 <M_Dio_PinMode>
 	M_Dio_PinMode(LED2_PIN,OUTPUT);
- 4c2:	61 e0       	ldi	r22, 0x01	; 1
- 4c4:	8c e0       	ldi	r24, 0x0C	; 12
- 4c6:	0e 94 b3 02 	call	0x566	; 0x566 <M_Dio_PinMode>
- 4ca:	08 95       	ret
+ 4f4:	61 e0       	ldi	r22, 0x01	; 1
+ 4f6:	8c e0       	ldi	r24, 0x0C	; 12
+ 4f8:	0e 94 cc 02 	call	0x598	; 0x598 <M_Dio_PinMode>
+ 4fc:	08 95       	ret
 
-000004cc <H_Leds_On>:
+000004fe <H_Leds_On>:
 }
 void H_Leds_On(u8 Local_u8_LedNum)
 {
 	switch(Local_u8_LedNum)
- 4cc:	82 30       	cpi	r24, 0x02	; 2
- 4ce:	49 f0       	breq	.+18     	; 0x4e2 <H_Leds_On+0x16>
- 4d0:	83 30       	cpi	r24, 0x03	; 3
- 4d2:	61 f0       	breq	.+24     	; 0x4ec <H_Leds_On+0x20>
- 4d4:	81 30       	cpi	r24, 0x01	; 1
- 4d6:	71 f4       	brne	.+28     	; 0x4f4 <H_Leds_On+0x28>
+ 4fe:	82 30       	cpi	r24, 0x02	; 2
+ 500:	49 f0       	breq	.+18     	; 0x514 <H_Leds_On+0x16>
+ 502:	83 30       	cpi	r24, 0x03	; 3
+ 504:	61 f0       	breq	.+24     	; 0x51e <H_Leds_On+0x20>
+ 506:	81 30       	cpi	r24, 0x01	; 1
+ 508:	71 f4       	brne	.+28     	; 0x526 <H_Leds_On+0x28>
 	{
 		case LED0: M_Dio_PinWrite(LED0_PIN,HIGH);  break;
- 4d8:	61 e0       	ldi	r22, 0x01	; 1
- 4da:	8a e0       	ldi	r24, 0x0A	; 10
- 4dc:	0e 94 3c 03 	call	0x678	; 0x678 <M_Dio_PinWrite>
- 4e0:	08 95       	ret
+ 50a:	61 e0       	ldi	r22, 0x01	; 1
+ 50c:	8a e0       	ldi	r24, 0x0A	; 10
+ 50e:	0e 94 55 03 	call	0x6aa	; 0x6aa <M_Dio_PinWrite>
+ 512:	08 95       	ret
 		case LED1: M_Dio_PinWrite(LED1_PIN,HIGH);  break;
- 4e2:	61 e0       	ldi	r22, 0x01	; 1
- 4e4:	8b e0       	ldi	r24, 0x0B	; 11
- 4e6:	0e 94 3c 03 	call	0x678	; 0x678 <M_Dio_PinWrite>
- 4ea:	08 95       	ret
+ 514:	61 e0       	ldi	r22, 0x01	; 1
+ 516:	8b e0       	ldi	r24, 0x0B	; 11
+ 518:	0e 94 55 03 	call	0x6aa	; 0x6aa <M_Dio_PinWrite>
+ 51c:	08 95       	ret
 		case LED2: M_Dio_PinWrite(LED2_PIN,HIGH);  break;
- 4ec:	61 e0       	ldi	r22, 0x01	; 1
- 4ee:	8c e0       	ldi	r24, 0x0C	; 12
- 4f0:	0e 94 3c 03 	call	0x678	; 0x678 <M_Dio_PinWrite>
- 4f4:	08 95       	ret
+ 51e:	61 e0       	ldi	r22, 0x01	; 1
+ 520:	8c e0       	ldi	r24, 0x0C	; 12
+ 522:	0e 94 55 03 	call	0x6aa	; 0x6aa <M_Dio_PinWrite>
+ 526:	08 95       	ret
 
-000004f6 <H_Leds_Off>:
+00000528 <H_Leds_Off>:
 		default:                                   break;
 	}
 }
 void H_Leds_Off(u8 Local_u8_LedNum)
 {
 	switch(Local_u8_LedNum)
- 4f6:	82 30       	cpi	r24, 0x02	; 2
- 4f8:	49 f0       	breq	.+18     	; 0x50c <H_Leds_Off+0x16>
- 4fa:	83 30       	cpi	r24, 0x03	; 3
- 4fc:	61 f0       	breq	.+24     	; 0x516 <H_Leds_Off+0x20>
- 4fe:	81 30       	cpi	r24, 0x01	; 1
- 500:	71 f4       	brne	.+28     	; 0x51e <H_Leds_Off+0x28>
+ 528:	82 30       	cpi	r24, 0x02	; 2
+ 52a:	49 f0       	breq	.+18     	; 0x53e <H_Leds_Off+0x16>
+ 52c:	83 30       	cpi	r24, 0x03	; 3
+ 52e:	61 f0       	breq	.+24     	; 0x548 <H_Leds_Off+0x20>
+ 530:	81 30       	cpi	r24, 0x01	; 1
+ 532:	71 f4       	brne	.+28     	; 0x550 <H_Leds_Off+0x28>
 	{
 		case LED0: M_Dio_PinWrite(LED0_PIN,LOW);  break;
- 502:	62 e0       	ldi	r22, 0x02	; 2
- 504:	8a e0       	ldi	r24, 0x0A	; 10
- 506:	0e 94 3c 03 	call	0x678	; 0x678 <M_Dio_PinWrite>
- 50a:	08 95       	ret
+ 534:	62 e0       	ldi	r22, 0x02	; 2
+ 536:	8a e0       	ldi	r24, 0x0A	; 10
+ 538:	0e 94 55 03 	call	0x6aa	; 0x6aa <M_Dio_PinWrite>
+ 53c:	08 95       	ret
 		case LED1: M_Dio_PinWrite(LED1_PIN,LOW);  break;
- 50c:	62 e0       	ldi	r22, 0x02	; 2
- 50e:	8b e0       	ldi	r24, 0x0B	; 11
- 510:	0e 94 3c 03 	call	0x678	; 0x678 <M_Dio_PinWrite>
- 514:	08 95       	ret
+ 53e:	62 e0       	ldi	r22, 0x02	; 2
+ 540:	8b e0       	ldi	r24, 0x0B	; 11
+ 542:	0e 94 55 03 	call	0x6aa	; 0x6aa <M_Dio_PinWrite>
+ 546:	08 95       	ret
 		case LED2: M_Dio_PinWrite(LED2_PIN,LOW);  break;
- 516:	62 e0       	ldi	r22, 0x02	; 2
- 518:	8c e0       	ldi	r24, 0x0C	; 12
- 51a:	0e 94 3c 03 	call	0x678	; 0x678 <M_Dio_PinWrite>
- 51e:	08 95       	ret
+ 548:	62 e0       	ldi	r22, 0x02	; 2
+ 54a:	8c e0       	ldi	r24, 0x0C	; 12
+ 54c:	0e 94 55 03 	call	0x6aa	; 0x6aa <M_Dio_PinWrite>
+ 550:	08 95       	ret
 
-00000520 <H_Motor_Init>:
+00000552 <H_Motor_Init>:
 	
 }
 void H_Motor_CCW(void)
 {
 	M_Dio_PinWrite(MOTOR_PIN1,HIGH);
 	M_Dio_PinWrite(MOTOR_PIN2,LOW);
- 520:	61 e0       	ldi	r22, 0x01	; 1
- 522:	81 e2       	ldi	r24, 0x21	; 33
- 524:	0e 94 b3 02 	call	0x566	; 0x566 <M_Dio_PinMode>
- 528:	61 e0       	ldi	r22, 0x01	; 1
- 52a:	81 e2       	ldi	r24, 0x21	; 33
- 52c:	0e 94 b3 02 	call	0x566	; 0x566 <M_Dio_PinMode>
- 530:	61 e0       	ldi	r22, 0x01	; 1
- 532:	81 e2       	ldi	r24, 0x21	; 33
- 534:	0e 94 3c 03 	call	0x678	; 0x678 <M_Dio_PinWrite>
- 538:	61 e0       	ldi	r22, 0x01	; 1
- 53a:	82 e2       	ldi	r24, 0x22	; 34
- 53c:	0e 94 3c 03 	call	0x678	; 0x678 <M_Dio_PinWrite>
- 540:	08 95       	ret
+ 552:	61 e0       	ldi	r22, 0x01	; 1
+ 554:	81 e2       	ldi	r24, 0x21	; 33
+ 556:	0e 94 cc 02 	call	0x598	; 0x598 <M_Dio_PinMode>
+ 55a:	61 e0       	ldi	r22, 0x01	; 1
+ 55c:	81 e2       	ldi	r24, 0x21	; 33
+ 55e:	0e 94 cc 02 	call	0x598	; 0x598 <M_Dio_PinMode>
+ 562:	61 e0       	ldi	r22, 0x01	; 1
+ 564:	81 e2       	ldi	r24, 0x21	; 33
+ 566:	0e 94 55 03 	call	0x6aa	; 0x6aa <M_Dio_PinWrite>
+ 56a:	61 e0       	ldi	r22, 0x01	; 1
+ 56c:	82 e2       	ldi	r24, 0x22	; 34
+ 56e:	0e 94 55 03 	call	0x6aa	; 0x6aa <M_Dio_PinWrite>
+ 572:	08 95       	ret
 
-00000542 <H_Motor_CW>:
- 542:	62 e0       	ldi	r22, 0x02	; 2
- 544:	81 e2       	ldi	r24, 0x21	; 33
- 546:	0e 94 3c 03 	call	0x678	; 0x678 <M_Dio_PinWrite>
- 54a:	61 e0       	ldi	r22, 0x01	; 1
- 54c:	82 e2       	ldi	r24, 0x22	; 34
- 54e:	0e 94 3c 03 	call	0x678	; 0x678 <M_Dio_PinWrite>
- 552:	08 95       	ret
+00000574 <H_Motor_CW>:
+ 574:	62 e0       	ldi	r22, 0x02	; 2
+ 576:	81 e2       	ldi	r24, 0x21	; 33
+ 578:	0e 94 55 03 	call	0x6aa	; 0x6aa <M_Dio_PinWrite>
+ 57c:	61 e0       	ldi	r22, 0x01	; 1
+ 57e:	82 e2       	ldi	r24, 0x22	; 34
+ 580:	0e 94 55 03 	call	0x6aa	; 0x6aa <M_Dio_PinWrite>
+ 584:	08 95       	ret
 
-00000554 <H_Motor_Stop>:
+00000586 <H_Motor_Stop>:
 }
 void H_Motor_Stop(void)
 {
 	M_Dio_PinWrite(MOTOR_PIN1,HIGH);
- 554:	61 e0       	ldi	r22, 0x01	; 1
- 556:	81 e2       	ldi	r24, 0x21	; 33
- 558:	0e 94 3c 03 	call	0x678	; 0x678 <M_Dio_PinWrite>
+ 586:	61 e0       	ldi	r22, 0x01	; 1
+ 588:	81 e2       	ldi	r24, 0x21	; 33
+ 58a:	0e 94 55 03 	call	0x6aa	; 0x6aa <M_Dio_PinWrite>
 	M_Dio_PinWrite(MOTOR_PIN1,HIGH);
- 55c:	61 e0       	ldi	r22, 0x01	; 1
- 55e:	81 e2       	ldi	r24, 0x21	; 33
- 560:	0e 94 3c 03 	call	0x678	; 0x678 <M_Dio_PinWrite>
- 564:	08 95       	ret
+ 58e:	61 e0       	ldi	r22, 0x01	; 1
+ 590:	81 e2       	ldi	r24, 0x21	; 33
+ 592:	0e 94 55 03 	call	0x6aa	; 0x6aa <M_Dio_PinWrite>
+ 596:	08 95       	ret
 
-00000566 <M_Dio_PinMode>:
+00000598 <M_Dio_PinMode>:
  */ 
 
 #include "Dio.h"
 void M_Dio_PinMode(u8 Local_u8_Num, u8 Local_u8_Mode)
 {
 	u8 Local_u8_Pin  = Local_u8_Num % 10;
- 566:	9d ec       	ldi	r25, 0xCD	; 205
- 568:	89 9f       	mul	r24, r25
- 56a:	91 2d       	mov	r25, r1
- 56c:	11 24       	eor	r1, r1
- 56e:	29 2f       	mov	r18, r25
- 570:	26 95       	lsr	r18
- 572:	26 95       	lsr	r18
- 574:	26 95       	lsr	r18
- 576:	22 0f       	add	r18, r18
- 578:	32 2f       	mov	r19, r18
- 57a:	33 0f       	add	r19, r19
- 57c:	33 0f       	add	r19, r19
- 57e:	23 0f       	add	r18, r19
- 580:	82 1b       	sub	r24, r18
- 582:	28 2f       	mov	r18, r24
+ 598:	9d ec       	ldi	r25, 0xCD	; 205
+ 59a:	89 9f       	mul	r24, r25
+ 59c:	91 2d       	mov	r25, r1
+ 59e:	11 24       	eor	r1, r1
+ 5a0:	29 2f       	mov	r18, r25
+ 5a2:	26 95       	lsr	r18
+ 5a4:	26 95       	lsr	r18
+ 5a6:	26 95       	lsr	r18
+ 5a8:	22 0f       	add	r18, r18
+ 5aa:	32 2f       	mov	r19, r18
+ 5ac:	33 0f       	add	r19, r19
+ 5ae:	33 0f       	add	r19, r19
+ 5b0:	23 0f       	add	r18, r19
+ 5b2:	82 1b       	sub	r24, r18
+ 5b4:	28 2f       	mov	r18, r24
 	u8 Local_u8_Port = Local_u8_Num / 10;
- 584:	96 95       	lsr	r25
- 586:	96 95       	lsr	r25
- 588:	96 95       	lsr	r25
+ 5b6:	96 95       	lsr	r25
+ 5b8:	96 95       	lsr	r25
+ 5ba:	96 95       	lsr	r25
 	switch (Local_u8_Mode)
- 58a:	61 30       	cpi	r22, 0x01	; 1
- 58c:	19 f0       	breq	.+6      	; 0x594 <M_Dio_PinMode+0x2e>
- 58e:	62 30       	cpi	r22, 0x02	; 2
- 590:	c1 f1       	breq	.+112    	; 0x602 <M_Dio_PinMode+0x9c>
- 592:	08 95       	ret
+ 5bc:	61 30       	cpi	r22, 0x01	; 1
+ 5be:	19 f0       	breq	.+6      	; 0x5c6 <M_Dio_PinMode+0x2e>
+ 5c0:	62 30       	cpi	r22, 0x02	; 2
+ 5c2:	c1 f1       	breq	.+112    	; 0x634 <M_Dio_PinMode+0x9c>
+ 5c4:	08 95       	ret
 	{
 		case OUTPUT:
 		switch(Local_u8_Port)
- 594:	92 30       	cpi	r25, 0x02	; 2
- 596:	a1 f0       	breq	.+40     	; 0x5c0 <M_Dio_PinMode+0x5a>
- 598:	18 f4       	brcc	.+6      	; 0x5a0 <M_Dio_PinMode+0x3a>
- 59a:	91 30       	cpi	r25, 0x01	; 1
- 59c:	31 f0       	breq	.+12     	; 0x5aa <M_Dio_PinMode+0x44>
- 59e:	08 95       	ret
- 5a0:	93 30       	cpi	r25, 0x03	; 3
- 5a2:	c9 f0       	breq	.+50     	; 0x5d6 <M_Dio_PinMode+0x70>
- 5a4:	94 30       	cpi	r25, 0x04	; 4
- 5a6:	11 f1       	breq	.+68     	; 0x5ec <M_Dio_PinMode+0x86>
- 5a8:	08 95       	ret
+ 5c6:	92 30       	cpi	r25, 0x02	; 2
+ 5c8:	a1 f0       	breq	.+40     	; 0x5f2 <M_Dio_PinMode+0x5a>
+ 5ca:	18 f4       	brcc	.+6      	; 0x5d2 <M_Dio_PinMode+0x3a>
+ 5cc:	91 30       	cpi	r25, 0x01	; 1
+ 5ce:	31 f0       	breq	.+12     	; 0x5dc <M_Dio_PinMode+0x44>
+ 5d0:	08 95       	ret
+ 5d2:	93 30       	cpi	r25, 0x03	; 3
+ 5d4:	c9 f0       	breq	.+50     	; 0x608 <M_Dio_PinMode+0x70>
+ 5d6:	94 30       	cpi	r25, 0x04	; 4
+ 5d8:	11 f1       	breq	.+68     	; 0x61e <M_Dio_PinMode+0x86>
+ 5da:	08 95       	ret
 		{
 			case 1: SetBit(DDRA,Local_u8_Pin); break;
- 5aa:	3a b3       	in	r19, 0x1a	; 26
- 5ac:	81 e0       	ldi	r24, 0x01	; 1
- 5ae:	90 e0       	ldi	r25, 0x00	; 0
- 5b0:	02 c0       	rjmp	.+4      	; 0x5b6 <M_Dio_PinMode+0x50>
- 5b2:	88 0f       	add	r24, r24
- 5b4:	99 1f       	adc	r25, r25
- 5b6:	2a 95       	dec	r18
- 5b8:	e2 f7       	brpl	.-8      	; 0x5b2 <M_Dio_PinMode+0x4c>
- 5ba:	83 2b       	or	r24, r19
- 5bc:	8a bb       	out	0x1a, r24	; 26
- 5be:	08 95       	ret
+ 5dc:	3a b3       	in	r19, 0x1a	; 26
+ 5de:	81 e0       	ldi	r24, 0x01	; 1
+ 5e0:	90 e0       	ldi	r25, 0x00	; 0
+ 5e2:	02 c0       	rjmp	.+4      	; 0x5e8 <M_Dio_PinMode+0x50>
+ 5e4:	88 0f       	add	r24, r24
+ 5e6:	99 1f       	adc	r25, r25
+ 5e8:	2a 95       	dec	r18
+ 5ea:	e2 f7       	brpl	.-8      	; 0x5e4 <M_Dio_PinMode+0x4c>
+ 5ec:	83 2b       	or	r24, r19
+ 5ee:	8a bb       	out	0x1a, r24	; 26
+ 5f0:	08 95       	ret
 			case 2: SetBit(DDRB,Local_u8_Pin); break;
- 5c0:	37 b3       	in	r19, 0x17	; 23
- 5c2:	81 e0       	ldi	r24, 0x01	; 1
- 5c4:	90 e0       	ldi	r25, 0x00	; 0
- 5c6:	02 c0       	rjmp	.+4      	; 0x5cc <M_Dio_PinMode+0x66>
- 5c8:	88 0f       	add	r24, r24
- 5ca:	99 1f       	adc	r25, r25
- 5cc:	2a 95       	dec	r18
- 5ce:	e2 f7       	brpl	.-8      	; 0x5c8 <M_Dio_PinMode+0x62>
- 5d0:	83 2b       	or	r24, r19
- 5d2:	87 bb       	out	0x17, r24	; 23
- 5d4:	08 95       	ret
+ 5f2:	37 b3       	in	r19, 0x17	; 23
+ 5f4:	81 e0       	ldi	r24, 0x01	; 1
+ 5f6:	90 e0       	ldi	r25, 0x00	; 0
+ 5f8:	02 c0       	rjmp	.+4      	; 0x5fe <M_Dio_PinMode+0x66>
+ 5fa:	88 0f       	add	r24, r24
+ 5fc:	99 1f       	adc	r25, r25
+ 5fe:	2a 95       	dec	r18
+ 600:	e2 f7       	brpl	.-8      	; 0x5fa <M_Dio_PinMode+0x62>
+ 602:	83 2b       	or	r24, r19
+ 604:	87 bb       	out	0x17, r24	; 23
+ 606:	08 95       	ret
 			case 3: SetBit(DDRC,Local_u8_Pin); break;
- 5d6:	34 b3       	in	r19, 0x14	; 20
- 5d8:	81 e0       	ldi	r24, 0x01	; 1
- 5da:	90 e0       	ldi	r25, 0x00	; 0
- 5dc:	02 c0       	rjmp	.+4      	; 0x5e2 <M_Dio_PinMode+0x7c>
- 5de:	88 0f       	add	r24, r24
- 5e0:	99 1f       	adc	r25, r25
- 5e2:	2a 95       	dec	r18
- 5e4:	e2 f7       	brpl	.-8      	; 0x5de <M_Dio_PinMode+0x78>
- 5e6:	83 2b       	or	r24, r19
- 5e8:	84 bb       	out	0x14, r24	; 20
- 5ea:	08 95       	ret
+ 608:	34 b3       	in	r19, 0x14	; 20
+ 60a:	81 e0       	ldi	r24, 0x01	; 1
+ 60c:	90 e0       	ldi	r25, 0x00	; 0
+ 60e:	02 c0       	rjmp	.+4      	; 0x614 <M_Dio_PinMode+0x7c>
+ 610:	88 0f       	add	r24, r24
+ 612:	99 1f       	adc	r25, r25
+ 614:	2a 95       	dec	r18
+ 616:	e2 f7       	brpl	.-8      	; 0x610 <M_Dio_PinMode+0x78>
+ 618:	83 2b       	or	r24, r19
+ 61a:	84 bb       	out	0x14, r24	; 20
+ 61c:	08 95       	ret
 			case 4: SetBit(DDRD,Local_u8_Pin); break;
- 5ec:	31 b3       	in	r19, 0x11	; 17
- 5ee:	81 e0       	ldi	r24, 0x01	; 1
- 5f0:	90 e0       	ldi	r25, 0x00	; 0
- 5f2:	02 c0       	rjmp	.+4      	; 0x5f8 <M_Dio_PinMode+0x92>
- 5f4:	88 0f       	add	r24, r24
- 5f6:	99 1f       	adc	r25, r25
- 5f8:	2a 95       	dec	r18
- 5fa:	e2 f7       	brpl	.-8      	; 0x5f4 <M_Dio_PinMode+0x8e>
- 5fc:	83 2b       	or	r24, r19
- 5fe:	81 bb       	out	0x11, r24	; 17
- 600:	08 95       	ret
+ 61e:	31 b3       	in	r19, 0x11	; 17
+ 620:	81 e0       	ldi	r24, 0x01	; 1
+ 622:	90 e0       	ldi	r25, 0x00	; 0
+ 624:	02 c0       	rjmp	.+4      	; 0x62a <M_Dio_PinMode+0x92>
+ 626:	88 0f       	add	r24, r24
+ 628:	99 1f       	adc	r25, r25
+ 62a:	2a 95       	dec	r18
+ 62c:	e2 f7       	brpl	.-8      	; 0x626 <M_Dio_PinMode+0x8e>
+ 62e:	83 2b       	or	r24, r19
+ 630:	81 bb       	out	0x11, r24	; 17
+ 632:	08 95       	ret
 			default:                           break;
 		}break;
 		case INPUT:
 		switch(Local_u8_Port)
- 602:	92 30       	cpi	r25, 0x02	; 2
- 604:	a9 f0       	breq	.+42     	; 0x630 <M_Dio_PinMode+0xca>
- 606:	18 f4       	brcc	.+6      	; 0x60e <M_Dio_PinMode+0xa8>
- 608:	91 30       	cpi	r25, 0x01	; 1
- 60a:	31 f0       	breq	.+12     	; 0x618 <M_Dio_PinMode+0xb2>
- 60c:	08 95       	ret
- 60e:	93 30       	cpi	r25, 0x03	; 3
- 610:	d9 f0       	breq	.+54     	; 0x648 <M_Dio_PinMode+0xe2>
- 612:	94 30       	cpi	r25, 0x04	; 4
- 614:	29 f1       	breq	.+74     	; 0x660 <M_Dio_PinMode+0xfa>
- 616:	08 95       	ret
+ 634:	92 30       	cpi	r25, 0x02	; 2
+ 636:	a9 f0       	breq	.+42     	; 0x662 <M_Dio_PinMode+0xca>
+ 638:	18 f4       	brcc	.+6      	; 0x640 <M_Dio_PinMode+0xa8>
+ 63a:	91 30       	cpi	r25, 0x01	; 1
+ 63c:	31 f0       	breq	.+12     	; 0x64a <M_Dio_PinMode+0xb2>
+ 63e:	08 95       	ret
+ 640:	93 30       	cpi	r25, 0x03	; 3
+ 642:	d9 f0       	breq	.+54     	; 0x67a <M_Dio_PinMode+0xe2>
+ 644:	94 30       	cpi	r25, 0x04	; 4
+ 646:	29 f1       	breq	.+74     	; 0x692 <M_Dio_PinMode+0xfa>
+ 648:	08 95       	ret
 		{
 			case 1: ClrBit(DDRA,Local_u8_Pin); break;
- 618:	3a b3       	in	r19, 0x1a	; 26
- 61a:	81 e0       	ldi	r24, 0x01	; 1
- 61c:	90 e0       	ldi	r25, 0x00	; 0
- 61e:	02 c0       	rjmp	.+4      	; 0x624 <M_Dio_PinMode+0xbe>
- 620:	88 0f       	add	r24, r24
- 622:	99 1f       	adc	r25, r25
- 624:	2a 95       	dec	r18
- 626:	e2 f7       	brpl	.-8      	; 0x620 <M_Dio_PinMode+0xba>
- 628:	80 95       	com	r24
- 62a:	83 23       	and	r24, r19
- 62c:	8a bb       	out	0x1a, r24	; 26
- 62e:	08 95       	ret
+ 64a:	3a b3       	in	r19, 0x1a	; 26
+ 64c:	81 e0       	ldi	r24, 0x01	; 1
+ 64e:	90 e0       	ldi	r25, 0x00	; 0
+ 650:	02 c0       	rjmp	.+4      	; 0x656 <M_Dio_PinMode+0xbe>
+ 652:	88 0f       	add	r24, r24
+ 654:	99 1f       	adc	r25, r25
+ 656:	2a 95       	dec	r18
+ 658:	e2 f7       	brpl	.-8      	; 0x652 <M_Dio_PinMode+0xba>
+ 65a:	80 95       	com	r24
+ 65c:	83 23       	and	r24, r19
+ 65e:	8a bb       	out	0x1a, r24	; 26
+ 660:	08 95       	ret
 			case 2: ClrBit(DDRB,Local_u8_Pin); break;
- 630:	37 b3       	in	r19, 0x17	; 23
- 632:	81 e0       	ldi	r24, 0x01	; 1
- 634:	90 e0       	ldi	r25, 0x00	; 0
- 636:	02 c0       	rjmp	.+4      	; 0x63c <M_Dio_PinMode+0xd6>
- 638:	88 0f       	add	r24, r24
- 63a:	99 1f       	adc	r25, r25
- 63c:	2a 95       	dec	r18
- 63e:	e2 f7       	brpl	.-8      	; 0x638 <M_Dio_PinMode+0xd2>
- 640:	80 95       	com	r24
- 642:	83 23       	and	r24, r19
- 644:	87 bb       	out	0x17, r24	; 23
- 646:	08 95       	ret
+ 662:	37 b3       	in	r19, 0x17	; 23
+ 664:	81 e0       	ldi	r24, 0x01	; 1
+ 666:	90 e0       	ldi	r25, 0x00	; 0
+ 668:	02 c0       	rjmp	.+4      	; 0x66e <M_Dio_PinMode+0xd6>
+ 66a:	88 0f       	add	r24, r24
+ 66c:	99 1f       	adc	r25, r25
+ 66e:	2a 95       	dec	r18
+ 670:	e2 f7       	brpl	.-8      	; 0x66a <M_Dio_PinMode+0xd2>
+ 672:	80 95       	com	r24
+ 674:	83 23       	and	r24, r19
+ 676:	87 bb       	out	0x17, r24	; 23
+ 678:	08 95       	ret
 			case 3: ClrBit(DDRC,Local_u8_Pin); break;
- 648:	34 b3       	in	r19, 0x14	; 20
- 64a:	81 e0       	ldi	r24, 0x01	; 1
- 64c:	90 e0       	ldi	r25, 0x00	; 0
- 64e:	02 c0       	rjmp	.+4      	; 0x654 <M_Dio_PinMode+0xee>
- 650:	88 0f       	add	r24, r24
- 652:	99 1f       	adc	r25, r25
- 654:	2a 95       	dec	r18
- 656:	e2 f7       	brpl	.-8      	; 0x650 <M_Dio_PinMode+0xea>
- 658:	80 95       	com	r24
- 65a:	83 23       	and	r24, r19
- 65c:	84 bb       	out	0x14, r24	; 20
- 65e:	08 95       	ret
+ 67a:	34 b3       	in	r19, 0x14	; 20
+ 67c:	81 e0       	ldi	r24, 0x01	; 1
+ 67e:	90 e0       	ldi	r25, 0x00	; 0
+ 680:	02 c0       	rjmp	.+4      	; 0x686 <M_Dio_PinMode+0xee>
+ 682:	88 0f       	add	r24, r24
+ 684:	99 1f       	adc	r25, r25
+ 686:	2a 95       	dec	r18
+ 688:	e2 f7       	brpl	.-8      	; 0x682 <M_Dio_PinMode+0xea>
+ 68a:	80 95       	com	r24
+ 68c:	83 23       	and	r24, r19
+ 68e:	84 bb       	out	0x14, r24	; 20
+ 690:	08 95       	ret
 			case 4: ClrBit(DDRD,Local_u8_Pin); break;
- 660:	31 b3       	in	r19, 0x11	; 17
- 662:	81 e0       	ldi	r24, 0x01	; 1
- 664:	90 e0       	ldi	r25, 0x00	; 0
- 666:	02 c0       	rjmp	.+4      	; 0x66c <M_Dio_PinMode+0x106>
- 668:	88 0f       	add	r24, r24
- 66a:	99 1f       	adc	r25, r25
- 66c:	2a 95       	dec	r18
- 66e:	e2 f7       	brpl	.-8      	; 0x668 <M_Dio_PinMode+0x102>
- 670:	80 95       	com	r24
- 672:	83 23       	and	r24, r19
- 674:	81 bb       	out	0x11, r24	; 17
- 676:	08 95       	ret
+ 692:	31 b3       	in	r19, 0x11	; 17
+ 694:	81 e0       	ldi	r24, 0x01	; 1
+ 696:	90 e0       	ldi	r25, 0x00	; 0
+ 698:	02 c0       	rjmp	.+4      	; 0x69e <M_Dio_PinMode+0x106>
+ 69a:	88 0f       	add	r24, r24
+ 69c:	99 1f       	adc	r25, r25
+ 69e:	2a 95       	dec	r18
+ 6a0:	e2 f7       	brpl	.-8      	; 0x69a <M_Dio_PinMode+0x102>
+ 6a2:	80 95       	com	r24
+ 6a4:	83 23       	and	r24, r19
+ 6a6:	81 bb       	out	0x11, r24	; 17
+ 6a8:	08 95       	ret
 
-00000678 <M_Dio_PinWrite>:
+000006aa <M_Dio_PinWrite>:
 default: break;
 	}
 }
 void M_Dio_PinWrite(u8 Local_u8_Num, u8 Local_u8_Mode)
 {
 	u8 Local_u8_Pin  = Local_u8_Num % 10;
- 678:	9d ec       	ldi	r25, 0xCD	; 205
- 67a:	89 9f       	mul	r24, r25
- 67c:	91 2d       	mov	r25, r1
- 67e:	11 24       	eor	r1, r1
- 680:	29 2f       	mov	r18, r25
- 682:	26 95       	lsr	r18
- 684:	26 95       	lsr	r18
- 686:	26 95       	lsr	r18
- 688:	22 0f       	add	r18, r18
- 68a:	32 2f       	mov	r19, r18
- 68c:	33 0f       	add	r19, r19
- 68e:	33 0f       	add	r19, r19
- 690:	23 0f       	add	r18, r19
- 692:	82 1b       	sub	r24, r18
- 694:	28 2f       	mov	r18, r24
+ 6aa:	9d ec       	ldi	r25, 0xCD	; 205
+ 6ac:	89 9f       	mul	r24, r25
+ 6ae:	91 2d       	mov	r25, r1
+ 6b0:	11 24       	eor	r1, r1
+ 6b2:	29 2f       	mov	r18, r25
+ 6b4:	26 95       	lsr	r18
+ 6b6:	26 95       	lsr	r18
+ 6b8:	26 95       	lsr	r18
+ 6ba:	22 0f       	add	r18, r18
+ 6bc:	32 2f       	mov	r19, r18
+ 6be:	33 0f       	add	r19, r19
+ 6c0:	33 0f       	add	r19, r19
+ 6c2:	23 0f       	add	r18, r19
+ 6c4:	82 1b       	sub	r24, r18
+ 6c6:	28 2f       	mov	r18, r24
 	u8 Local_u8_Port = Local_u8_Num / 10;
- 696:	96 95       	lsr	r25
- 698:	96 95       	lsr	r25
- 69a:	96 95       	lsr	r25
+ 6c8:	96 95       	lsr	r25
+ 6ca:	96 95       	lsr	r25
+ 6cc:	96 95       	lsr	r25
 	switch (Local_u8_Mode)
- 69c:	61 30       	cpi	r22, 0x01	; 1
- 69e:	19 f0       	breq	.+6      	; 0x6a6 <M_Dio_PinWrite+0x2e>
- 6a0:	62 30       	cpi	r22, 0x02	; 2
- 6a2:	c1 f1       	breq	.+112    	; 0x714 <M_Dio_PinWrite+0x9c>
- 6a4:	08 95       	ret
+ 6ce:	61 30       	cpi	r22, 0x01	; 1
+ 6d0:	19 f0       	breq	.+6      	; 0x6d8 <M_Dio_PinWrite+0x2e>
+ 6d2:	62 30       	cpi	r22, 0x02	; 2
+ 6d4:	c1 f1       	breq	.+112    	; 0x746 <M_Dio_PinWrite+0x9c>
+ 6d6:	08 95       	ret
 	{
 		case HIGH:
 		switch(Local_u8_Port)
- 6a6:	92 30       	cpi	r25, 0x02	; 2
- 6a8:	a1 f0       	breq	.+40     	; 0x6d2 <M_Dio_PinWrite+0x5a>
- 6aa:	18 f4       	brcc	.+6      	; 0x6b2 <M_Dio_PinWrite+0x3a>
- 6ac:	91 30       	cpi	r25, 0x01	; 1
- 6ae:	31 f0       	breq	.+12     	; 0x6bc <M_Dio_PinWrite+0x44>
- 6b0:	08 95       	ret
- 6b2:	93 30       	cpi	r25, 0x03	; 3
- 6b4:	c9 f0       	breq	.+50     	; 0x6e8 <M_Dio_PinWrite+0x70>
- 6b6:	94 30       	cpi	r25, 0x04	; 4
- 6b8:	11 f1       	breq	.+68     	; 0x6fe <M_Dio_PinWrite+0x86>
- 6ba:	08 95       	ret
+ 6d8:	92 30       	cpi	r25, 0x02	; 2
+ 6da:	a1 f0       	breq	.+40     	; 0x704 <M_Dio_PinWrite+0x5a>
+ 6dc:	18 f4       	brcc	.+6      	; 0x6e4 <M_Dio_PinWrite+0x3a>
+ 6de:	91 30       	cpi	r25, 0x01	; 1
+ 6e0:	31 f0       	breq	.+12     	; 0x6ee <M_Dio_PinWrite+0x44>
+ 6e2:	08 95       	ret
+ 6e4:	93 30       	cpi	r25, 0x03	; 3
+ 6e6:	c9 f0       	breq	.+50     	; 0x71a <M_Dio_PinWrite+0x70>
+ 6e8:	94 30       	cpi	r25, 0x04	; 4
+ 6ea:	11 f1       	breq	.+68     	; 0x730 <M_Dio_PinWrite+0x86>
+ 6ec:	08 95       	ret
 		{
 			case 1: SetBit(PORTA,Local_u8_Pin); break;
- 6bc:	3b b3       	in	r19, 0x1b	; 27
- 6be:	81 e0       	ldi	r24, 0x01	; 1
- 6c0:	90 e0       	ldi	r25, 0x00	; 0
- 6c2:	02 c0       	rjmp	.+4      	; 0x6c8 <M_Dio_PinWrite+0x50>
- 6c4:	88 0f       	add	r24, r24
- 6c6:	99 1f       	adc	r25, r25
- 6c8:	2a 95       	dec	r18
- 6ca:	e2 f7       	brpl	.-8      	; 0x6c4 <M_Dio_PinWrite+0x4c>
- 6cc:	83 2b       	or	r24, r19
- 6ce:	8b bb       	out	0x1b, r24	; 27
- 6d0:	08 95       	ret
+ 6ee:	3b b3       	in	r19, 0x1b	; 27
+ 6f0:	81 e0       	ldi	r24, 0x01	; 1
+ 6f2:	90 e0       	ldi	r25, 0x00	; 0
+ 6f4:	02 c0       	rjmp	.+4      	; 0x6fa <M_Dio_PinWrite+0x50>
+ 6f6:	88 0f       	add	r24, r24
+ 6f8:	99 1f       	adc	r25, r25
+ 6fa:	2a 95       	dec	r18
+ 6fc:	e2 f7       	brpl	.-8      	; 0x6f6 <M_Dio_PinWrite+0x4c>
+ 6fe:	83 2b       	or	r24, r19
+ 700:	8b bb       	out	0x1b, r24	; 27
+ 702:	08 95       	ret
 			case 2: SetBit(PORTB,Local_u8_Pin); break;
- 6d2:	38 b3       	in	r19, 0x18	; 24
- 6d4:	81 e0       	ldi	r24, 0x01	; 1
- 6d6:	90 e0       	ldi	r25, 0x00	; 0
- 6d8:	02 c0       	rjmp	.+4      	; 0x6de <M_Dio_PinWrite+0x66>
- 6da:	88 0f       	add	r24, r24
- 6dc:	99 1f       	adc	r25, r25
- 6de:	2a 95       	dec	r18
- 6e0:	e2 f7       	brpl	.-8      	; 0x6da <M_Dio_PinWrite+0x62>
- 6e2:	83 2b       	or	r24, r19
- 6e4:	88 bb       	out	0x18, r24	; 24
- 6e6:	08 95       	ret
+ 704:	38 b3       	in	r19, 0x18	; 24
+ 706:	81 e0       	ldi	r24, 0x01	; 1
+ 708:	90 e0       	ldi	r25, 0x00	; 0
+ 70a:	02 c0       	rjmp	.+4      	; 0x710 <M_Dio_PinWrite+0x66>
+ 70c:	88 0f       	add	r24, r24
+ 70e:	99 1f       	adc	r25, r25
+ 710:	2a 95       	dec	r18
+ 712:	e2 f7       	brpl	.-8      	; 0x70c <M_Dio_PinWrite+0x62>
+ 714:	83 2b       	or	r24, r19
+ 716:	88 bb       	out	0x18, r24	; 24
+ 718:	08 95       	ret
 			case 3: SetBit(PORTC,Local_u8_Pin); break;
- 6e8:	35 b3       	in	r19, 0x15	; 21
- 6ea:	81 e0       	ldi	r24, 0x01	; 1
- 6ec:	90 e0       	ldi	r25, 0x00	; 0
- 6ee:	02 c0       	rjmp	.+4      	; 0x6f4 <M_Dio_PinWrite+0x7c>
- 6f0:	88 0f       	add	r24, r24
- 6f2:	99 1f       	adc	r25, r25
- 6f4:	2a 95       	dec	r18
- 6f6:	e2 f7       	brpl	.-8      	; 0x6f0 <M_Dio_PinWrite+0x78>
- 6f8:	83 2b       	or	r24, r19
- 6fa:	85 bb       	out	0x15, r24	; 21
- 6fc:	08 95       	ret
+ 71a:	35 b3       	in	r19, 0x15	; 21
+ 71c:	81 e0       	ldi	r24, 0x01	; 1
+ 71e:	90 e0       	ldi	r25, 0x00	; 0
+ 720:	02 c0       	rjmp	.+4      	; 0x726 <M_Dio_PinWrite+0x7c>
+ 722:	88 0f       	add	r24, r24
+ 724:	99 1f       	adc	r25, r25
+ 726:	2a 95       	dec	r18
+ 728:	e2 f7       	brpl	.-8      	; 0x722 <M_Dio_PinWrite+0x78>
+ 72a:	83 2b       	or	r24, r19
+ 72c:	85 bb       	out	0x15, r24	; 21
+ 72e:	08 95       	ret
 			case 4: SetBit(PORTD,Local_u8_Pin); break;
- 6fe:	32 b3       	in	r19, 0x12	; 18
- 700:	81 e0       	ldi	r24, 0x01	; 1
- 702:	90 e0       	ldi	r25, 0x00	; 0
- 704:	02 c0       	rjmp	.+4      	; 0x70a <M_Dio_PinWrite+0x92>
- 706:	88 0f       	add	r24, r24
- 708:	99 1f       	adc	r25, r25
- 70a:	2a 95       	dec	r18
- 70c:	e2 f7       	brpl	.-8      	; 0x706 <M_Dio_PinWrite+0x8e>
- 70e:	83 2b       	or	r24, r19
- 710:	82 bb       	out	0x12, r24	; 18
- 712:	08 95       	ret
+ 730:	32 b3       	in	r19, 0x12	; 18
+ 732:	81 e0       	ldi	r24, 0x01	; 1
+ 734:	90 e0       	ldi	r25, 0x00	; 0
+ 736:	02 c0       	rjmp	.+4      	; 0x73c <M_Dio_PinWrite+0x92>
+ 738:	88 0f       	add	r24, r24
+ 73a:	99 1f       	adc	r25, r25
+ 73c:	2a 95       	dec	r18
+ 73e:	e2 f7       	brpl	.-8      	; 0x738 <M_Dio_PinWrite+0x8e>
+ 740:	83 2b       	or	r24, r19
+ 742:	82 bb       	out	0x12, r24	; 18
+ 744:	08 95       	ret
 			default:                           break;
 		}break;
 		case LOW:
 		switch(Local_u8_Port)
- 714:	92 30       	cpi	r25, 0x02	; 2
- 716:	a9 f0       	breq	.+42     	; 0x742 <M_Dio_PinWrite+0xca>
- 718:	18 f4       	brcc	.+6      	; 0x720 <M_Dio_PinWrite+0xa8>
- 71a:	91 30       	cpi	r25, 0x01	; 1
- 71c:	31 f0       	breq	.+12     	; 0x72a <M_Dio_PinWrite+0xb2>
- 71e:	08 95       	ret
- 720:	93 30       	cpi	r25, 0x03	; 3
- 722:	d9 f0       	breq	.+54     	; 0x75a <M_Dio_PinWrite+0xe2>
- 724:	94 30       	cpi	r25, 0x04	; 4
- 726:	29 f1       	breq	.+74     	; 0x772 <M_Dio_PinWrite+0xfa>
- 728:	08 95       	ret
+ 746:	92 30       	cpi	r25, 0x02	; 2
+ 748:	a9 f0       	breq	.+42     	; 0x774 <M_Dio_PinWrite+0xca>
+ 74a:	18 f4       	brcc	.+6      	; 0x752 <M_Dio_PinWrite+0xa8>
+ 74c:	91 30       	cpi	r25, 0x01	; 1
+ 74e:	31 f0       	breq	.+12     	; 0x75c <M_Dio_PinWrite+0xb2>
+ 750:	08 95       	ret
+ 752:	93 30       	cpi	r25, 0x03	; 3
+ 754:	d9 f0       	breq	.+54     	; 0x78c <M_Dio_PinWrite+0xe2>
+ 756:	94 30       	cpi	r25, 0x04	; 4
+ 758:	29 f1       	breq	.+74     	; 0x7a4 <M_Dio_PinWrite+0xfa>
+ 75a:	08 95       	ret
 		{
 			case 1: ClrBit(PORTA,Local_u8_Pin); break;
- 72a:	3b b3       	in	r19, 0x1b	; 27
- 72c:	81 e0       	ldi	r24, 0x01	; 1
- 72e:	90 e0       	ldi	r25, 0x00	; 0
- 730:	02 c0       	rjmp	.+4      	; 0x736 <M_Dio_PinWrite+0xbe>
- 732:	88 0f       	add	r24, r24
- 734:	99 1f       	adc	r25, r25
- 736:	2a 95       	dec	r18
- 738:	e2 f7       	brpl	.-8      	; 0x732 <M_Dio_PinWrite+0xba>
- 73a:	80 95       	com	r24
- 73c:	83 23       	and	r24, r19
- 73e:	8b bb       	out	0x1b, r24	; 27
- 740:	08 95       	ret
+ 75c:	3b b3       	in	r19, 0x1b	; 27
+ 75e:	81 e0       	ldi	r24, 0x01	; 1
+ 760:	90 e0       	ldi	r25, 0x00	; 0
+ 762:	02 c0       	rjmp	.+4      	; 0x768 <M_Dio_PinWrite+0xbe>
+ 764:	88 0f       	add	r24, r24
+ 766:	99 1f       	adc	r25, r25
+ 768:	2a 95       	dec	r18
+ 76a:	e2 f7       	brpl	.-8      	; 0x764 <M_Dio_PinWrite+0xba>
+ 76c:	80 95       	com	r24
+ 76e:	83 23       	and	r24, r19
+ 770:	8b bb       	out	0x1b, r24	; 27
+ 772:	08 95       	ret
 			case 2: ClrBit(PORTB,Local_u8_Pin); break;
- 742:	38 b3       	in	r19, 0x18	; 24
- 744:	81 e0       	ldi	r24, 0x01	; 1
- 746:	90 e0       	ldi	r25, 0x00	; 0
- 748:	02 c0       	rjmp	.+4      	; 0x74e <M_Dio_PinWrite+0xd6>
- 74a:	88 0f       	add	r24, r24
- 74c:	99 1f       	adc	r25, r25
- 74e:	2a 95       	dec	r18
- 750:	e2 f7       	brpl	.-8      	; 0x74a <M_Dio_PinWrite+0xd2>
- 752:	80 95       	com	r24
- 754:	83 23       	and	r24, r19
- 756:	88 bb       	out	0x18, r24	; 24
- 758:	08 95       	ret
+ 774:	38 b3       	in	r19, 0x18	; 24
+ 776:	81 e0       	ldi	r24, 0x01	; 1
+ 778:	90 e0       	ldi	r25, 0x00	; 0
+ 77a:	02 c0       	rjmp	.+4      	; 0x780 <M_Dio_PinWrite+0xd6>
+ 77c:	88 0f       	add	r24, r24
+ 77e:	99 1f       	adc	r25, r25
+ 780:	2a 95       	dec	r18
+ 782:	e2 f7       	brpl	.-8      	; 0x77c <M_Dio_PinWrite+0xd2>
+ 784:	80 95       	com	r24
+ 786:	83 23       	and	r24, r19
+ 788:	88 bb       	out	0x18, r24	; 24
+ 78a:	08 95       	ret
 			case 3: ClrBit(PORTC,Local_u8_Pin); break;
- 75a:	35 b3       	in	r19, 0x15	; 21
- 75c:	81 e0       	ldi	r24, 0x01	; 1
- 75e:	90 e0       	ldi	r25, 0x00	; 0
- 760:	02 c0       	rjmp	.+4      	; 0x766 <M_Dio_PinWrite+0xee>
- 762:	88 0f       	add	r24, r24
- 764:	99 1f       	adc	r25, r25
- 766:	2a 95       	dec	r18
- 768:	e2 f7       	brpl	.-8      	; 0x762 <M_Dio_PinWrite+0xea>
- 76a:	80 95       	com	r24
- 76c:	83 23       	and	r24, r19
- 76e:	85 bb       	out	0x15, r24	; 21
- 770:	08 95       	ret
+ 78c:	35 b3       	in	r19, 0x15	; 21
+ 78e:	81 e0       	ldi	r24, 0x01	; 1
+ 790:	90 e0       	ldi	r25, 0x00	; 0
+ 792:	02 c0       	rjmp	.+4      	; 0x798 <M_Dio_PinWrite+0xee>
+ 794:	88 0f       	add	r24, r24
+ 796:	99 1f       	adc	r25, r25
+ 798:	2a 95       	dec	r18
+ 79a:	e2 f7       	brpl	.-8      	; 0x794 <M_Dio_PinWrite+0xea>
+ 79c:	80 95       	com	r24
+ 79e:	83 23       	and	r24, r19
+ 7a0:	85 bb       	out	0x15, r24	; 21
+ 7a2:	08 95       	ret
 			case 4: ClrBit(PORTD,Local_u8_Pin); break;
- 772:	32 b3       	in	r19, 0x12	; 18
- 774:	81 e0       	ldi	r24, 0x01	; 1
- 776:	90 e0       	ldi	r25, 0x00	; 0
- 778:	02 c0       	rjmp	.+4      	; 0x77e <M_Dio_PinWrite+0x106>
- 77a:	88 0f       	add	r24, r24
- 77c:	99 1f       	adc	r25, r25
- 77e:	2a 95       	dec	r18
- 780:	e2 f7       	brpl	.-8      	; 0x77a <M_Dio_PinWrite+0x102>
- 782:	80 95       	com	r24
- 784:	83 23       	and	r24, r19
- 786:	82 bb       	out	0x12, r24	; 18
- 788:	08 95       	ret
+ 7a4:	32 b3       	in	r19, 0x12	; 18
+ 7a6:	81 e0       	ldi	r24, 0x01	; 1
+ 7a8:	90 e0       	ldi	r25, 0x00	; 0
+ 7aa:	02 c0       	rjmp	.+4      	; 0x7b0 <M_Dio_PinWrite+0x106>
+ 7ac:	88 0f       	add	r24, r24
+ 7ae:	99 1f       	adc	r25, r25
+ 7b0:	2a 95       	dec	r18
+ 7b2:	e2 f7       	brpl	.-8      	; 0x7ac <M_Dio_PinWrite+0x102>
+ 7b4:	80 95       	com	r24
+ 7b6:	83 23       	and	r24, r19
+ 7b8:	82 bb       	out	0x12, r24	; 18
+ 7ba:	08 95       	ret
 
-0000078a <M_Timer0_Init>:
+000007bc <M_Timer0_Init>:
 {
 	M_Timer0_Start();
 }
 void M_Timer0_Pwm0Stop(void)
 {
 	M_Timer0_Stop();
- 78a:	83 b7       	in	r24, 0x33	; 51
- 78c:	88 60       	ori	r24, 0x08	; 8
- 78e:	83 bf       	out	0x33, r24	; 51
- 790:	83 b7       	in	r24, 0x33	; 51
- 792:	8f 7b       	andi	r24, 0xBF	; 191
- 794:	83 bf       	out	0x33, r24	; 51
- 796:	89 b7       	in	r24, 0x39	; 57
- 798:	82 60       	ori	r24, 0x02	; 2
- 79a:	89 bf       	out	0x39, r24	; 57
- 79c:	8f b7       	in	r24, 0x3f	; 63
- 79e:	80 68       	ori	r24, 0x80	; 128
- 7a0:	8f bf       	out	0x3f, r24	; 63
- 7a2:	08 95       	ret
+ 7bc:	83 b7       	in	r24, 0x33	; 51
+ 7be:	88 60       	ori	r24, 0x08	; 8
+ 7c0:	83 bf       	out	0x33, r24	; 51
+ 7c2:	83 b7       	in	r24, 0x33	; 51
+ 7c4:	8f 7b       	andi	r24, 0xBF	; 191
+ 7c6:	83 bf       	out	0x33, r24	; 51
+ 7c8:	89 b7       	in	r24, 0x39	; 57
+ 7ca:	82 60       	ori	r24, 0x02	; 2
+ 7cc:	89 bf       	out	0x39, r24	; 57
+ 7ce:	8f b7       	in	r24, 0x3f	; 63
+ 7d0:	80 68       	ori	r24, 0x80	; 128
+ 7d2:	8f bf       	out	0x3f, r24	; 63
+ 7d4:	08 95       	ret
 
-000007a4 <M_Timer0_SetTime>:
- 7a4:	8f 92       	push	r8
- 7a6:	9f 92       	push	r9
- 7a8:	af 92       	push	r10
- 7aa:	bf 92       	push	r11
- 7ac:	cf 92       	push	r12
- 7ae:	df 92       	push	r13
- 7b0:	ef 92       	push	r14
- 7b2:	ff 92       	push	r15
- 7b4:	cf 93       	push	r28
- 7b6:	9b 01       	movw	r18, r22
- 7b8:	ac 01       	movw	r20, r24
- 7ba:	a8 ee       	ldi	r26, 0xE8	; 232
- 7bc:	b3 e0       	ldi	r27, 0x03	; 3
- 7be:	0e 94 31 05 	call	0xa62	; 0xa62 <__muluhisi3>
- 7c2:	4b 01       	movw	r8, r22
- 7c4:	5c 01       	movw	r10, r24
- 7c6:	68 94       	set
- 7c8:	15 f8       	bld	r1, 5
- 7ca:	b6 94       	lsr	r11
- 7cc:	a7 94       	ror	r10
- 7ce:	97 94       	ror	r9
- 7d0:	87 94       	ror	r8
- 7d2:	16 94       	lsr	r1
- 7d4:	d1 f7       	brne	.-12     	; 0x7ca <M_Timer0_SetTime+0x26>
- 7d6:	c5 01       	movw	r24, r10
- 7d8:	b4 01       	movw	r22, r8
- 7da:	2f ef       	ldi	r18, 0xFF	; 255
- 7dc:	30 e0       	ldi	r19, 0x00	; 0
- 7de:	40 e0       	ldi	r20, 0x00	; 0
- 7e0:	50 e0       	ldi	r21, 0x00	; 0
- 7e2:	0e 94 0f 05 	call	0xa1e	; 0xa1e <__udivmodsi4>
- 7e6:	67 2b       	or	r22, r23
- 7e8:	68 2b       	or	r22, r24
- 7ea:	69 2b       	or	r22, r25
- 7ec:	89 f4       	brne	.+34     	; 0x810 <__DATA_REGION_LENGTH__+0x10>
- 7ee:	cf ef       	ldi	r28, 0xFF	; 255
- 7f0:	c1 50       	subi	r28, 0x01	; 1
- 7f2:	cc 2e       	mov	r12, r28
- 7f4:	d1 2c       	mov	r13, r1
- 7f6:	e1 2c       	mov	r14, r1
- 7f8:	f1 2c       	mov	r15, r1
- 7fa:	c5 01       	movw	r24, r10
- 7fc:	b4 01       	movw	r22, r8
- 7fe:	a7 01       	movw	r20, r14
- 800:	96 01       	movw	r18, r12
- 802:	0e 94 0f 05 	call	0xa1e	; 0xa1e <__udivmodsi4>
- 806:	67 2b       	or	r22, r23
- 808:	68 2b       	or	r22, r24
- 80a:	69 2b       	or	r22, r25
- 80c:	89 f3       	breq	.-30     	; 0x7f0 <M_Timer0_SetTime+0x4c>
- 80e:	05 c0       	rjmp	.+10     	; 0x81a <__DATA_REGION_LENGTH__+0x1a>
- 810:	c1 2c       	mov	r12, r1
- 812:	d1 2c       	mov	r13, r1
- 814:	76 01       	movw	r14, r12
- 816:	ca 94       	dec	r12
- 818:	cf ef       	ldi	r28, 0xFF	; 255
- 81a:	c5 01       	movw	r24, r10
- 81c:	b4 01       	movw	r22, r8
- 81e:	a7 01       	movw	r20, r14
- 820:	96 01       	movw	r18, r12
- 822:	0e 94 0f 05 	call	0xa1e	; 0xa1e <__udivmodsi4>
- 826:	20 93 69 00 	sts	0x0069, r18	; 0x800069 <Timer0_NumberOfCompareMatch>
- 82a:	30 93 6a 00 	sts	0x006A, r19	; 0x80006a <Timer0_NumberOfCompareMatch+0x1>
- 82e:	40 93 6b 00 	sts	0x006B, r20	; 0x80006b <Timer0_NumberOfCompareMatch+0x2>
- 832:	50 93 6c 00 	sts	0x006C, r21	; 0x80006c <Timer0_NumberOfCompareMatch+0x3>
- 836:	c1 50       	subi	r28, 0x01	; 1
- 838:	cc bf       	out	0x3c, r28	; 60
- 83a:	cf 91       	pop	r28
- 83c:	ff 90       	pop	r15
- 83e:	ef 90       	pop	r14
- 840:	df 90       	pop	r13
- 842:	cf 90       	pop	r12
- 844:	bf 90       	pop	r11
- 846:	af 90       	pop	r10
- 848:	9f 90       	pop	r9
- 84a:	8f 90       	pop	r8
- 84c:	08 95       	ret
+000007d6 <M_Timer0_SetTime>:
+ 7d6:	8f 92       	push	r8
+ 7d8:	9f 92       	push	r9
+ 7da:	af 92       	push	r10
+ 7dc:	bf 92       	push	r11
+ 7de:	cf 92       	push	r12
+ 7e0:	df 92       	push	r13
+ 7e2:	ef 92       	push	r14
+ 7e4:	ff 92       	push	r15
+ 7e6:	cf 93       	push	r28
+ 7e8:	9b 01       	movw	r18, r22
+ 7ea:	ac 01       	movw	r20, r24
+ 7ec:	a8 ee       	ldi	r26, 0xE8	; 232
+ 7ee:	b3 e0       	ldi	r27, 0x03	; 3
+ 7f0:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <__muluhisi3>
+ 7f4:	4b 01       	movw	r8, r22
+ 7f6:	5c 01       	movw	r10, r24
+ 7f8:	68 94       	set
+ 7fa:	15 f8       	bld	r1, 5
+ 7fc:	b6 94       	lsr	r11
+ 7fe:	a7 94       	ror	r10
+ 800:	97 94       	ror	r9
+ 802:	87 94       	ror	r8
+ 804:	16 94       	lsr	r1
+ 806:	d1 f7       	brne	.-12     	; 0x7fc <M_Timer0_SetTime+0x26>
+ 808:	c5 01       	movw	r24, r10
+ 80a:	b4 01       	movw	r22, r8
+ 80c:	2f ef       	ldi	r18, 0xFF	; 255
+ 80e:	30 e0       	ldi	r19, 0x00	; 0
+ 810:	40 e0       	ldi	r20, 0x00	; 0
+ 812:	50 e0       	ldi	r21, 0x00	; 0
+ 814:	0e 94 d7 04 	call	0x9ae	; 0x9ae <__udivmodsi4>
+ 818:	67 2b       	or	r22, r23
+ 81a:	68 2b       	or	r22, r24
+ 81c:	69 2b       	or	r22, r25
+ 81e:	89 f4       	brne	.+34     	; 0x842 <__DATA_REGION_LENGTH__+0x42>
+ 820:	cf ef       	ldi	r28, 0xFF	; 255
+ 822:	c1 50       	subi	r28, 0x01	; 1
+ 824:	cc 2e       	mov	r12, r28
+ 826:	d1 2c       	mov	r13, r1
+ 828:	e1 2c       	mov	r14, r1
+ 82a:	f1 2c       	mov	r15, r1
+ 82c:	c5 01       	movw	r24, r10
+ 82e:	b4 01       	movw	r22, r8
+ 830:	a7 01       	movw	r20, r14
+ 832:	96 01       	movw	r18, r12
+ 834:	0e 94 d7 04 	call	0x9ae	; 0x9ae <__udivmodsi4>
+ 838:	67 2b       	or	r22, r23
+ 83a:	68 2b       	or	r22, r24
+ 83c:	69 2b       	or	r22, r25
+ 83e:	89 f3       	breq	.-30     	; 0x822 <__DATA_REGION_LENGTH__+0x22>
+ 840:	05 c0       	rjmp	.+10     	; 0x84c <__DATA_REGION_LENGTH__+0x4c>
+ 842:	c1 2c       	mov	r12, r1
+ 844:	d1 2c       	mov	r13, r1
+ 846:	76 01       	movw	r14, r12
+ 848:	ca 94       	dec	r12
+ 84a:	cf ef       	ldi	r28, 0xFF	; 255
+ 84c:	c5 01       	movw	r24, r10
+ 84e:	b4 01       	movw	r22, r8
+ 850:	a7 01       	movw	r20, r14
+ 852:	96 01       	movw	r18, r12
+ 854:	0e 94 d7 04 	call	0x9ae	; 0x9ae <__udivmodsi4>
+ 858:	20 93 69 00 	sts	0x0069, r18	; 0x800069 <Timer0_NumberOfCompareMatch>
+ 85c:	30 93 6a 00 	sts	0x006A, r19	; 0x80006a <Timer0_NumberOfCompareMatch+0x1>
+ 860:	40 93 6b 00 	sts	0x006B, r20	; 0x80006b <Timer0_NumberOfCompareMatch+0x2>
+ 864:	50 93 6c 00 	sts	0x006C, r21	; 0x80006c <Timer0_NumberOfCompareMatch+0x3>
+ 868:	c1 50       	subi	r28, 0x01	; 1
+ 86a:	cc bf       	out	0x3c, r28	; 60
+ 86c:	cf 91       	pop	r28
+ 86e:	ff 90       	pop	r15
+ 870:	ef 90       	pop	r14
+ 872:	df 90       	pop	r13
+ 874:	cf 90       	pop	r12
+ 876:	bf 90       	pop	r11
+ 878:	af 90       	pop	r10
+ 87a:	9f 90       	pop	r9
+ 87c:	8f 90       	pop	r8
+ 87e:	08 95       	ret
 
-0000084e <M_Timer0_Start>:
- 84e:	83 b7       	in	r24, 0x33	; 51
- 850:	81 60       	ori	r24, 0x01	; 1
- 852:	83 bf       	out	0x33, r24	; 51
- 854:	83 b7       	in	r24, 0x33	; 51
- 856:	8d 7f       	andi	r24, 0xFD	; 253
- 858:	83 bf       	out	0x33, r24	; 51
- 85a:	83 b7       	in	r24, 0x33	; 51
- 85c:	84 60       	ori	r24, 0x04	; 4
- 85e:	83 bf       	out	0x33, r24	; 51
- 860:	08 95       	ret
+00000880 <M_Timer0_Start>:
+ 880:	83 b7       	in	r24, 0x33	; 51
+ 882:	81 60       	ori	r24, 0x01	; 1
+ 884:	83 bf       	out	0x33, r24	; 51
+ 886:	83 b7       	in	r24, 0x33	; 51
+ 888:	8d 7f       	andi	r24, 0xFD	; 253
+ 88a:	83 bf       	out	0x33, r24	; 51
+ 88c:	83 b7       	in	r24, 0x33	; 51
+ 88e:	84 60       	ori	r24, 0x04	; 4
+ 890:	83 bf       	out	0x33, r24	; 51
+ 892:	08 95       	ret
 
-00000862 <M_Timer0_Stop>:
- 862:	83 b7       	in	r24, 0x33	; 51
- 864:	8e 7f       	andi	r24, 0xFE	; 254
- 866:	83 bf       	out	0x33, r24	; 51
- 868:	83 b7       	in	r24, 0x33	; 51
- 86a:	8d 7f       	andi	r24, 0xFD	; 253
- 86c:	83 bf       	out	0x33, r24	; 51
- 86e:	83 b7       	in	r24, 0x33	; 51
- 870:	8b 7f       	andi	r24, 0xFB	; 251
- 872:	83 bf       	out	0x33, r24	; 51
- 874:	08 95       	ret
+00000894 <M_Timer0_Stop>:
+ 894:	83 b7       	in	r24, 0x33	; 51
+ 896:	8e 7f       	andi	r24, 0xFE	; 254
+ 898:	83 bf       	out	0x33, r24	; 51
+ 89a:	83 b7       	in	r24, 0x33	; 51
+ 89c:	8d 7f       	andi	r24, 0xFD	; 253
+ 89e:	83 bf       	out	0x33, r24	; 51
+ 8a0:	83 b7       	in	r24, 0x33	; 51
+ 8a2:	8b 7f       	andi	r24, 0xFB	; 251
+ 8a4:	83 bf       	out	0x33, r24	; 51
+ 8a6:	08 95       	ret
 
-00000876 <M_Timer0_SetCallBack>:
+000008a8 <M_Timer0_SetCallBack>:
 }
 
 
 void M_Timer0_SetCallBack(void (*Ptr)(void))
 {
 	CallBack = Ptr;
- 876:	90 93 6e 00 	sts	0x006E, r25	; 0x80006e <CallBack+0x1>
- 87a:	80 93 6d 00 	sts	0x006D, r24	; 0x80006d <CallBack>
- 87e:	08 95       	ret
+ 8a8:	90 93 6e 00 	sts	0x006E, r25	; 0x80006e <CallBack+0x1>
+ 8ac:	80 93 6d 00 	sts	0x006D, r24	; 0x80006d <CallBack>
+ 8b0:	08 95       	ret
 
-00000880 <__vector_10>:
+000008b2 <__vector_10>:
 	}
 	
 }
 #elif TIMER0_MODE == CTC_MODE
 ISR(TIMER0_COMP_vect)
 {
- 880:	1f 92       	push	r1
- 882:	0f 92       	push	r0
- 884:	0f b6       	in	r0, 0x3f	; 63
- 886:	0f 92       	push	r0
- 888:	11 24       	eor	r1, r1
- 88a:	2f 93       	push	r18
- 88c:	3f 93       	push	r19
- 88e:	4f 93       	push	r20
- 890:	5f 93       	push	r21
- 892:	6f 93       	push	r22
- 894:	7f 93       	push	r23
- 896:	8f 93       	push	r24
- 898:	9f 93       	push	r25
- 89a:	af 93       	push	r26
- 89c:	bf 93       	push	r27
- 89e:	ef 93       	push	r30
- 8a0:	ff 93       	push	r31
+ 8b2:	1f 92       	push	r1
+ 8b4:	0f 92       	push	r0
+ 8b6:	0f b6       	in	r0, 0x3f	; 63
+ 8b8:	0f 92       	push	r0
+ 8ba:	11 24       	eor	r1, r1
+ 8bc:	2f 93       	push	r18
+ 8be:	3f 93       	push	r19
+ 8c0:	4f 93       	push	r20
+ 8c2:	5f 93       	push	r21
+ 8c4:	6f 93       	push	r22
+ 8c6:	7f 93       	push	r23
+ 8c8:	8f 93       	push	r24
+ 8ca:	9f 93       	push	r25
+ 8cc:	af 93       	push	r26
+ 8ce:	bf 93       	push	r27
+ 8d0:	ef 93       	push	r30
+ 8d2:	ff 93       	push	r31
 	static u32 Local_u32_Counter = 0;
 	Local_u32_Counter++;
- 8a2:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <Local_u32_Counter.1671>
- 8a6:	90 91 66 00 	lds	r25, 0x0066	; 0x800066 <Local_u32_Counter.1671+0x1>
- 8aa:	a0 91 67 00 	lds	r26, 0x0067	; 0x800067 <Local_u32_Counter.1671+0x2>
- 8ae:	b0 91 68 00 	lds	r27, 0x0068	; 0x800068 <Local_u32_Counter.1671+0x3>
- 8b2:	01 96       	adiw	r24, 0x01	; 1
- 8b4:	a1 1d       	adc	r26, r1
- 8b6:	b1 1d       	adc	r27, r1
- 8b8:	80 93 65 00 	sts	0x0065, r24	; 0x800065 <Local_u32_Counter.1671>
- 8bc:	90 93 66 00 	sts	0x0066, r25	; 0x800066 <Local_u32_Counter.1671+0x1>
- 8c0:	a0 93 67 00 	sts	0x0067, r26	; 0x800067 <Local_u32_Counter.1671+0x2>
- 8c4:	b0 93 68 00 	sts	0x0068, r27	; 0x800068 <Local_u32_Counter.1671+0x3>
+ 8d4:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <Local_u32_Counter.1671>
+ 8d8:	90 91 66 00 	lds	r25, 0x0066	; 0x800066 <Local_u32_Counter.1671+0x1>
+ 8dc:	a0 91 67 00 	lds	r26, 0x0067	; 0x800067 <Local_u32_Counter.1671+0x2>
+ 8e0:	b0 91 68 00 	lds	r27, 0x0068	; 0x800068 <Local_u32_Counter.1671+0x3>
+ 8e4:	01 96       	adiw	r24, 0x01	; 1
+ 8e6:	a1 1d       	adc	r26, r1
+ 8e8:	b1 1d       	adc	r27, r1
+ 8ea:	80 93 65 00 	sts	0x0065, r24	; 0x800065 <Local_u32_Counter.1671>
+ 8ee:	90 93 66 00 	sts	0x0066, r25	; 0x800066 <Local_u32_Counter.1671+0x1>
+ 8f2:	a0 93 67 00 	sts	0x0067, r26	; 0x800067 <Local_u32_Counter.1671+0x2>
+ 8f6:	b0 93 68 00 	sts	0x0068, r27	; 0x800068 <Local_u32_Counter.1671+0x3>
 	if(Local_u32_Counter == Timer0_NumberOfCompareMatch)
- 8c8:	40 91 69 00 	lds	r20, 0x0069	; 0x800069 <Timer0_NumberOfCompareMatch>
- 8cc:	50 91 6a 00 	lds	r21, 0x006A	; 0x80006a <Timer0_NumberOfCompareMatch+0x1>
- 8d0:	60 91 6b 00 	lds	r22, 0x006B	; 0x80006b <Timer0_NumberOfCompareMatch+0x2>
- 8d4:	70 91 6c 00 	lds	r23, 0x006C	; 0x80006c <Timer0_NumberOfCompareMatch+0x3>
- 8d8:	84 17       	cp	r24, r20
- 8da:	95 07       	cpc	r25, r21
- 8dc:	a6 07       	cpc	r26, r22
- 8de:	b7 07       	cpc	r27, r23
- 8e0:	69 f4       	brne	.+26     	; 0x8fc <__vector_10+0x7c>
+ 8fa:	40 91 69 00 	lds	r20, 0x0069	; 0x800069 <Timer0_NumberOfCompareMatch>
+ 8fe:	50 91 6a 00 	lds	r21, 0x006A	; 0x80006a <Timer0_NumberOfCompareMatch+0x1>
+ 902:	60 91 6b 00 	lds	r22, 0x006B	; 0x80006b <Timer0_NumberOfCompareMatch+0x2>
+ 906:	70 91 6c 00 	lds	r23, 0x006C	; 0x80006c <Timer0_NumberOfCompareMatch+0x3>
+ 90a:	84 17       	cp	r24, r20
+ 90c:	95 07       	cpc	r25, r21
+ 90e:	a6 07       	cpc	r26, r22
+ 910:	b7 07       	cpc	r27, r23
+ 912:	69 f4       	brne	.+26     	; 0x92e <__vector_10+0x7c>
 	{
 		CallBack();
- 8e2:	e0 91 6d 00 	lds	r30, 0x006D	; 0x80006d <CallBack>
- 8e6:	f0 91 6e 00 	lds	r31, 0x006E	; 0x80006e <CallBack+0x1>
- 8ea:	09 95       	icall
+ 914:	e0 91 6d 00 	lds	r30, 0x006D	; 0x80006d <CallBack>
+ 918:	f0 91 6e 00 	lds	r31, 0x006E	; 0x80006e <CallBack+0x1>
+ 91c:	09 95       	icall
 		Local_u32_Counter = 0;
- 8ec:	10 92 65 00 	sts	0x0065, r1	; 0x800065 <Local_u32_Counter.1671>
- 8f0:	10 92 66 00 	sts	0x0066, r1	; 0x800066 <Local_u32_Counter.1671+0x1>
- 8f4:	10 92 67 00 	sts	0x0067, r1	; 0x800067 <Local_u32_Counter.1671+0x2>
- 8f8:	10 92 68 00 	sts	0x0068, r1	; 0x800068 <Local_u32_Counter.1671+0x3>
+ 91e:	10 92 65 00 	sts	0x0065, r1	; 0x800065 <Local_u32_Counter.1671>
+ 922:	10 92 66 00 	sts	0x0066, r1	; 0x800066 <Local_u32_Counter.1671+0x1>
+ 926:	10 92 67 00 	sts	0x0067, r1	; 0x800067 <Local_u32_Counter.1671+0x2>
+ 92a:	10 92 68 00 	sts	0x0068, r1	; 0x800068 <Local_u32_Counter.1671+0x3>
 		
 	}
 	
 }
- 8fc:	ff 91       	pop	r31
- 8fe:	ef 91       	pop	r30
- 900:	bf 91       	pop	r27
- 902:	af 91       	pop	r26
- 904:	9f 91       	pop	r25
- 906:	8f 91       	pop	r24
- 908:	7f 91       	pop	r23
- 90a:	6f 91       	pop	r22
- 90c:	5f 91       	pop	r21
- 90e:	4f 91       	pop	r20
- 910:	3f 91       	pop	r19
- 912:	2f 91       	pop	r18
- 914:	0f 90       	pop	r0
- 916:	0f be       	out	0x3f, r0	; 63
- 918:	0f 90       	pop	r0
- 91a:	1f 90       	pop	r1
- 91c:	18 95       	reti
+ 92e:	ff 91       	pop	r31
+ 930:	ef 91       	pop	r30
+ 932:	bf 91       	pop	r27
+ 934:	af 91       	pop	r26
+ 936:	9f 91       	pop	r25
+ 938:	8f 91       	pop	r24
+ 93a:	7f 91       	pop	r23
+ 93c:	6f 91       	pop	r22
+ 93e:	5f 91       	pop	r21
+ 940:	4f 91       	pop	r20
+ 942:	3f 91       	pop	r19
+ 944:	2f 91       	pop	r18
+ 946:	0f 90       	pop	r0
+ 948:	0f be       	out	0x3f, r0	; 63
+ 94a:	0f 90       	pop	r0
+ 94c:	1f 90       	pop	r1
+ 94e:	18 95       	reti
 
-0000091e <M_Twi_Init>:
-#include "Twi.h"
-
-void M_Twi_Init(void)
-{
-	#if   TWI_MODE == TWI_MASTER
-	TWBR = 12;         //to select FSCL = 400KHz
- 91e:	8c e0       	ldi	r24, 0x0C	; 12
- 920:	80 b9       	out	0x00, r24	; 0
-	#elif TWI_MODE == TWI_SLAVE
-	TWAR = 0b00000010; //to select slave address 1, and disable general call recognition
-	#endif
-	
-	SetBit(TWCR,2);    //to enable TWI circuit
- 922:	86 b7       	in	r24, 0x36	; 54
- 924:	84 60       	ori	r24, 0x04	; 4
- 926:	86 bf       	out	0x36, r24	; 54
- 928:	08 95       	ret
-
-0000092a <M_Twi_StartCondition>:
-}
-void M_Twi_StartCondition(void)
+00000950 <M_Twi_Init>:
 {
 	SetBit(TWCR,5);
- 92a:	86 b7       	in	r24, 0x36	; 54
- 92c:	80 62       	ori	r24, 0x20	; 32
- 92e:	86 bf       	out	0x36, r24	; 54
 	SetBit(TWCR,7);                //to clear the flag
- 930:	86 b7       	in	r24, 0x36	; 54
- 932:	80 68       	ori	r24, 0x80	; 128
- 934:	86 bf       	out	0x36, r24	; 54
 	while ((GetBit(TWCR,7)) == 0);
- 936:	06 b6       	in	r0, 0x36	; 54
- 938:	07 fe       	sbrs	r0, 7
- 93a:	fd cf       	rjmp	.-6      	; 0x936 <M_Twi_StartCondition+0xc>
-	while ((TWSR & 0xF8) != START_ACK);   //F8 is 11111000 to make sure that the last 3 bits are 0
- 93c:	81 b1       	in	r24, 0x01	; 1
- 93e:	88 7f       	andi	r24, 0xF8	; 248
- 940:	88 30       	cpi	r24, 0x08	; 8
- 942:	e1 f7       	brne	.-8      	; 0x93c <M_Twi_StartCondition+0x12>
-}
- 944:	08 95       	ret
-
-00000946 <M_Twi_SendSlaveAddressWrite>:
-void M_Twi_SendSlaveAddressWrite(u8 Local_u8_Address)
-{
-	TWDR = (Local_u8_Address << 1); /*shift 1 left because 0000000 0 first 7 bits is the slave address and last bit is to select
- 946:	88 0f       	add	r24, r24
- 948:	83 b9       	out	0x03, r24	; 3
-	                                  either we want to read or write*/
-	ClrBit(TWCR,5);
- 94a:	86 b7       	in	r24, 0x36	; 54
- 94c:	8f 7d       	andi	r24, 0xDF	; 223
- 94e:	86 bf       	out	0x36, r24	; 54
-	SetBit(TWCR,7);                //to clear the flag
- 950:	86 b7       	in	r24, 0x36	; 54
- 952:	80 68       	ori	r24, 0x80	; 128
- 954:	86 bf       	out	0x36, r24	; 54
-	while ((GetBit(TWCR,7)) == 0);
- 956:	06 b6       	in	r0, 0x36	; 54
- 958:	07 fe       	sbrs	r0, 7
- 95a:	fd cf       	rjmp	.-6      	; 0x956 <M_Twi_SendSlaveAddressWrite+0x10>
-	while ((TWSR & 0xF8) != SLAVE_AD_AND_WR_ACK);
- 95c:	81 b1       	in	r24, 0x01	; 1
- 95e:	88 7f       	andi	r24, 0xF8	; 248
- 960:	88 31       	cpi	r24, 0x18	; 24
- 962:	e1 f7       	brne	.-8      	; 0x95c <M_Twi_SendSlaveAddressWrite+0x16>
-}
- 964:	08 95       	ret
-
-00000966 <M_Twi_SendSlaveAddressRead>:
-void M_Twi_SendSlaveAddressRead(u8 Local_u8_Address)
-{
-	TWDR = (Local_u8_Address << 1) | 1; //OR with 1 to make sure last bit is 1 to read and not write
- 966:	88 0f       	add	r24, r24
- 968:	81 60       	ori	r24, 0x01	; 1
- 96a:	83 b9       	out	0x03, r24	; 3
-	ClrBit(TWCR,5);
- 96c:	86 b7       	in	r24, 0x36	; 54
- 96e:	8f 7d       	andi	r24, 0xDF	; 223
- 970:	86 bf       	out	0x36, r24	; 54
-	SetBit(TWCR,7);                //to clear the flag
- 972:	86 b7       	in	r24, 0x36	; 54
- 974:	80 68       	ori	r24, 0x80	; 128
- 976:	86 bf       	out	0x36, r24	; 54
-	while ((GetBit(TWCR,7)) == 0);
- 978:	06 b6       	in	r0, 0x36	; 54
- 97a:	07 fe       	sbrs	r0, 7
- 97c:	fd cf       	rjmp	.-6      	; 0x978 <M_Twi_SendSlaveAddressRead+0x12>
-	while ((TWSR & 0xF8) != SLAVE_AD_AND_RD_ACK);
- 97e:	81 b1       	in	r24, 0x01	; 1
- 980:	88 7f       	andi	r24, 0xF8	; 248
- 982:	80 34       	cpi	r24, 0x40	; 64
- 984:	e1 f7       	brne	.-8      	; 0x97e <M_Twi_SendSlaveAddressRead+0x18>
-}
- 986:	08 95       	ret
-
-00000988 <M_Twi_SendByte>:
-void M_Twi_SendByte(u8 Local_u8_Data)
-{
-	TWDR = Local_u8_Data;
- 988:	83 b9       	out	0x03, r24	; 3
-	ClrBit(TWCR,5);              //as per data sheet this bit must be set to 0 via software
- 98a:	86 b7       	in	r24, 0x36	; 54
- 98c:	8f 7d       	andi	r24, 0xDF	; 223
- 98e:	86 bf       	out	0x36, r24	; 54
-	SetBit(TWCR,7);                //to clear the flag
- 990:	86 b7       	in	r24, 0x36	; 54
- 992:	80 68       	ori	r24, 0x80	; 128
- 994:	86 bf       	out	0x36, r24	; 54
-	while ((GetBit(TWCR,7)) == 0);
- 996:	06 b6       	in	r0, 0x36	; 54
- 998:	07 fe       	sbrs	r0, 7
- 99a:	fd cf       	rjmp	.-6      	; 0x996 <M_Twi_SendByte+0xe>
-	while ((TWSR & 0xF8) != WR_BYTE_ACK);
- 99c:	81 b1       	in	r24, 0x01	; 1
- 99e:	88 7f       	andi	r24, 0xF8	; 248
- 9a0:	88 32       	cpi	r24, 0x28	; 40
- 9a2:	e1 f7       	brne	.-8      	; 0x99c <M_Twi_SendByte+0x14>
-}
- 9a4:	08 95       	ret
-
-000009a6 <M_Twi_ReadByte>:
-u8   M_Twi_ReadByte(void)
-{
-	ClrBit(TWCR,5);
- 9a6:	86 b7       	in	r24, 0x36	; 54
- 9a8:	8f 7d       	andi	r24, 0xDF	; 223
- 9aa:	86 bf       	out	0x36, r24	; 54
-	ClrBit(TWCR,4);
- 9ac:	86 b7       	in	r24, 0x36	; 54
- 9ae:	8f 7e       	andi	r24, 0xEF	; 239
- 9b0:	86 bf       	out	0x36, r24	; 54
-	SetBit(TWCR,6);  
- 9b2:	86 b7       	in	r24, 0x36	; 54
- 9b4:	80 64       	ori	r24, 0x40	; 64
- 9b6:	86 bf       	out	0x36, r24	; 54
-	SetBit(TWCR,7);       //to clear the flag
- 9b8:	86 b7       	in	r24, 0x36	; 54
- 9ba:	80 68       	ori	r24, 0x80	; 128
- 9bc:	86 bf       	out	0x36, r24	; 54
-	while ((GetBit(TWCR,7)) == 0);
- 9be:	06 b6       	in	r0, 0x36	; 54
- 9c0:	07 fe       	sbrs	r0, 7
- 9c2:	fd cf       	rjmp	.-6      	; 0x9be <M_Twi_ReadByte+0x18>
-	while ((TWSR & 0xF8) != RD_BYTE_WITH_ACK);
- 9c4:	81 b1       	in	r24, 0x01	; 1
- 9c6:	88 7f       	andi	r24, 0xF8	; 248
- 9c8:	80 35       	cpi	r24, 0x50	; 80
- 9ca:	e1 f7       	brne	.-8      	; 0x9c4 <M_Twi_ReadByte+0x1e>
-	return TWDR;
- 9cc:	83 b1       	in	r24, 0x03	; 3
-}
- 9ce:	08 95       	ret
-
-000009d0 <M_Twi_RepeatedStart>:
-void M_Twi_RepeatedStart(void)
-{
-	SetBit(TWCR,5);
- 9d0:	86 b7       	in	r24, 0x36	; 54
- 9d2:	80 62       	ori	r24, 0x20	; 32
- 9d4:	86 bf       	out	0x36, r24	; 54
-	SetBit(TWCR,7);                //to clear the flag
- 9d6:	86 b7       	in	r24, 0x36	; 54
- 9d8:	80 68       	ori	r24, 0x80	; 128
- 9da:	86 bf       	out	0x36, r24	; 54
-	while ((GetBit(TWCR,7)) == 0);
- 9dc:	06 b6       	in	r0, 0x36	; 54
- 9de:	07 fe       	sbrs	r0, 7
- 9e0:	fd cf       	rjmp	.-6      	; 0x9dc <M_Twi_RepeatedStart+0xc>
 	while ((TWSR & 0xF8) != REP_START_ACK);
- 9e2:	81 b1       	in	r24, 0x01	; 1
- 9e4:	88 7f       	andi	r24, 0xF8	; 248
- 9e6:	80 31       	cpi	r24, 0x10	; 16
- 9e8:	e1 f7       	brne	.-8      	; 0x9e2 <M_Twi_RepeatedStart+0x12>
 }
- 9ea:	08 95       	ret
+ 950:	8c e0       	ldi	r24, 0x0C	; 12
+ 952:	80 b9       	out	0x00, r24	; 0
+ 954:	86 b7       	in	r24, 0x36	; 54
+ 956:	84 60       	ori	r24, 0x04	; 4
+ 958:	86 bf       	out	0x36, r24	; 54
+ 95a:	08 95       	ret
 
-000009ec <M_Twi_StopCondition>:
-void M_Twi_StopCondition(void)
-{
-	SetBit(TWCR,4);
- 9ec:	86 b7       	in	r24, 0x36	; 54
- 9ee:	80 61       	ori	r24, 0x10	; 16
- 9f0:	86 bf       	out	0x36, r24	; 54
-	SetBit(TWCR,7);                //to clear the flag
- 9f2:	86 b7       	in	r24, 0x36	; 54
- 9f4:	80 68       	ori	r24, 0x80	; 128
- 9f6:	86 bf       	out	0x36, r24	; 54
- 9f8:	08 95       	ret
+0000095c <M_Twi_StartCondition>:
+ 95c:	84 ea       	ldi	r24, 0xA4	; 164
+ 95e:	86 bf       	out	0x36, r24	; 54
+ 960:	06 b6       	in	r0, 0x36	; 54
+ 962:	07 fe       	sbrs	r0, 7
+ 964:	fd cf       	rjmp	.-6      	; 0x960 <M_Twi_StartCondition+0x4>
+ 966:	08 95       	ret
 
-000009fa <M_Uart_Init>:
+00000968 <M_Twi_SendByte>:
+ 968:	83 b9       	out	0x03, r24	; 3
+ 96a:	84 e8       	ldi	r24, 0x84	; 132
+ 96c:	86 bf       	out	0x36, r24	; 54
+ 96e:	06 b6       	in	r0, 0x36	; 54
+ 970:	07 fe       	sbrs	r0, 7
+ 972:	fd cf       	rjmp	.-6      	; 0x96e <M_Twi_SendByte+0x6>
+ 974:	08 95       	ret
+
+00000976 <M_Twi_ReadByte>:
+ 976:	84 e8       	ldi	r24, 0x84	; 132
+ 978:	86 bf       	out	0x36, r24	; 54
+ 97a:	06 b6       	in	r0, 0x36	; 54
+ 97c:	07 fe       	sbrs	r0, 7
+ 97e:	fd cf       	rjmp	.-6      	; 0x97a <M_Twi_ReadByte+0x4>
+ 980:	83 b1       	in	r24, 0x03	; 3
+ 982:	08 95       	ret
+
+00000984 <M_Twi_StopCondition>:
+	/*
+	 * Clear the TWINT flag before sending the stop bit TWINT=1
+	 * send the stop bit by TWSTO=1
+	 * Enable TWI Module TWEN=1
+	 */
+	TWCR = (1 << TWINT) | (1 << TWSTO) | (1 << TWEN);
+ 984:	84 e9       	ldi	r24, 0x94	; 148
+ 986:	86 bf       	out	0x36, r24	; 54
+ 988:	08 95       	ret
+
+0000098a <M_Uart_Init>:
 
 #include "Uart.h"
 
 void M_Uart_Init(void)
 {
 	ClrBit(DDRD,0); //to enable input circuit for RX pin
- 9fa:	88 98       	cbi	0x11, 0	; 17
+ 98a:	88 98       	cbi	0x11, 0	; 17
 	SetBit(DDRD,1); //to enable output circuit for TX pin
- 9fc:	89 9a       	sbi	0x11, 1	; 17
+ 98c:	89 9a       	sbi	0x11, 1	; 17
 	
 	u8 Local_u8_UCSRC = 0b10000000;
 	//to select char size = 8-bits
 	SetBit(Local_u8_UCSRC,2);
 	SetBit(Local_u8_UCSRC,1);
 	ClrBit(UCSRB,2);
- 9fe:	52 98       	cbi	0x0a, 2	; 10
+ 98e:	52 98       	cbi	0x0a, 2	; 10
 	SetBit(Local_u8_UCSRC,5);
 	#endif
 	//to select stop bit -> 1 bit
 	ClrBit(Local_u8_UCSRC,3);
 	
 	UBRRL = ((u32)F_OSC * 1000000 / ((u32)16 * BAUD_RATE)) - 1;
- a00:	87 e6       	ldi	r24, 0x67	; 103
- a02:	89 b9       	out	0x09, r24	; 9
+ 990:	87 e6       	ldi	r24, 0x67	; 103
+ 992:	89 b9       	out	0x09, r24	; 9
 	
 	UCSRC = Local_u8_UCSRC;
- a04:	86 e8       	ldi	r24, 0x86	; 134
- a06:	80 bd       	out	0x20, r24	; 32
+ 994:	86 e8       	ldi	r24, 0x86	; 134
+ 996:	80 bd       	out	0x20, r24	; 32
 	
 	SetBit(UCSRB,4); //to enable receive circuit  RX
- a08:	54 9a       	sbi	0x0a, 4	; 10
+ 998:	54 9a       	sbi	0x0a, 4	; 10
 	SetBit(UCSRB,3); //to enable transmit circuit TX
- a0a:	53 9a       	sbi	0x0a, 3	; 10
- a0c:	08 95       	ret
+ 99a:	53 9a       	sbi	0x0a, 3	; 10
+ 99c:	08 95       	ret
 
-00000a0e <M_Uart_SendByte>:
+0000099e <M_Uart_SendByte>:
 }
 
 void M_Uart_SendByte(u8 Local_u8_Data)
 {
 	UDR = Local_u8_Data;
- a0e:	8c b9       	out	0x0c, r24	; 12
+ 99e:	8c b9       	out	0x0c, r24	; 12
 	while((GetBit(UCSRA,6)) == 0);
- a10:	5e 9b       	sbis	0x0b, 6	; 11
- a12:	fe cf       	rjmp	.-4      	; 0xa10 <M_Uart_SendByte+0x2>
+ 9a0:	5e 9b       	sbis	0x0b, 6	; 11
+ 9a2:	fe cf       	rjmp	.-4      	; 0x9a0 <M_Uart_SendByte+0x2>
 }
- a14:	08 95       	ret
+ 9a4:	08 95       	ret
 
-00000a16 <M_Uart_ReceiveByte>:
+000009a6 <M_Uart_ReceiveByte>:
 
 u8   M_Uart_ReceiveByte(void)
 {
 	while((GetBit(UCSRA,7)) == 0);
- a16:	5f 9b       	sbis	0x0b, 7	; 11
- a18:	fe cf       	rjmp	.-4      	; 0xa16 <M_Uart_ReceiveByte>
+ 9a6:	5f 9b       	sbis	0x0b, 7	; 11
+ 9a8:	fe cf       	rjmp	.-4      	; 0x9a6 <M_Uart_ReceiveByte>
 	return UDR;
- a1a:	8c b1       	in	r24, 0x0c	; 12
+ 9aa:	8c b1       	in	r24, 0x0c	; 12
 }
- a1c:	08 95       	ret
+ 9ac:	08 95       	ret
 
-00000a1e <__udivmodsi4>:
- a1e:	a1 e2       	ldi	r26, 0x21	; 33
- a20:	1a 2e       	mov	r1, r26
- a22:	aa 1b       	sub	r26, r26
- a24:	bb 1b       	sub	r27, r27
- a26:	fd 01       	movw	r30, r26
- a28:	0d c0       	rjmp	.+26     	; 0xa44 <__udivmodsi4_ep>
+000009ae <__udivmodsi4>:
+ 9ae:	a1 e2       	ldi	r26, 0x21	; 33
+ 9b0:	1a 2e       	mov	r1, r26
+ 9b2:	aa 1b       	sub	r26, r26
+ 9b4:	bb 1b       	sub	r27, r27
+ 9b6:	fd 01       	movw	r30, r26
+ 9b8:	0d c0       	rjmp	.+26     	; 0x9d4 <__udivmodsi4_ep>
 
-00000a2a <__udivmodsi4_loop>:
- a2a:	aa 1f       	adc	r26, r26
- a2c:	bb 1f       	adc	r27, r27
- a2e:	ee 1f       	adc	r30, r30
- a30:	ff 1f       	adc	r31, r31
- a32:	a2 17       	cp	r26, r18
- a34:	b3 07       	cpc	r27, r19
- a36:	e4 07       	cpc	r30, r20
- a38:	f5 07       	cpc	r31, r21
- a3a:	20 f0       	brcs	.+8      	; 0xa44 <__udivmodsi4_ep>
- a3c:	a2 1b       	sub	r26, r18
- a3e:	b3 0b       	sbc	r27, r19
- a40:	e4 0b       	sbc	r30, r20
- a42:	f5 0b       	sbc	r31, r21
+000009ba <__udivmodsi4_loop>:
+ 9ba:	aa 1f       	adc	r26, r26
+ 9bc:	bb 1f       	adc	r27, r27
+ 9be:	ee 1f       	adc	r30, r30
+ 9c0:	ff 1f       	adc	r31, r31
+ 9c2:	a2 17       	cp	r26, r18
+ 9c4:	b3 07       	cpc	r27, r19
+ 9c6:	e4 07       	cpc	r30, r20
+ 9c8:	f5 07       	cpc	r31, r21
+ 9ca:	20 f0       	brcs	.+8      	; 0x9d4 <__udivmodsi4_ep>
+ 9cc:	a2 1b       	sub	r26, r18
+ 9ce:	b3 0b       	sbc	r27, r19
+ 9d0:	e4 0b       	sbc	r30, r20
+ 9d2:	f5 0b       	sbc	r31, r21
 
-00000a44 <__udivmodsi4_ep>:
- a44:	66 1f       	adc	r22, r22
- a46:	77 1f       	adc	r23, r23
- a48:	88 1f       	adc	r24, r24
- a4a:	99 1f       	adc	r25, r25
- a4c:	1a 94       	dec	r1
- a4e:	69 f7       	brne	.-38     	; 0xa2a <__udivmodsi4_loop>
- a50:	60 95       	com	r22
- a52:	70 95       	com	r23
- a54:	80 95       	com	r24
- a56:	90 95       	com	r25
- a58:	9b 01       	movw	r18, r22
- a5a:	ac 01       	movw	r20, r24
- a5c:	bd 01       	movw	r22, r26
- a5e:	cf 01       	movw	r24, r30
- a60:	08 95       	ret
+000009d4 <__udivmodsi4_ep>:
+ 9d4:	66 1f       	adc	r22, r22
+ 9d6:	77 1f       	adc	r23, r23
+ 9d8:	88 1f       	adc	r24, r24
+ 9da:	99 1f       	adc	r25, r25
+ 9dc:	1a 94       	dec	r1
+ 9de:	69 f7       	brne	.-38     	; 0x9ba <__udivmodsi4_loop>
+ 9e0:	60 95       	com	r22
+ 9e2:	70 95       	com	r23
+ 9e4:	80 95       	com	r24
+ 9e6:	90 95       	com	r25
+ 9e8:	9b 01       	movw	r18, r22
+ 9ea:	ac 01       	movw	r20, r24
+ 9ec:	bd 01       	movw	r22, r26
+ 9ee:	cf 01       	movw	r24, r30
+ 9f0:	08 95       	ret
 
-00000a62 <__muluhisi3>:
- a62:	0e 94 3c 05 	call	0xa78	; 0xa78 <__umulhisi3>
- a66:	a5 9f       	mul	r26, r21
- a68:	90 0d       	add	r25, r0
- a6a:	b4 9f       	mul	r27, r20
- a6c:	90 0d       	add	r25, r0
- a6e:	a4 9f       	mul	r26, r20
- a70:	80 0d       	add	r24, r0
- a72:	91 1d       	adc	r25, r1
- a74:	11 24       	eor	r1, r1
- a76:	08 95       	ret
+000009f2 <__muluhisi3>:
+ 9f2:	0e 94 04 05 	call	0xa08	; 0xa08 <__umulhisi3>
+ 9f6:	a5 9f       	mul	r26, r21
+ 9f8:	90 0d       	add	r25, r0
+ 9fa:	b4 9f       	mul	r27, r20
+ 9fc:	90 0d       	add	r25, r0
+ 9fe:	a4 9f       	mul	r26, r20
+ a00:	80 0d       	add	r24, r0
+ a02:	91 1d       	adc	r25, r1
+ a04:	11 24       	eor	r1, r1
+ a06:	08 95       	ret
 
-00000a78 <__umulhisi3>:
- a78:	a2 9f       	mul	r26, r18
- a7a:	b0 01       	movw	r22, r0
- a7c:	b3 9f       	mul	r27, r19
- a7e:	c0 01       	movw	r24, r0
- a80:	a3 9f       	mul	r26, r19
- a82:	70 0d       	add	r23, r0
- a84:	81 1d       	adc	r24, r1
- a86:	11 24       	eor	r1, r1
- a88:	91 1d       	adc	r25, r1
- a8a:	b2 9f       	mul	r27, r18
- a8c:	70 0d       	add	r23, r0
- a8e:	81 1d       	adc	r24, r1
- a90:	11 24       	eor	r1, r1
- a92:	91 1d       	adc	r25, r1
- a94:	08 95       	ret
+00000a08 <__umulhisi3>:
+ a08:	a2 9f       	mul	r26, r18
+ a0a:	b0 01       	movw	r22, r0
+ a0c:	b3 9f       	mul	r27, r19
+ a0e:	c0 01       	movw	r24, r0
+ a10:	a3 9f       	mul	r26, r19
+ a12:	70 0d       	add	r23, r0
+ a14:	81 1d       	adc	r24, r1
+ a16:	11 24       	eor	r1, r1
+ a18:	91 1d       	adc	r25, r1
+ a1a:	b2 9f       	mul	r27, r18
+ a1c:	70 0d       	add	r23, r0
+ a1e:	81 1d       	adc	r24, r1
+ a20:	11 24       	eor	r1, r1
+ a22:	91 1d       	adc	r25, r1
+ a24:	08 95       	ret
 
-00000a96 <_exit>:
- a96:	f8 94       	cli
+00000a26 <_exit>:
+ a26:	f8 94       	cli
 
-00000a98 <__stop_program>:
- a98:	ff cf       	rjmp	.-2      	; 0xa98 <__stop_program>
+00000a28 <__stop_program>:
+ a28:	ff cf       	rjmp	.-2      	; 0xa28 <__stop_program>

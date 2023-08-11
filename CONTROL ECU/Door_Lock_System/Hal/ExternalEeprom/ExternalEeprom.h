@@ -17,7 +17,7 @@
 
 // Functions Prototypes
 void H_Eeprom_Init(void);
-void H_Eeprom_Write(u8,u8,u8);
-u8   H_Eeprom_Read(u8,u8);
+void H_Eeprom_Write(u8,u16);
+u8   H_Eeprom_Read(u16);
 
 #endif /* EXTERNALEEPROM_H_ */

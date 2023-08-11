@@ -80,7 +80,7 @@ u8 A_Main_CheckPasswordEeprom(u8 * Local_u8_Str1, u8* Local_u8_Str2)
 {
 	for (int i = 0; i<PASSWORD_SIZE; i++)
 	{
-		Local_u8_Str1 [i]= H_Eeprom_Read(1,1+i); // reads the saved password in the EEPROM page 1 byte 1
+		Local_u8_Str1[i]= H_Eeprom_Read(0x0311+i); // reads the saved password in the EEPROM 
 		if(Local_u8_Str1[i] != Local_u8_Str2[i])
 		{
 			return ERROR;
@@ -107,7 +107,7 @@ int main(void)
 	u8 Local_u8_Result;
 	
 	while(M_Uart_ReceiveByte() != HMI_READY );   // this waits until the HMI MC is ready
-	Local_u8_CheckPassword = H_Eeprom_Read(1,1); // check if there is a password already in the EEPROM.
+	Local_u8_CheckPassword = H_Eeprom_Read(0x0311); // check if there is a password already in the EEPROM.
 	if (Local_u8_CheckPassword != 0xFF)          // Determine the system current state based on EEPROM.
 	{
 		Global_u8_SystemState = 2;
@@ -148,7 +148,7 @@ int main(void)
 			case 1:
 			for (int i = 0; i<PASSWORD_SIZE; i++)
 			{
-				H_Eeprom_Write(Local_u8_StrPassword[i],1,1+i);
+				H_Eeprom_Write(Local_u8_StrPassword[i],0x0311+i);
 				_delay_ms(10);
 			}
 			Global_u8_SystemState = 2;
@@ -184,7 +184,6 @@ int main(void)
 			}
 			Local_u8_Result = A_Main_CheckPasswordEeprom(Local_u8_StrPasswordCheck, Local_u8_StrPassword); // comparing entered password to the saved password.
 			M_Uart_SendByte(Local_u8_Result);
-			
 			/* Action will be taken based on the Result variable */
 			
 			if(Local_u8_Result == ERROR)
@@ -244,6 +243,7 @@ int main(void)
 					Local_u8_TrialCounter = 0;
 					Global_u8_SystemState = 5;
 				}
+				_delay_ms(1);
 				M_Uart_SendByte(Global_u8_SystemState);
 			}
 			
@@ -252,6 +252,7 @@ int main(void)
 				Local_u8_TrialCounter = 0;
 				H_Leds_Off(LED0); H_Leds_Off(LED1); H_Leds_Off(LED2);
 				Global_u8_SystemState = 0;
+				_delay_ms(1);
 				M_Uart_SendByte(Global_u8_SystemState);
 			}
 			break;
