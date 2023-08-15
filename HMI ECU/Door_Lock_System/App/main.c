@@ -17,6 +17,7 @@
 #include <util/delay.h>
 
 
+
 // System Macros
 #define PASSWORD_SIZE 5
 #define HMI_READY 0x20
